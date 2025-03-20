@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://liqxy5sahq77"]
+
+[ext_resource type="PackedScene" uid="uid://cq65x7b5c0gnh" path="res://Escenas/Nivel_Debug/fede.tscn" id="1_0tvo3"]
+[ext_resource type="PackedScene" uid="uid://bbmu4n8lhr6a5" path="res://Escenas/Nivel_Debug/Lucas.tscn" id="2_bkuex"]
+[ext_resource type="PackedScene" uid="uid://be7yrher148yy" path="res://Escenas/Nivel_Debug/sol.tscn" id="3_x0qh1"]
+[ext_resource type="PackedScene" uid="uid://dv2hr6hjlhlwh" path="res://Escenas/Nivel_Debug/thiago.tscn" id="4_xctpd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d6urg"]
+size = Vector3(64, 1, 64)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Fede" parent="." instance=ExtResource("1_0tvo3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.4905, -2, -13.6425)
+
+[node name="Lucas" parent="." instance=ExtResource("2_bkuex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509537, -2, 50.3575)
+
+[node name="Sol" parent="." instance=ExtResource("3_x0qh1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.49046, -2, -46.6425)
+
+[node name="Thiago" parent="." instance=ExtResource("4_xctpd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -42.5095, 1, -0.642521)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("BoxMesh_d6urg")
