@@ -1,9 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://liqxy5sahq77"]
+[gd_scene load_steps=11 format=3 uid="uid://liqxy5sahq77"]
 
 [ext_resource type="PackedScene" uid="uid://cq65x7b5c0gnh" path="res://Escenas/Nivel_Debug/fede.tscn" id="1_0tvo3"]
 [ext_resource type="PackedScene" uid="uid://bbmu4n8lhr6a5" path="res://Escenas/Nivel_Debug/Lucas.tscn" id="2_bkuex"]
 [ext_resource type="PackedScene" uid="uid://be7yrher148yy" path="res://Escenas/Nivel_Debug/sol.tscn" id="3_x0qh1"]
 [ext_resource type="PackedScene" uid="uid://dv2hr6hjlhlwh" path="res://Escenas/Nivel_Debug/thiago.tscn" id="4_xctpd"]
+[ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="5_bkuex"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bkuex"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_x0qh1"]
+sky_material = SubResource("ProceduralSkyMaterial_bkuex")
+
+[sub_resource type="Environment" id="Environment_xctpd"]
+background_mode = 2
+sky = SubResource("Sky_x0qh1")
+tonemap_mode = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_d6urg"]
 size = Vector3(64, 1, 64)
@@ -12,6 +25,13 @@ size = Vector3(64, 1, 64)
 data = PackedVector3Array(-32, 0.5, 32, 32, 0.5, 32, -32, -0.5, 32, 32, 0.5, 32, 32, -0.5, 32, -32, -0.5, 32, 32, 0.5, -32, -32, 0.5, -32, 32, -0.5, -32, -32, 0.5, -32, -32, -0.5, -32, 32, -0.5, -32, 32, 0.5, 32, 32, 0.5, -32, 32, -0.5, 32, 32, 0.5, -32, 32, -0.5, -32, 32, -0.5, 32, -32, 0.5, -32, -32, 0.5, 32, -32, -0.5, -32, -32, 0.5, 32, -32, -0.5, 32, -32, -0.5, -32, 32, 0.5, 32, -32, 0.5, 32, 32, 0.5, -32, -32, 0.5, 32, -32, 0.5, -32, 32, 0.5, -32, -32, -0.5, 32, 32, -0.5, 32, -32, -0.5, -32, 32, -0.5, 32, 32, -0.5, -32, -32, -0.5, -32)
 
 [node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xctpd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Fede" parent="." instance=ExtResource("1_0tvo3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.4905, -2, -13.6425)
@@ -33,3 +53,6 @@ mesh = SubResource("BoxMesh_d6urg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_0tvo3")
+
+[node name="Jugador" parent="." instance=ExtResource("5_bkuex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05513, -0.499998, -1.56992)
