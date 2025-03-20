@@ -96,11 +96,6 @@ mesh = SubResource("PrismMesh_iiy4a")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.06528, 0)
 mesh = SubResource("BoxMesh_nkt3c")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Interior"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interior/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_bdsjh")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Interior"]
 transform = Transform3D(1, 0, 0, 0, 4.525, 0, 0, 0, 1, -12.637, -4.08621, 12.0465)
 mesh = SubResource("CylinderMesh_at6ei")
