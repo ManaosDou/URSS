@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://liqxy5sahq77"]
 
-[ext_resource type="PackedScene" uid="uid://cq65x7b5c0gnh" path="res://Escenas/Nivel_debug/fede.tscn" id="1_0tvo3"]
-[ext_resource type="PackedScene" uid="uid://bbmu4n8lhr6a5" path="res://Escenas/Nivel_debug/Lucas.tscn" id="2_bkuex"]
-[ext_resource type="PackedScene" uid="uid://be7yrher148yy" path="res://Escenas/Nivel_debug/sol.tscn" id="3_x0qh1"]
-[ext_resource type="PackedScene" uid="uid://dv2hr6hjlhlwh" path="res://Escenas/Nivel_debug/thiago.tscn" id="4_xctpd"]
+[ext_resource type="PackedScene" uid="uid://cq65x7b5c0gnh" path="res://Escenas/Nivel_Debug/fede.tscn" id="1_0tvo3"]
+[ext_resource type="PackedScene" uid="uid://bbmu4n8lhr6a5" path="res://Escenas/Nivel_Debug/Lucas.tscn" id="2_bkuex"]
+[ext_resource type="PackedScene" uid="uid://be7yrher148yy" path="res://Escenas/Nivel_Debug/sol.tscn" id="3_x0qh1"]
+[ext_resource type="PackedScene" uid="uid://dv2hr6hjlhlwh" path="res://Escenas/Nivel_Debug/thiago.tscn" id="4_xctpd"]
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="5_bkuex"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bkuex"]
@@ -33,26 +33,30 @@ environment = SubResource("Environment_xctpd")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Fede" parent="." instance=ExtResource("1_0tvo3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.4905, -2, -13.6425)
-
-[node name="Lucas" parent="." instance=ExtResource("2_bkuex")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509537, -2, 50.3575)
-
-[node name="Sol" parent="." instance=ExtResource("3_x0qh1")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.49046, -2, -46.6425)
-
-[node name="Thiago" parent="." instance=ExtResource("4_xctpd")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -42.5095, 1, -0.642521)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
-mesh = SubResource("BoxMesh_d6urg")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_0tvo3")
-
 [node name="Jugador" parent="." instance=ExtResource("5_bkuex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05513, -0.499998, -1.56992)
+
+[node name="Nivel" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Fede" parent="Nivel" instance=ExtResource("1_0tvo3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.4905, -2, -13.6425)
+
+[node name="Lucas" parent="Nivel" instance=ExtResource("2_bkuex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509537, -2, 50.3575)
+
+[node name="Sol" parent="Nivel" instance=ExtResource("3_x0qh1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.49046, -2, -46.6425)
+
+[node name="Thiago" parent="Nivel" instance=ExtResource("4_xctpd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -42.5095, 1, -0.642521)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Nivel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("BoxMesh_d6urg")
+skeleton = NodePath("../../root/@EditorNode@21269/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11479/@VSplitContainer@11131/@HSplitContainer@11133/@HSplitContainer@11135/@Control@11136/@SubViewportContainer@11137/@SubViewport@11138/Node3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Nivel/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0tvo3")
