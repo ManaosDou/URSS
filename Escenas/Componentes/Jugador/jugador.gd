@@ -8,13 +8,21 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 func _physics_process(delta):
-		velocity.y = -10
 		velocity.z = velocidad * Input.get_axis("mover_adelante","mover_atras")
 		velocity.x= velocidad * Input.get_axis("mover_izquierda","mover_derecha")
 		velocity = velocity.rotated(Vector3(0,1,0),camera.rotation.y)
-		if Input.is_action_just_pressed("saltar"):
-			velocity.y = 100
+		if Input.is_action_just_pressed("saltar") and is_on_floor():
+			velocity.y = 500 * delta
+		if not is_on_floor():
+			velocity.y -= 15 * delta
 		move_and_slide()
+		detectar_hackeo()
+
+func detectar_hackeo():
+	var collider = get_node("Camera3D/RayCast3D").get_collider()
+	if collider is ObjectoHackeable:
+		if Input.is_action_just_pressed("hackear"):
+			collider.hack()
 
 func _input(event):
 	if event is InputEventMouseMotion:
