@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Jugador
 
 @export var velocidad : float = 10
 @export var mouse_sens : float = 0.025
@@ -21,8 +22,11 @@ func _physics_process(delta):
 func detectar_hackeo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
 	if collider is ObjectoHackeable:
+		$CanvasLayer/HackingLabel.visible = true
 		if Input.is_action_just_pressed("hackear"):
 			collider.hack()
+	else:
+		$CanvasLayer/HackingLabel.visible = false
 
 func _input(event):
 	if event is InputEventMouseMotion:

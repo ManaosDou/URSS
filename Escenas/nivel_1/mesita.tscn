@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://hbtdw5757yo0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4nq7f"]
+size = Vector3(0.05, 0.35, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4mi7b"]
+size = Vector3(0.5, 0.05, 0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gpkjl"]
+data = PackedVector3Array(-0.25, 0.025, 0.25, 0.25, 0.025, 0.25, -0.25, -0.025, 0.25, 0.25, 0.025, 0.25, 0.25, -0.025, 0.25, -0.25, -0.025, 0.25, 0.25, 0.025, -0.25, -0.25, 0.025, -0.25, 0.25, -0.025, -0.25, -0.25, 0.025, -0.25, -0.25, -0.025, -0.25, 0.25, -0.025, -0.25, 0.25, 0.025, 0.25, 0.25, 0.025, -0.25, 0.25, -0.025, 0.25, 0.25, 0.025, -0.25, 0.25, -0.025, -0.25, 0.25, -0.025, 0.25, -0.25, 0.025, -0.25, -0.25, 0.025, 0.25, -0.25, -0.025, -0.25, -0.25, 0.025, 0.25, -0.25, -0.025, 0.25, -0.25, -0.025, -0.25, 0.25, 0.025, 0.25, -0.25, 0.025, 0.25, 0.25, 0.025, -0.25, -0.25, 0.025, 0.25, -0.25, 0.025, -0.25, 0.25, 0.025, -0.25, -0.25, -0.025, 0.25, 0.25, -0.025, 0.25, -0.25, -0.025, -0.25, 0.25, -0.025, 0.25, 0.25, -0.025, -0.25, -0.25, -0.025, -0.25)
+
+[node name="Mesita" type="MeshInstance3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("BoxMesh_4nq7f")
+
+[node name="TablaMesita" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_4mi7b")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TablaMesita"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TablaMesita/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_gpkjl")

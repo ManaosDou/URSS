@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://dt1dk8opj2iwv"]
+[gd_scene load_steps=25 format=3 uid="uid://dt1dk8opj2iwv"]
 
 [ext_resource type="Script" uid="uid://cb875hmdw1whe" path="res://Escenas/Nivel_Debug/facu/puerta_hackeable.gd" id="1_8v0j3"]
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_eigfb"]
+[ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://Escenas/Nivel_Debug/facu/lampara_hackeable.gd" id="2_w016u"]
+[ext_resource type="PackedScene" uid="uid://mfejefpnaroc" path="res://Escenas/Componentes/camara/camara.tscn" id="4_myhkv"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_saidh"]
 
@@ -46,6 +48,43 @@ data = PackedVector3Array(-1, 1.5, 0.5, 1, 1.5, 0.5, -1, -1.5, 0.5, 1, 1.5, 0.5,
 [sub_resource type="SphereShape3D" id="SphereShape3D_8v0j3"]
 radius = 1.4762
 
+[sub_resource type="Animation" id="Animation_w016u"]
+resource_name = "abrir_puerta"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0179901, 1.99664, 0), Vector3(-0.018, -1.003, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_myhkv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0179901, 1.99664, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6i5g0"]
+_data = {
+&"RESET": SubResource("Animation_myhkv"),
+&"abrir_puerta": SubResource("Animation_w016u")
+}
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8v0j3"]
 albedo_color = Color(1, 0, 0, 1)
 
@@ -63,6 +102,8 @@ radius = 0.25
 height = 0.5
 radial_segments = 8
 rings = 4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_myhkv"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -136,6 +177,11 @@ barrera = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puerta/Barrera/Puerta/HackeoPuerta"]
 shape = SubResource("SphereShape3D_8v0j3")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Puerta/Barrera/Puerta/HackeoPuerta"]
+libraries = {
+&"": SubResource("AnimationLibrary_6i5g0")
+}
+
 [node name="Lampara" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
 mesh = SubResource("CylinderMesh_saidh")
@@ -147,5 +193,17 @@ mesh = SubResource("SphereMesh_eigfb")
 [node name="OmniLight3D" type="OmniLight3D" parent="Lampara/LamparaPunta"]
 light_color = Color(1, 0.556863, 0.556863, 1)
 
+[node name="ObjectoHackeable" type="Area3D" parent="Lampara"]
+collision_layer = 256
+script = ExtResource("2_w016u")
+metadata/_custom_type_script = "uid://do4tacrtqixlk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lampara/ObjectoHackeable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("SphereShape3D_myhkv")
+
 [node name="Jugador" parent="." instance=ExtResource("1_eigfb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)
+
+[node name="Camara" parent="." instance=ExtResource("4_myhkv")]
+transform = Transform3D(0.707107, -0.183012, -0.683013, 0, 0.965926, -0.258819, 0.707107, 0.183012, 0.683013, 16, 2, 0)

@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjbeb7qembhbw"]
+
+[ext_resource type="PackedScene" uid="uid://mfejefpnaroc" path="res://Escenas/Componentes/camara/camara.tscn" id="1_qvdvw"]
+
+[node name="A" type="CSGBox3D"]
+use_collision = true
+size = Vector3(32, 8, 32)
+
+[node name="HabitacionA" type="CSGBox3D" parent="."]
+operation = 2
+size = Vector3(31, 7, 31)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0.9, 0)
+omni_range = 14.7131
+
+[node name="ParedDeCamaras" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+size = Vector3(2, 4, 16)
+
+[node name="Camara" parent="ParedDeCamaras" instance=ExtResource("1_qvdvw")]
+transform = Transform3D(0.707107, -0.183012, -0.683013, 0, 0.965926, -0.258819, 0.707107, 0.183012, 0.683013, -1.3, 1.5, 0)
+
+[node name="Camara2" parent="ParedDeCamaras" instance=ExtResource("1_qvdvw")]
+transform = Transform3D(0.707107, -0.183012, -0.683013, 0, 0.965926, -0.258819, 0.707107, 0.183012, 0.683013, -1.3, 1.5, -5)
+
+[node name="Tragaluz" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+operation = 2
+size = Vector3(8, 2, 8)
+
+[node name="PuertaC" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5176, -0.5, 0)
+operation = 2
+size = Vector3(16.0352, 6, 5)
+
+[node name="PuertaB" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4648, -0.5, 0)
+operation = 2
+size = Vector3(6, 6, 5)
