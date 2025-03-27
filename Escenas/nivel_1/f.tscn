@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c4l3lf6xupbau"]
+
+[node name="F" type="CSGBox3D"]
+use_collision = true
+size = Vector3(8, 8, 8)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+operation = 2
+size = Vector3(7, 7, 7)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -4)
+operation = 2
+size = Vector3(3, 4, 1)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://vcwfnlbm47uh"]
+[gd_scene load_steps=10 format=3 uid="uid://vcwfnlbm47uh"]
 
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
 [ext_resource type="PackedScene" uid="uid://cjbeb7qembhbw" path="res://Escenas/nivel_1/a.tscn" id="3_4mi7b"]
 [ext_resource type="PackedScene" uid="uid://b3nvgg8ff80to" path="res://Escenas/nivel_1/c.tscn" id="3_4nq7f"]
 [ext_resource type="VoxelGIData" uid="uid://dkfr3ei7wnix4" path="res://Escenas/nivel_1/Nivel1.VoxelGI_data.res" id="3_jt4gu"]
 [ext_resource type="PackedScene" uid="uid://bx5kc122jg7r5" path="res://Escenas/nivel_1/b.tscn" id="4_4mi7b"]
+[ext_resource type="PackedScene" uid="uid://c4l3lf6xupbau" path="res://Escenas/nivel_1/f.tscn" id="6_spbm1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vxico"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -48,19 +49,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.65991, 0, 4.16803)
 size = Vector3(55.7124, 20, 50.4337)
 data = ExtResource("3_jt4gu")
 
-[node name="F" type="CSGBox3D" parent="."]
+[node name="F" parent="." instance=ExtResource("6_spbm1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 20)
-use_collision = true
-size = Vector3(8, 8, 8)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="F"]
-operation = 2
-size = Vector3(7, 7, 7)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="F"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="F"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -4)
-operation = 2
-size = Vector3(3, 4, 1)
