@@ -15,14 +15,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0.9, 0)
 omni_range = 14.7131
 
 [node name="ParedDeCamaras" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
-size = Vector3(2, 4, 16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.761124, 0)
+size = Vector3(2, 5.47775, 16)
 
 [node name="Camara" parent="ParedDeCamaras" instance=ExtResource("1_qvdvw")]
-transform = Transform3D(0.707107, -0.183012, -0.683013, 0, 0.965926, -0.258819, 0.707107, 0.183012, 0.683013, -1.3, 1.5, 0)
+transform = Transform3D(0.707107, -0.183012, -0.683013, 0, 0.965926, -0.258819, 0.707107, 0.183012, 0.683013, -1.3, 2.36918, 4.34916)
 
 [node name="Camara2" parent="ParedDeCamaras" instance=ExtResource("1_qvdvw")]
-transform = Transform3D(0.707107, -0.183012, -0.683013, 0, 0.965926, -0.258819, 0.707107, 0.183012, 0.683013, -1.3, 1.5, -5)
+transform = Transform3D(0.707107, -0.183012, -0.683013, 0, 0.965926, -0.258819, 0.707107, 0.183012, 0.683013, -1.3, 2.36918, -5)
+
+[node name="Camara3" parent="ParedDeCamaras" instance=ExtResource("1_qvdvw")]
+transform = Transform3D(0.707107, -0.183012, -0.683013, 0, 0.965926, -0.258819, 0.707107, 0.183012, 0.683013, 1.04842, 2.36918, -5)
+
+[node name="Camara4" parent="ParedDeCamaras" instance=ExtResource("1_qvdvw")]
+transform = Transform3D(0.707107, -0.183012, -0.683013, 0, 0.965926, -0.258819, 0.707107, 0.183012, 0.683013, 1.04842, 2.36918, 4.27339)
 
 [node name="Tragaluz" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
