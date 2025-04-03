@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://bx5kc122jg7r5"]
+[gd_scene load_steps=9 format=3 uid="uid://bx5kc122jg7r5"]
 
 [ext_resource type="PackedScene" uid="uid://hbtdw5757yo0" path="res://Escenas/nivel_1/mesita.tscn" id="1_nuns4"]
+[ext_resource type="AudioStream" uid="uid://dda4n5yiujrra" path="res://Escenas/nivel_1/sonido_telefono.mp3" id="2_atvtv"]
+[ext_resource type="Script" uid="uid://bq8024qv5ebrp" path="res://Escenas/nivel_1/telefono_hackeable.gd" id="3_op6bx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_op6bx"]
+albedo_color = Color(1, 0.25, 0.25, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nputx"]
+material = SubResource("StandardMaterial3D_op6bx")
+size = Vector3(2, 3, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3nly"]
+albedo_color = Color(0.45, 0.45, 0.45, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vmdni"]
+material = SubResource("StandardMaterial3D_c3nly")
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nputx"]
+radius = 2.84754
 
 [node name="B" type="CSGBox3D"]
 use_collision = true
@@ -21,3 +40,21 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -3.1, 0)
 
 [node name="Mesita2" parent="." instance=ExtResource("1_nuns4")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, -3.1, 5)
+
+[node name="Soporte Telefono" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.925, 1.13715, -14.1942)
+mesh = SubResource("BoxMesh_nputx")
+
+[node name="telefono" type="MeshInstance3D" parent="Soporte Telefono"]
+transform = Transform3D(0.998814, -0.0485235, -0.00405842, 0, 0.0833474, -0.996521, 0.0486929, 0.995338, 0.0832485, -1.02482, 0.109182, 0.32439)
+mesh = SubResource("CylinderMesh_vmdni")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Soporte Telefono"]
+stream = ExtResource("2_atvtv")
+
+[node name="ObjectoHackeable" type="Area3D" parent="Soporte Telefono"]
+script = ExtResource("3_op6bx")
+metadata/_custom_type_script = "uid://do4tacrtqixlk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soporte Telefono/ObjectoHackeable"]
+shape = SubResource("SphereShape3D_nputx")
