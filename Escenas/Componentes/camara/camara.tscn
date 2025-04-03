@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://mfejefpnaroc"]
 
-[ext_resource type="Script" uid="uid://djjb6cjga70q1" path="res://Escenas/Nivel_Debug/facu/camara.gd" id="1_ahbtq"]
+[ext_resource type="Script" uid="uid://djjb6cjga70q1" path="res://Escenas/nivel_debug/facu/camara.gd" id="1_ahbtq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahbtq"]
 albedo_color = Color(0, 0, 0, 1)
@@ -18,7 +18,7 @@ bottom_radius = 0.25
 height = 0.25
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w016u"]
-height = 4.99463
+height = 20.9959
 
 [sub_resource type="Animation" id="Animation_8ks63"]
 length = 0.001
@@ -29,22 +29,10 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(-0.533333),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0.261799, -0.785398, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OmniLight3D:light_energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_6i5g0"]
@@ -61,25 +49,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 4.98),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.261799, -0.785398, 0), Vector3(0.261799, 0.785398, 0)]
+"values": [Vector3(0.261799, -2.30907, 0), Vector3(0.261799, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_8nkos"]
 resource_name = "jugador_detectado"
 length = 3.0
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OmniLight3D:light_energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.46667, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 10.0, 0.0]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ks63"]
 _data = {
@@ -102,7 +78,7 @@ mesh = SubResource("CylinderMesh_6i5g0")
 [node name="CamaraDeteccion" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CamaraDeteccion"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 2.69731)
+transform = Transform3D(1, 0, 0, 0, -4.37081e-08, 0.999936, 0, -0.999925, -4.37086e-08, -0.004, 0.118, 10.737)
 shape = SubResource("CylinderShape3D_w016u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -110,9 +86,3 @@ libraries = {
 &"": SubResource("AnimationLibrary_8ks63")
 }
 autoplay = "girar_camara"
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-light_color = Color(1, 0, 0, 1)
-light_energy = 0.0
-omni_range = 212.649
-omni_attenuation = 0.306
