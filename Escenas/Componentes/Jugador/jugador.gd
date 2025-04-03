@@ -4,6 +4,11 @@ class_name Jugador
 @export var velocidad : float = 10
 @export var mouse_sens : float = 0.025
 @onready var camera : Camera3D = get_node("Camera3D")
+@export var arma_flash : GPUParticles3D
+@export var arma_animacion : AnimationPlayer
+
+var municion : int = 10
+var max_municion : int = 10
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -16,6 +21,11 @@ func _physics_process(delta):
 			velocity.y = 500 * delta
 		if not is_on_floor():
 			velocity.y -= 15 * delta
+		
+		# comportamiento arma
+		if Input.is_action_just_pressed("disparar") and not $Camera3D/ArmaMesh/ArmaAnimacion.is_playing():
+			arma_animacion.play("disparar")
+		
 		move_and_slide()
 		detectar_hackeo()
 

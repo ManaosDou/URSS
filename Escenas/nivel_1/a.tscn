@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cjbeb7qembhbw"]
 
-[ext_resource type="PackedScene" uid="uid://mfejefpnaroc" path="res://escenas/Componentes/camara/camara.tscn" id="1_qvdvw"]
-[ext_resource type="Script" path="res://Escenas/Nivel_Debug/facu/lampara_hackeable.gd" id="2_2bt8x"]
+[ext_resource type="PackedScene" uid="uid://mfejefpnaroc" path="res://Escenas/Componentes/camara/camara.tscn" id="1_qvdvw"]
+[ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://Escenas/Nivel_Debug/facu/lampara_hackeable.gd" id="2_2bt8x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxxr6"]
 
@@ -22,6 +22,21 @@ height = 0.5
 radial_segments = 8
 rings = 4
 
+[sub_resource type="Animation" id="Animation_nyj3e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LamparaPunta/OmniLight3D:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_fosui"]
 resource_name = "luz_alarma"
 length = 2.0
@@ -37,21 +52,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 3.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_nyj3e"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LamparaPunta/OmniLight3D:light_energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_stsvo"]

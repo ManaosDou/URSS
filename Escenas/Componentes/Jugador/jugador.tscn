@@ -1,11 +1,140 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbni6o826cp8b"]
+[gd_scene load_steps=14 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
-[node name="Jugador" type="CharacterBody3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwbgw"]
+no_depth_test = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_lwbgw"]
+material = SubResource("StandardMaterial3D_lwbgw")
+size = Vector3(0.1, 0.1, 1)
+
+[sub_resource type="Gradient" id="Gradient_lwbgw"]
+colors = PackedColorArray(1, 0.529412, 0.219608, 1, 1, 0.529412, 0.219608, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u0du3"]
+gradient = SubResource("Gradient_lwbgw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lwbgw"]
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 0, -1)
+spread = 10.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, -4.9, 0)
+color_ramp = SubResource("GradientTexture1D_u0du3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0du3"]
+transparency = 4
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_r5jap"]
+material = SubResource("StandardMaterial3D_u0du3")
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="Animation" id="Animation_lwbgw"]
+resource_name = "disparar"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.174533, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmaFlash:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmaFlash")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"restart"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_u0du3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmaFlash:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_r5jap"]
+resource_name = "recargar"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.14159, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5jap"]
+_data = {
+&"RESET": SubResource("Animation_u0du3"),
+&"disparar": SubResource("Animation_lwbgw"),
+&"recargar": SubResource("Animation_r5jap")
+}
+
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("arma_flash", "arma_animacion")]
 script = ExtResource("1_lwbgw")
+arma_flash = NodePath("Camera3D/ArmaMesh/ArmaFlash")
+arma_animacion = NodePath("Camera3D/ArmaMesh/ArmaAnimacion")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_oq0nd")
@@ -17,6 +146,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, 0, -15)
 collision_mask = 257
 collide_with_areas = true
+
+[node name="ArmaMesh" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, -0.5, -0.757)
+mesh = SubResource("BoxMesh_lwbgw")
+skeleton = NodePath("../..")
+
+[node name="ArmaFlash" type="GPUParticles3D" parent="Camera3D/ArmaMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+emitting = false
+amount = 32
+lifetime = 0.1
+one_shot = true
+explosiveness = 0.79
+process_material = SubResource("ParticleProcessMaterial_lwbgw")
+draw_pass_1 = SubResource("QuadMesh_r5jap")
+
+[node name="ArmaAnimacion" type="AnimationPlayer" parent="Camera3D/ArmaMesh"]
+libraries = {
+&"": SubResource("AnimationLibrary_r5jap")
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
