@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cynopchc85yxk"]
+
+[ext_resource type="Script" path="res://Escenas/Nivel_Debug/facu/lampara_hackeable.gd" id="1_1ot81"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8v0j3"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_saidh"]
+material = SubResource("StandardMaterial3D_8v0j3")
+top_radius = 0.1
+bottom_radius = 0.25
+height = 1.0
+radial_segments = 8
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_saidh"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_eigfb"]
+material = SubResource("StandardMaterial3D_saidh")
+radius = 0.25
+height = 0.5
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_myhkv"]
+
+[node name="Lampara" type="MeshInstance3D"]
+mesh = SubResource("CylinderMesh_saidh")
+
+[node name="LamparaPunta" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+mesh = SubResource("SphereMesh_eigfb")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="LamparaPunta"]
+light_color = Color(1, 0.556863, 0.556863, 1)
+
+[node name="ObjectoHackeable" type="Area3D" parent="."]
+collision_layer = 256
+script = ExtResource("1_1ot81")
+metadata/_custom_type_script = "uid://do4tacrtqixlk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectoHackeable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("SphereShape3D_myhkv")

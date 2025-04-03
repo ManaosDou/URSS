@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://c4l3lf6xupbau"]
+[gd_scene load_steps=3 format=3 uid="uid://c4l3lf6xupbau"]
+
+[ext_resource type="Script" uid="uid://ci3k34onjwkaf" path="res://Escenas/nivel_1/CollectArchivo.gd" id="1_0v0y3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_e04ap"]
+radius = 1.29469
 
 [node name="F" type="CSGBox3D"]
 use_collision = true
@@ -15,3 +20,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -4)
 operation = 2
 size = Vector3(3, 4, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.973709, 0.225715, 0.030721, -0.222546, 0.971364, -0.0832181, -0.0486249, 0.0741934, 0.996058, -0.154234, -1.85694, 2.51555)
+size = Vector3(0.613281, 0.889771, 0.0463257)
+
+[node name="Area3D" type="Area3D" parent="CSGBox3D"]
+transform = Transform3D(1, 4.42378e-09, 0, 2.56114e-09, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_0v0y3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/Area3D"]
+transform = Transform3D(1, -1.0943e-08, 0, 2.56114e-09, 1, -7.45058e-09, 0, 7.45058e-09, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_e04ap")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -413.0
+offset_top = -272.0
+offset_right = -34.0
+offset_bottom = 275.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Informe de Seguimiento - Semana 4
+Experimento #1475
+
+Clasificación: Confidencial
+Estado del Experimento: Funcional
+Objetivo: Desarrollo de un organismo mutante con capacidades mejoradas para su posible uso en escenarios de guerra química.
+
+Durante esta fase del experimento, el sujeto #1475 ha mostrado avances significativos en su desarrollo. Las pruebas realizadas han confirmado que su organismo ha logrado adaptaciones extraordinarias a los compuestos químicos introducidos en su metabolismo.
+
+Próximos Pasos
+- Refinar el condicionamiento conductual para reducir la agresividad incontrolada.
+- Continuar la observación de las capacidades adaptativas en condiciones extremas.
+- Evaluar la posibilidad de replicar el proceso en otros sujetos."
+scroll_active = false
+
+[connection signal="body_entered" from="CSGBox3D/Area3D" to="CSGBox3D/Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="CSGBox3D/Area3D" to="CSGBox3D/Area3D" method="_on_body_exited"]
+[connection signal="body_shape_exited" from="CSGBox3D/Area3D" to="CSGBox3D/Area3D" method="_on_body_shape_exited"]
