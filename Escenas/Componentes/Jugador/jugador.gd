@@ -6,12 +6,16 @@ class_name Jugador
 @onready var camera : Camera3D = get_node("Camera3D")
 @export var arma_flash : GPUParticles3D
 @export var arma_animacion : AnimationPlayer
+@export var hud : Control
+@export var objeto_detectado : Marker3D
+@export var radar : Control
 
-var municion : int = 10
+@export var municion : int = 10
 var max_municion : int = 10
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	radar.crear_punto(objeto_detectado, Color.RED)
 	
 func _physics_process(delta):
 		velocity.z = velocidad * Input.get_axis("mover_adelante","mover_atras")
@@ -23,11 +27,26 @@ func _physics_process(delta):
 			velocity.y -= 15 * delta
 		
 		# comportamiento arma
-		if Input.is_action_just_pressed("disparar") and not $Camera3D/ArmaMesh/ArmaAnimacion.is_playing():
+		if Input.is_action_just_pressed("disparar") and not arma_animacion.is_playing() and municion > 0:
 			arma_animacion.play("disparar")
+			municion -= 1
+			detectar_enemigo()
+		if Input.is_action_just_pressed("recargar"):
+			arma_animacion.play("recargar")
+		
+		#hud
+		hud.municion = municion
+		hud.max_municion = max_municion
+		radar.posicion_jugador = global_position
+		radar.puntos_radar.rotation = camera.rotation.y
 		
 		move_and_slide()
 		detectar_hackeo()
+
+func detectar_enemigo():
+	var collider = get_node("Camera3D/RayCast3D").get_collider()
+	if collider is Enemigo:
+		collider.morir()
 
 func detectar_hackeo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()

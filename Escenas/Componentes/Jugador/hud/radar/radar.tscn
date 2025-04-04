@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://5pshi02b2aod"]
+
+[ext_resource type="Texture2D" uid="uid://ddrt3ajhtgnt3" path="res://assets/texturas/ui/radar_fondo.png" id="1_0k03c"]
+[ext_resource type="Script" uid="uid://qtbi2srd5n7c" path="res://Escenas/Componentes/Jugador/hud/radar/radar.gd" id="1_ey84f"]
+[ext_resource type="Texture2D" uid="uid://dcaa50uhg5nvn" path="res://assets/texturas/ui/radar_punto.png" id="2_ey84f"]
+[ext_resource type="Texture2D" uid="uid://bcjroqgj7kb7u" path="res://assets/texturas/ui/radar_aro.png" id="4_pr0cx"]
+
+[sub_resource type="Animation" id="Animation_m51ry"]
+resource_name = "sonar_activar"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RadarAro:custom_minimum_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(256, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RadarAro:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gmsgn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RadarAro:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RadarAro:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j2jbr"]
+_data = {
+&"RESET": SubResource("Animation_gmsgn"),
+&"sonar_activar": SubResource("Animation_m51ry")
+}
+
+[node name="Radar" type="CenterContainer" node_paths=PackedStringArray("puntos_radar", "punto_jugador", "anim_player", "aro")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -896.0
+offset_bottom = -392.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ey84f")
+texture = ExtResource("2_ey84f")
+puntos_radar = NodePath("Fondo/PuntosRadar")
+punto_jugador = NodePath("PuntoJugador")
+anim_player = NodePath("AnimationPlayer")
+aro = NodePath("RadarAro")
+offset = 115.0
+distancia_sonar = 0.0
+
+[node name="Fondo" type="TextureRect" parent="."]
+clip_children = 2
+layout_mode = 2
+texture = ExtResource("1_0k03c")
+
+[node name="PuntosRadar" type="Control" parent="Fondo"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="PuntoJugador" type="TextureRect" parent="."]
+modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_ey84f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_j2jbr")
+}
+autoplay = "sonar_activar"
+
+[node name="RadarAro" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("4_pr0cx")
+expand_mode = 5
