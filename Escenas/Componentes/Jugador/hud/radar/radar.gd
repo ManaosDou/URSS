@@ -34,9 +34,9 @@ func _process(delta: float) -> void:
 		punto.position *= zoom
 		
 		if punto.position.distance_to(punto_jugador.position) > aro.custom_minimum_size.x + offset:
-			create_tween().tween_property(punto,"modulate",Color.TRANSPARENT,0.1)
+			create_tween().tween_property(punto,"modulate",Color.TRANSPARENT,0.25)
 		else:
-			create_tween().tween_property(punto,"modulate",Color.RED,0.1)
+			create_tween().tween_property(punto,"modulate",Color.RED,0.25)
 		
 		
 		

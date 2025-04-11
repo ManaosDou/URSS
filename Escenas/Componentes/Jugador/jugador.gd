@@ -9,6 +9,7 @@ class_name Jugador
 @export var hud : Control
 @export var objeto_detectado : Marker3D
 @export var radar : Control
+@export var fase_label : Label
 
 @export var municion : int = 10
 var max_municion : int = 10
@@ -42,6 +43,7 @@ func _physics_process(delta):
 		
 		move_and_slide()
 		detectar_hackeo()
+
 
 func detectar_enemigo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()

@@ -157,12 +157,13 @@ _data = {
 &"recargar": SubResource("Animation_r5jap")
 }
 
-[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("arma_flash", "arma_animacion", "hud", "radar")]
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("arma_flash", "arma_animacion", "hud", "radar", "fase_label")]
 script = ExtResource("1_lwbgw")
 arma_flash = NodePath("Camera3D/ArmaMesh/ArmaFlash")
 arma_animacion = NodePath("Camera3D/ArmaMesh/ArmaAnimacion")
 hud = NodePath("CanvasLayer/HUD")
 radar = NodePath("CanvasLayer/Radar")
+fase_label = NodePath("CanvasLayer/FaseLabel")
 municion = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -188,6 +189,7 @@ amount = 32
 lifetime = 0.1
 one_shot = true
 explosiveness = 0.79
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_lwbgw")
 draw_pass_1 = SubResource("QuadMesh_r5jap")
 
@@ -220,3 +222,8 @@ offset_right = 0.0
 offset_bottom = 256.0
 grow_horizontal = 0
 grow_vertical = 1
+
+[node name="FaseLabel" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Fase: ALERTA"
