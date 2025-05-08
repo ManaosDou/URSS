@@ -1,0 +1,207 @@
+[gd_scene load_steps=11 format=3 uid="uid://7d1ajcs4m3ik"]
+
+[ext_resource type="PackedScene" uid="uid://cmg1jgp5d3cse" path="res://Escenas/Componentes/ui/arbol_habilidades/habilidad_item_arbol.tscn" id="1_yw7m4"]
+[ext_resource type="Texture2D" uid="uid://d4hfyew31mefe" path="res://icon.svg" id="2_84dcb"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_o7hdi"]
+vertices = PackedVector3Array(-63.5, 0.5, -63.5, -63.5, 0.5, 63.5, 63.5, 0.5, 63.5, 63.5, 0.5, -63.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o7hdi"]
+size = Vector2(128, 128)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_o7hdi"]
+data = PackedVector3Array(64, 0, 64, -64, 0, 64, 64, 0, -64, -64, 0, 64, -64, 0, -64, 64, 0, -64)
+
+[sub_resource type="GDScript" id="GDScript_o7hdi"]
+resource_name = "Guardia"
+script/source = "extends CharacterBody3D
+class_name Enemigo2
+
+var jugador : Node3D
+enum ESTADOS {PATRULLA, ALERTA, CAZA}
+@export var estado : ESTADOS
+
+@export var nav_agent : NavigationAgent3D
+@export var raycast : RayCast3D
+@onready var puntos_patrulla : Array = get_parent().get_node(\"PuntosPatrulla\").get_children()
+var jugador_ultima_posicion_vista : Vector3 = Vector3.ZERO
+
+@export var velocidad : float = 10.0
+@export var delay_disparo : float = 2.0
+@export var area_vision : float = 10.0
+
+func _ready() -> void:
+	patrullar()
+
+func patrullar():
+	
+	while estado == ESTADOS.PATRULLA:
+		var puntos = puntos_patrulla
+		puntos.shuffle()
+		for punto_nodo in puntos_patrulla:
+			var punto : Vector3 = punto_nodo.global_position
+			nav_agent.target_position = punto
+			while global_position.distance_to(punto) > 1 and estado == ESTADOS.PATRULLA:
+				velocity = global_position.direction_to(nav_agent.get_next_path_position()) * velocidad
+				velocity.y = 0
+				move_and_slide()
+				await get_tree().physics_frame
+				print(global_position)
+	
+	while estado == ESTADOS.ALERTA:
+		var puntos = puntos_patrulla
+		puntos.sort_custom(func(a,b): return a.global_position.distance_to(jugador_ultima_posicion_vista)<b.global_position.distance_to(jugador_ultima_posicion_vista))
+		if puntos.size() > 3: puntos = puntos.slice(0,3)
+		print(puntos)
+		for punto_nodo in puntos:
+			var punto : Vector3 = punto_nodo.global_position
+			nav_agent.target_position = punto
+			while global_position.distance_to(punto) > 1 and estado == ESTADOS.ALERTA:
+				velocity = global_position.direction_to(nav_agent.get_next_path_position()) * velocidad
+				velocity.y = 0
+				move_and_slide()
+				await get_tree().physics_frame
+				
+	while estado == ESTADOS.CAZA:
+		pass
+		#???
+	
+func esta_jugador_en_foco() -> bool:
+	if global_position.distance_to(jugador.global_position) > area_vision:
+		raycast.enabled = true
+		raycast.target_position = to_local(jugador.global_position)
+		return raycast.get_collider() is Jugador
+	raycast.enabled = false
+	return false
+
+func disparar():
+	if esta_jugador_en_foco():
+		await get_tree().create_timer(delay_disparo).timeout
+		if esta_jugador_en_foco():
+			print(\"disparo a jugador\")
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o7hdi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yw7m4"]
+
+[sub_resource type="Theme" id="Theme_84dcb"]
+HBoxContainer/constants/separation = 16
+VBoxContainer/constants/separation = 64
+
+[sub_resource type="GDScript" id="GDScript_84dcb"]
+resource_name = "TreeController"
+script/source = "@tool
+extends VBoxContainer
+
+func _ready() -> void:
+	get_child(0).get_child(0).seleccionable = true
+
+func update():
+	for container in get_children():
+		for habilidad : HabilidadItemArbol in container.get_children():
+			habilidad.dibujar_lineas()
+"
+
+[node name="Debug" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_o7hdi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_o7hdi")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_o7hdi")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="NavigationRegion3D" node_paths=PackedStringArray("nav_agent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = SubResource("GDScript_o7hdi")
+estado = 1
+nav_agent = NodePath("NavigationAgent3D")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="NavigationRegion3D/CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_o7hdi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_yw7m4")
+
+[node name="PuntosPatrulla" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="Marker3D" type="Marker3D" parent="NavigationRegion3D/PuntosPatrulla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+
+[node name="Marker3D2" type="Marker3D" parent="NavigationRegion3D/PuntosPatrulla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -7)
+
+[node name="Marker3D3" type="Marker3D" parent="NavigationRegion3D/PuntosPatrulla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -7)
+
+[node name="Marker3D4" type="Marker3D" parent="NavigationRegion3D/PuntosPatrulla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+
+[node name="Control" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 2
+theme = SubResource("Theme_84dcb")
+script = SubResource("GDScript_84dcb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Habilidad" parent="Control/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("habilidades_que_desbloquea") instance=ExtResource("1_yw7m4")]
+modulate = Color(1, 1, 1, 1)
+layout_mode = 2
+tooltip_text = "+10 de fuerza"
+icono = ExtResource("2_84dcb")
+nombre = "Hack"
+descripcion = "Hola"
+habilidades_que_desbloquea = [NodePath("../../HBoxContainer2/Habilidad"), NodePath("../../HBoxContainer2/Habilidad2")]
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Habilidad" parent="Control/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("habilidades_que_desbloquea") instance=ExtResource("1_yw7m4")]
+layout_mode = 2
+habilidades_que_desbloquea = [NodePath("../../HBoxContainer3/Habilidad")]
+
+[node name="Habilidad2" parent="Control/VBoxContainer/HBoxContainer2" instance=ExtResource("1_yw7m4")]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Habilidad" parent="Control/VBoxContainer/HBoxContainer3" instance=ExtResource("1_yw7m4")]
+layout_mode = 2
+
+[node name="Habilidad4" parent="Control/VBoxContainer/HBoxContainer3" instance=ExtResource("1_yw7m4")]
+layout_mode = 2
+
+[node name="Habilidad2" parent="Control/VBoxContainer/HBoxContainer3" instance=ExtResource("1_yw7m4")]
+layout_mode = 2
+
+[node name="Habilidad3" parent="Control/VBoxContainer/HBoxContainer3" instance=ExtResource("1_yw7m4")]
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="."]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmg1jgp5d3cse"]
+
+[ext_resource type="Texture2D" uid="uid://d4hfyew31mefe" path="res://icon.svg" id="1_ow31o"]
+[ext_resource type="Script" uid="uid://dmip84j8fk241" path="res://Escenas/Componentes/ui/arbol_habilidades/habilidad_item_arbol.gd" id="1_x5ad3"]
+
+[node name="Habilidad" type="Panel"]
+modulate = Color(1, 1, 1, 0.5)
+custom_minimum_size = Vector2(191.065, 128)
+script = ExtResource("1_x5ad3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "30"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_ow31o")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Habilidad"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
