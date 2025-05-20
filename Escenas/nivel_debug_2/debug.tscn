@@ -152,7 +152,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -5.0
+offset_right = 1.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -192,7 +192,6 @@ layout_mode = 2
 alignment = 1
 
 [node name="Nivel 2 Camaras" parent="ScrollContainer/Control/HBoxContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("habilidades_que_desbloquea") instance=ExtResource("1_yw7m4")]
-modulate = Color(1, 1, 1, 1)
 layout_mode = 2
 nombre = "Nivel 2 (+50%)"
 descripcion = "Permite apagar las cámaras con un cooldown de 15 segundos"
@@ -230,7 +229,6 @@ layout_mode = 2
 alignment = 1
 
 [node name="Apagar Luces" parent="ScrollContainer/Control/HBoxContainer/VBoxContainer2/HBoxContainer2" node_paths=PackedStringArray("habilidades_que_desbloquea") instance=ExtResource("1_yw7m4")]
-modulate = Color(1, 1, 1, 1)
 layout_mode = 2
 nombre = "Apagar"
 descripcion = "Permite apagar y encender las luces con una duración de 7.5 segundos"
@@ -283,7 +281,6 @@ layout_mode = 2
 alignment = 1
 
 [node name="Nivel 2 Alarmas" parent="ScrollContainer/Control/HBoxContainer/VBoxContainer3/HBoxContainer2" node_paths=PackedStringArray("habilidades_que_desbloquea") instance=ExtResource("1_yw7m4")]
-modulate = Color(1, 1, 1, 1)
 layout_mode = 2
 nombre = "Nivel 2"
 descripcion = "Aumenta la duración de las alarmas un 50% (7.5 segundos)"
@@ -380,5 +377,22 @@ tooltip_text = "+10 de fuerza"
 icono = ExtResource("2_84dcb")
 nombre = "Walkie-Talkies"
 descripcion = "Permite interceptar y falsificar comunicaciones enemigas para redirigirlos"
+
+[node name="VBoxContainer7" type="VBoxContainer" parent="ScrollContainer/Control/HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_84dcb")
+script = SubResource("GDScript_84dcb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Control/HBoxContainer/VBoxContainer7"]
+layout_mode = 2
+alignment = 1
+
+[node name="Radios" parent="ScrollContainer/Control/HBoxContainer/VBoxContainer7/HBoxContainer" instance=ExtResource("1_yw7m4")]
+modulate = Color(1, 1, 1, 1)
+layout_mode = 2
+tooltip_text = "+10 de fuerza"
+icono = ExtResource("2_84dcb")
+nombre = "Radios"
+descripcion = "Permite hackear las radios para encenderlas y generar una distracción sonora"
 
 [node name="Line2D" type="Line2D" parent="."]
