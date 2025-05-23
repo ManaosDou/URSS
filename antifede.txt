@@ -1,1 +1,7 @@
-hola
+Mockup UI (HUD/Menu Ingame/Menu de Titulo/Game Over)
+
+Skills
+
+Luces y Sonidos Logicos
+
+Finalizacion de objetos hackeables
