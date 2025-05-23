@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://c4l3lf6xupbau" path="res://Escenas/nivel_1/f.tscn" id="6_spbm1"]
 [ext_resource type="PackedScene" uid="uid://dw2goglsahn8h" path="res://Escenas/Componentes/enemigos/enemigo_test.tscn" id="7_akklk"]
 [ext_resource type="Script" uid="uid://b8iq7gelwjd0b" path="res://Escenas/Componentes/enemigos/enemy_manager/enemy_manager.gd" id="7_ehg28"]
+[ext_resource type="Script" uid="uid://cb875hmdw1whe" path="res://Escenas/Nivel_Debug/facu/puerta_hackeable.gd" id="9_ihcya"]
+[ext_resource type="PackedScene" uid="uid://cynopchc85yxk" path="res://Escenas/Componentes/Lampara/lampara.tscn" id="10_qa56l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vxico"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
