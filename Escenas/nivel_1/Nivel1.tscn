@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://vcwfnlbm47uh"]
+[gd_scene load_steps=21 format=3 uid="uid://vcwfnlbm47uh"]
 
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
+[ext_resource type="Script" uid="uid://bmtygo874kxa7" path="res://Escenas/Componentes/niveles/clase_nivel.gd" id="1_ihcya"]
 [ext_resource type="PackedScene" uid="uid://cjbeb7qembhbw" path="res://Escenas/nivel_1/a.tscn" id="3_4mi7b"]
 [ext_resource type="PackedScene" uid="uid://b3nvgg8ff80to" path="res://Escenas/nivel_1/c.tscn" id="3_4nq7f"]
 [ext_resource type="VoxelGIData" uid="uid://dkfr3ei7wnix4" path="res://Escenas/nivel_1/Nivel1.VoxelGI_data.res" id="3_jt4gu"]
@@ -46,71 +47,24 @@ _data = {
 }
 point_count = 4
 
-[sub_resource type="BoxMesh" id="BoxMesh_qa56l"]
-size = Vector3(1, 4, 1)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dxtua"]
-data = PackedVector3Array(-0.5, 2, 0.5, 0.5, 2, 0.5, -0.5, -2, 0.5, 0.5, 2, 0.5, 0.5, -2, 0.5, -0.5, -2, 0.5, 0.5, 2, -0.5, -0.5, 2, -0.5, 0.5, -2, -0.5, -0.5, 2, -0.5, -0.5, -2, -0.5, 0.5, -2, -0.5, 0.5, 2, 0.5, 0.5, 2, -0.5, 0.5, -2, 0.5, 0.5, 2, -0.5, 0.5, -2, -0.5, 0.5, -2, 0.5, -0.5, 2, -0.5, -0.5, 2, 0.5, -0.5, -2, -0.5, -0.5, 2, 0.5, -0.5, -2, 0.5, -0.5, -2, -0.5, 0.5, 2, 0.5, -0.5, 2, 0.5, 0.5, 2, -0.5, -0.5, 2, 0.5, -0.5, 2, -0.5, 0.5, 2, -0.5, -0.5, -2, 0.5, 0.5, -2, 0.5, -0.5, -2, -0.5, 0.5, -2, 0.5, 0.5, -2, -0.5, -0.5, -2, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_14hvx"]
-data = PackedVector3Array(-0.5, 2, 0.5, 0.5, 2, 0.5, -0.5, -2, 0.5, 0.5, 2, 0.5, 0.5, -2, 0.5, -0.5, -2, 0.5, 0.5, 2, -0.5, -0.5, 2, -0.5, 0.5, -2, -0.5, -0.5, 2, -0.5, -0.5, -2, -0.5, 0.5, -2, -0.5, 0.5, 2, 0.5, 0.5, 2, -0.5, 0.5, -2, 0.5, 0.5, 2, -0.5, 0.5, -2, -0.5, 0.5, -2, 0.5, -0.5, 2, -0.5, -0.5, 2, 0.5, -0.5, -2, -0.5, -0.5, 2, 0.5, -0.5, -2, 0.5, -0.5, -2, -0.5, 0.5, 2, 0.5, -0.5, 2, 0.5, 0.5, 2, -0.5, -0.5, 2, 0.5, -0.5, 2, -0.5, 0.5, 2, -0.5, -0.5, -2, 0.5, 0.5, -2, 0.5, -0.5, -2, -0.5, 0.5, -2, 0.5, 0.5, -2, -0.5, -0.5, -2, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t5nma"]
-data = PackedVector3Array(-0.5, 2, 0.5, 0.5, 2, 0.5, -0.5, -2, 0.5, 0.5, 2, 0.5, 0.5, -2, 0.5, -0.5, -2, 0.5, 0.5, 2, -0.5, -0.5, 2, -0.5, 0.5, -2, -0.5, -0.5, 2, -0.5, -0.5, -2, -0.5, 0.5, -2, -0.5, 0.5, 2, 0.5, 0.5, 2, -0.5, 0.5, -2, 0.5, 0.5, 2, -0.5, 0.5, -2, -0.5, 0.5, -2, 0.5, -0.5, 2, -0.5, -0.5, 2, 0.5, -0.5, -2, -0.5, -0.5, 2, 0.5, -0.5, -2, 0.5, -0.5, -2, -0.5, 0.5, 2, 0.5, -0.5, 2, 0.5, 0.5, 2, -0.5, -0.5, 2, 0.5, -0.5, 2, -0.5, 0.5, 2, -0.5, -0.5, -2, 0.5, 0.5, -2, 0.5, -0.5, -2, -0.5, 0.5, -2, 0.5, 0.5, -2, -0.5, -0.5, -2, -0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_saidh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ihcya"]
 albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_iqcjr"]
-material = SubResource("StandardMaterial3D_saidh")
-size = Vector3(2, 3, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_qa56l"]
+material = SubResource("StandardMaterial3D_ihcya")
+size = Vector3(10, 10, 10)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0lah2"]
-data = PackedVector3Array(-1, 1.5, 0.5, 1, 1.5, 0.5, -1, -1.5, 0.5, 1, 1.5, 0.5, 1, -1.5, 0.5, -1, -1.5, 0.5, 1, 1.5, -0.5, -1, 1.5, -0.5, 1, -1.5, -0.5, -1, 1.5, -0.5, -1, -1.5, -0.5, 1, -1.5, -0.5, 1, 1.5, 0.5, 1, 1.5, -0.5, 1, -1.5, 0.5, 1, 1.5, -0.5, 1, -1.5, -0.5, 1, -1.5, 0.5, -1, 1.5, -0.5, -1, 1.5, 0.5, -1, -1.5, -0.5, -1, 1.5, 0.5, -1, -1.5, 0.5, -1, -1.5, -0.5, 1, 1.5, 0.5, -1, 1.5, 0.5, 1, 1.5, -0.5, -1, 1.5, 0.5, -1, 1.5, -0.5, 1, 1.5, -0.5, -1, -1.5, 0.5, 1, -1.5, 0.5, -1, -1.5, -0.5, 1, -1.5, 0.5, 1, -1.5, -0.5, -1, -1.5, -0.5)
+[sub_resource type="GDScript" id="GDScript_ihcya"]
+resource_name = "CuboRaro"
+script/source = "extends MeshInstance3D
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_tjvp2"]
-radius = 1.4762
-
-[sub_resource type="Animation" id="Animation_myhkv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.0179901, 1.99664, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_w016u"]
-resource_name = "abrir_puerta"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.0179901, 1.99664, 0), Vector3(-0.018, -1.003, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6i5g0"]
-_data = {
-&"RESET": SubResource("Animation_myhkv"),
-&"abrir_puerta": SubResource("Animation_w016u")
-}
+func _process(delta: float) -> void:
+	if Globals.nivel.triggers.jugador_salto:
+		queue_free()
+"
 
 [node name="Nivel1" type="Node3D"]
+script = ExtResource("1_ihcya")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4nq7f")
@@ -187,65 +141,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3.3, 14)
 [node name="Marker3D3" type="Marker3D" parent="EnemyManager/EnemigoTest/Patrulla"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -3.3, 4)
 
-[node name="Puerta" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5955, -3.68875, 15.9071)
-
-[node name="Marco" type="Node3D" parent="Puerta"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Puerta/Marco"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.51799, 2.28916, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22342, 0, 0)
 mesh = SubResource("BoxMesh_qa56l")
-skeleton = NodePath("../../root/@EditorNode@21269/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11479/@VSplitContainer@11131/@HSplitContainer@11133/@HSplitContainer@11135/@Control@11136/@SubViewportContainer@11137/@SubViewport@11138/Node3D")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Puerta/Marco/MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Puerta/Marco/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_dxtua")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Puerta/Marco"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48201, 2.28916, 0)
-mesh = SubResource("BoxMesh_qa56l")
-skeleton = NodePath("../../root/@EditorNode@21269/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11479/@VSplitContainer@11131/@HSplitContainer@11133/@HSplitContainer@11135/@Control@11136/@SubViewportContainer@11137/@SubViewport@11138/Node3D")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Puerta/Marco/MeshInstance3D2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Puerta/Marco/MeshInstance3D2/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_14hvx")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Puerta/Marco"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0179901, 3.99664, 0)
-mesh = SubResource("BoxMesh_qa56l")
-skeleton = NodePath("../../root/@EditorNode@21269/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11479/@VSplitContainer@11131/@HSplitContainer@11133/@HSplitContainer@11135/@Control@11136/@SubViewportContainer@11137/@SubViewport@11138/Node3D")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Puerta/Marco/MeshInstance3D3"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Puerta/Marco/MeshInstance3D3/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_t5nma")
-
-[node name="Barrera" type="Node3D" parent="Puerta"]
-
-[node name="Puerta" type="MeshInstance3D" parent="Puerta/Barrera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0179901, 1.99664, 0)
-mesh = SubResource("BoxMesh_iqcjr")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Puerta/Barrera/Puerta"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Puerta/Barrera/Puerta/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_0lah2")
-
-[node name="HackeoPuerta" type="Area3D" parent="Puerta/Barrera/Puerta" node_paths=PackedStringArray("barrera")]
-collision_layer = 256
-script = ExtResource("9_ihcya")
-barrera = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Puerta/Barrera/Puerta/HackeoPuerta"]
-shape = SubResource("SphereShape3D_tjvp2")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Puerta/Barrera/Puerta/HackeoPuerta"]
-libraries = {
-&"": SubResource("AnimationLibrary_6i5g0")
-}
-
-[node name="Lampara" parent="." instance=ExtResource("10_qa56l")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -10.5, 3.01631, -7.66994)
+script = SubResource("GDScript_ihcya")

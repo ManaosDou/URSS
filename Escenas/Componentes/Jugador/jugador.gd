@@ -12,6 +12,8 @@ class_name Jugador
 @export var objeto_detectado : Marker3D
 @export var radar : Control
 @export var fase_label : Label
+@export var hacking_cooldown : Timer
+@export var hacking_cooldown_bar : ProgressBar
 
 var agachado : bool 
 @export var agacharse_animacion : AnimationPlayer
@@ -27,7 +29,6 @@ var tiempo_sin_correr : float = 0.0
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	radar.crear_punto(objeto_detectado, Color.RED)
 
 func _physics_process(delta):
 	# agacharse
@@ -66,6 +67,7 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("saltar") and is_on_floor():
 		velocity.y = 500 * delta
+		Globals.nivel.triggers.jugador_salto = true
 	if not is_on_floor():
 		velocity.y -= 15 * delta
 
@@ -84,11 +86,12 @@ func _physics_process(delta):
 		hud.stamina = stamina
 		hud.max_stamina = max_stamina
 
-	radar.posicion_jugador = global_position
-	radar.puntos_radar.rotation = camera.rotation.y
-
 	move_and_slide()
 	detectar_hackeo()
+
+func _process(delta: float) -> void:
+	hacking_cooldown_bar.max_value = hacking_cooldown.wait_time
+	hacking_cooldown_bar.value = hacking_cooldown.wait_time - hacking_cooldown.time_left
 
 func detectar_enemigo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
@@ -97,10 +100,11 @@ func detectar_enemigo():
 
 func detectar_hackeo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
-	if collider is ObjectoHackeable:
+	if collider is ObjectoHackeable and hacking_cooldown.is_stopped():
 		$CanvasLayer/HackingLabel.visible = true
 		if Input.is_action_just_pressed("hackear"):
 			collider.hack()
+			hacking_cooldown.start()
 	else:
 		$CanvasLayer/HackingLabel.visible = false
 

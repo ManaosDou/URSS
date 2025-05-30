@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://dbni6o826cp8b"]
+[gd_scene load_steps=18 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 [ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://Escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
-[ext_resource type="PackedScene" uid="uid://5pshi02b2aod" path="res://Escenas/Componentes/Jugador/hud/radar/radar.tscn" id="3_r5jap"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -218,13 +217,15 @@ _data = {
 &"agacharse": SubResource("Animation_04w7q")
 }
 
-[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("arma_flash", "arma_animacion", "hud", "radar", "fase_label", "agacharse_animacion")]
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("arma_flash", "arma_animacion", "hud", "radar", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion")]
 script = ExtResource("1_lwbgw")
 arma_flash = NodePath("Camera3D/ArmaMesh/ArmaFlash")
 arma_animacion = NodePath("Camera3D/ArmaMesh/ArmaAnimacion")
 hud = NodePath("CanvasLayer/HUD")
-radar = NodePath("CanvasLayer/Radar")
+radar = NodePath("")
 fase_label = NodePath("CanvasLayer/FaseLabel")
+hacking_cooldown = NodePath("HackingCooldown")
+hacking_cooldown_bar = NodePath("CanvasLayer/HackingCooldownContainer/HackingCooldown")
 agacharse_animacion = NodePath("AgacharseAnimacion")
 municion = 0
 
@@ -275,22 +276,35 @@ text = "Presiona E para hackear"
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("2_u0du3")]
 mouse_filter = 2
 
-[node name="Radar" parent="CanvasLayer" instance=ExtResource("3_r5jap")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_bottom = 0.0
-offset_left = -256.0
-offset_right = 0.0
-offset_bottom = 256.0
-grow_horizontal = 0
-grow_vertical = 1
-
 [node name="FaseLabel" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Fase: ALERTA"
 
+[node name="HackingCooldownContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="HackLabel" type="Label" parent="CanvasLayer/HackingCooldownContainer"]
+layout_mode = 2
+text = "HACK"
+
+[node name="HackingCooldown" type="ProgressBar" parent="CanvasLayer/HackingCooldownContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_vertical = 1
+value = 100.0
+show_percentage = false
+
 [node name="AgacharseAnimacion" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_5howd")
 }
+
+[node name="HackingCooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

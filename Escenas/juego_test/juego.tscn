@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxuvxp1j4hb0r"]
+
+[ext_resource type="Script" uid="uid://embnvkxc0qt3" path="res://Escenas/juego_test/juego.gd" id="1_bd63v"]
+[ext_resource type="Texture2D" uid="uid://d0qtd5rv022gy" path="res://assets/texturas/ui/IconosHabilidades/icons/ffffff/transparent/1x1/lorc/techno-heart.svg" id="1_rrd0f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_73gbw"]
+font_size = 64
+
+[sub_resource type="GDScript" id="GDScript_rrd0f"]
+resource_name = "BotonNuevoJuego"
+script/source = "extends Button
+
+func _on_pressed() -> void:
+	var primer_nivel : String = \"res://Escenas/nivel_1/Nivel1.tscn\"
+	var scene = load(primer_nivel).instantiate()
+	Globals.nivel = scene
+	get_tree().current_scene.add_child(scene)
+	get_parent().queue_free()
+"
+
+[sub_resource type="Shader" id="Shader_rrd0f"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR.a = (sin(TIME*2.0)+1.0)/2.0;
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bd63v"]
+shader = SubResource("Shader_rrd0f")
+
+[node name="Juego" type="Node"]
+script = ExtResource("1_bd63v")
+
+[node name="MenuTitulo" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuTitulo"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="MenuTitulo/VBoxContainer"]
+layout_mode = 2
+text = "THE SOVIET THREAT"
+label_settings = SubResource("LabelSettings_73gbw")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MenuTitulo/VBoxContainer"]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Nuevo Juego"
+script = SubResource("GDScript_rrd0f")
+
+[node name="Button2" type="Button" parent="MenuTitulo/VBoxContainer"]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+text = "Cargar Juego"
+
+[node name="Loading" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Loading"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Loading"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="Loading/MarginContainer"]
+material = SubResource("ShaderMaterial_bd63v")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("1_rrd0f")
+expand_mode = 3
+stretch_mode = 5
+
+[connection signal="pressed" from="MenuTitulo/VBoxContainer/Button" to="MenuTitulo/VBoxContainer/Button" method="_on_pressed"]

@@ -1,5 +1,7 @@
 extends Node3D
 
+var activado : bool = true
+
 var jugador_detectado : bool = false
 var jugador
 
@@ -11,3 +13,4 @@ func _process(delta: float) -> void:
 			jugador = collider
 	if jugador_detectado:
 		look_at(jugador.position)
+	
