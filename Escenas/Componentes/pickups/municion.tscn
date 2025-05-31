@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://crp7ildmhc6a3"]
+
+[ext_resource type="Script" uid="uid://cr01xk8qievet" path="res://Escenas/Componentes/pickups/PickUpMunicion.gd" id="2_3hwal"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7cnxl"]
+albedo_color = Color(1, 1, 0.329412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mbe6k"]
+material = SubResource("StandardMaterial3D_7cnxl")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vr5e6"]
+size = Vector3(1, 0.5, 0.5)
+
+[node name="Municion" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_mbe6k")
+
+[node name="PickUp" type="Area3D" parent="."]
+script = ExtResource("2_3hwal")
+metadata/_custom_type_script = "uid://dvxpcycipgd7y"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp"]
+shape = SubResource("BoxShape3D_vr5e6")

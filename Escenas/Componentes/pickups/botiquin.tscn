@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dt7f00ohye4h1"]
+
+[ext_resource type="Script" uid="uid://d1hw08ql3u4h1" path="res://Escenas/Componentes/pickups/PickUpBotiquin.gd" id="2_fvby0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywose"]
+albedo_color = Color(1, 0, 0.0117647, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ukkql"]
+material = SubResource("StandardMaterial3D_ywose")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pfthc"]
+size = Vector3(1, 1, 0.5)
+
+[node name="Botiquin" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_ukkql")
+
+[node name="PickUp" type="Area3D" parent="."]
+script = ExtResource("2_fvby0")
+metadata/_custom_type_script = "uid://dvxpcycipgd7y"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp"]
+shape = SubResource("BoxShape3D_pfthc")

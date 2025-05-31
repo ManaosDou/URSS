@@ -18,9 +18,14 @@ class_name Jugador
 var agachado : bool 
 @export var agacharse_animacion : AnimationPlayer
 
-@export var municion : int = 10
-var max_municion : int = 10
+var municion_en_arma : int = 10
+var max_municion_en_arma : int = 10
+var municion_de_reserva : int = 30
+var max_municion_de_reserva : int = 30
 
+
+var vida : int = 100
+var max_vida : int = 100
 
 var stamina : float = 100
 var max_stamina : float = 100
@@ -72,16 +77,16 @@ func _physics_process(delta):
 		velocity.y -= 15 * delta
 
 	# Arma
-	if Input.is_action_just_pressed("disparar") and not arma_animacion.is_playing() and municion > 0:
+	if Input.is_action_just_pressed("disparar") and not arma_animacion.is_playing() and municion_en_arma > 0:
 		arma_animacion.play("disparar")
-		municion -= 1
+		municion_en_arma -= 1
 		detectar_enemigo()
 	if Input.is_action_just_pressed("recargar"):
-		arma_animacion.play("recargar")
+		recargar()
 
 	# HUD
-	hud.municion = municion
-	hud.max_municion = max_municion
+	hud.municion = municion_en_arma
+	hud.max_municion = municion_de_reserva
 	if "stamina" in hud:
 		hud.stamina = stamina
 		hud.max_stamina = max_stamina
@@ -113,3 +118,20 @@ func _input(event):
 		camera.rotation.x = camera.rotation.x - event.relative.y * 0.05
 		camera.rotation.y = camera.rotation.y - event.relative.x * 0.05
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x,-90,90)
+
+func recargar():
+	if municion_en_arma < max_municion_en_arma and municion_de_reserva > 0:
+		var balas_necesarias = max_municion_en_arma - municion_en_arma
+		var balas_a_recargar = min(balas_necesarias, municion_de_reserva)
+		municion_en_arma += balas_a_recargar
+		municion_de_reserva -= balas_a_recargar
+		arma_animacion.play("recargar")
+
+func recibir_dano(cantidad: int):
+	vida -= cantidad
+	if vida <= 0:
+		vida = 0
+		morir()
+
+func morir():
+	pass
