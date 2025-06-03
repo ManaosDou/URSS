@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv172ewllobfn"]
+
+[ext_resource type="FontFile" uid="uid://dpi0vbk4ab0vt" path="res://assets/UI/soviet_program (1)/EBGaramond-Medium.ttf" id="1_ld6d8"]
+[ext_resource type="AudioStream" uid="uid://c6no38txcdfoy" path="res://assets/audio/Intro soundtrack.ogg" id="2_50yqo"]
+
+[sub_resource type="GDScript" id="GDScript_c3yhp"]
+resource_name = "Cutscene0"
+script/source = "extends Control
+
+func _ready() -> void:
+	$RichTextLabel.position.y = 1080+128+$RichTextLabel.size.y
+	
+func _process(delta: float) -> void:
+	$RichTextLabel.position.y -= 100 * delta
+"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_c3yhp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -732.0
+offset_top = -382.0
+offset_right = 723.0
+offset_bottom = 383.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_ld6d8")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "Año 2157
+El mundo tal como lo conocemos ha desaparecido. Todo comenzó con un experimento secreto en los últimos días de la Unión Soviética. 
+Sos el agente especial, [color=RED] F[/color]. Has sido enviado atrás en el tiempo con una única misión: detener la catástrofe antes de que comience"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RichTextLabel"]
+stream = ExtResource("2_50yqo")
+autoplay = true
