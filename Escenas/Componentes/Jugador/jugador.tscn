@@ -217,12 +217,11 @@ _data = {
 &"agacharse": SubResource("Animation_04w7q")
 }
 
-[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("arma_flash", "arma_animacion", "hud", "radar", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion")]
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion")]
 script = ExtResource("1_lwbgw")
 arma_flash = NodePath("Camera3D/ArmaMesh/ArmaFlash")
 arma_animacion = NodePath("Camera3D/ArmaMesh/ArmaAnimacion")
 hud = NodePath("CanvasLayer/HUD")
-radar = NodePath("")
 fase_label = NodePath("CanvasLayer/FaseLabel")
 hacking_cooldown = NodePath("HackingCooldown")
 hacking_cooldown_bar = NodePath("CanvasLayer/HackingCooldownContainer/HackingCooldown")
