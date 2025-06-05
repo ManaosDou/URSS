@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://crp7ildmhc6a3"]
 
-[ext_resource type="Script" uid="uid://cr01xk8qievet" path="res://Escenas/Componentes/pickups/PickUpMunicion.gd" id="2_3hwal"]
+[ext_resource type="Script" uid="uid://cr01xk8qievet" path="res://Escenas/Componentes/pickups/pickup_municion.gd" id="2_3hwal"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7cnxl"]
 albedo_color = Color(1, 1, 0.329412, 1)
