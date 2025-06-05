@@ -18,6 +18,7 @@ func morir():
 	queue_free()
 
 func _physics_process(delta: float) -> void:
+	pass
 	var fase = manager.fase
 	match fase:
 		manager.fases.TRANQUILO:
@@ -78,29 +79,32 @@ func patrullar_random():
 				agent.target_position = ciclo_patrulla.pop_front().position
 
 func caza_update(delta):
-	if esta_jugador_en_foco():
-		timer_ultima_vez_visto_jugador.start()
-	agent.target_position = manager.jugador.global_position
-	posicion_ultima_vez_visto_jugador = manager.jugador.global_position
-	if global_position.distance_to(agent.target_position) < 5:
-		velocity = Vector3(0,0,0)
-	else:
-		var direccion = global_position.direction_to(agent.get_next_path_position())
-		velocity = direccion * speed * 1.25
-	move_and_slide()
+	pass
+	#if esta_jugador_en_foco():
+		#timer_ultima_vez_visto_jugador.start()
+	#agent.target_position = manager.jugador.global_position
+	#posicion_ultima_vez_visto_jugador = manager.jugador.global_position
+	#if global_position.distance_to(agent.target_position) < 5:
+		#velocity = Vector3(0,0,0)
+	#else:
+		#var direccion = global_position.direction_to(agent.get_next_path_position())
+		#velocity = direccion * speed * 1.25
+	#move_and_slide()
 
 func alerta_update(delta):
-	patrullar_alerta()
-	if esta_jugador_en_foco():
-		manager.fase = manager.fases.ALERTA
-	move_and_slide()
+	pass
+	#patrullar_alerta()
+	#if esta_jugador_en_foco():
+		#manager.fase = manager.fases.ALERTA
+	#move_and_slide()
 
 func tranquilo_update(delta):
-	if esta_jugador_en_foco():
-		manager.fase = manager.fases.CAZA
-		timer_ultima_vez_visto_jugador.start()
-	patrullar_random()
-	move_and_slide()
+	pass
+	#if esta_jugador_en_foco():
+		#manager.fase = manager.fases.CAZA
+		#timer_ultima_vez_visto_jugador.start()
+	#patrullar_random()
+	#move_and_slide()
 
 func _on_timer_timeout() -> void:
 	match manager.fase:

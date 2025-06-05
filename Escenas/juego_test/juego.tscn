@@ -63,6 +63,11 @@ uniform float vignette_intensity : hint_range(0.0, 1.0) = 0.3;
 uniform float grille_amount : hint_range(0.0, 1.0) = 0.05;
 uniform float brightness_boost : hint_range(1.0, 2.0) = 1.2;
 
+float random (vec2 uv) {
+    return fract(sin(dot(uv.xy,
+        vec2(12.9898,78.233))) * 43758.5453123);
+}
+
 void fragment() {
     vec2 uv = SCREEN_UV;
     
@@ -86,6 +91,10 @@ void fragment() {
 
     COLOR.rgb = color;
     COLOR.a = 1.0;
+	float pixel_size = 256.0;
+	vec2 pixel_uv = vec2(round(UV.x*pixel_size) / pixel_size,round(UV.y*pixel_size) / pixel_size);
+	float color_ruido = random(pixel_uv + vec2(TIME));
+	COLOR.rgb += vec3(color_ruido,color_ruido,color_ruido) * 0.15;
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bdrrg"]
@@ -97,6 +106,33 @@ shader_parameter/vignette_amount = 1.0
 shader_parameter/vignette_intensity = 1.0
 shader_parameter/grille_amount = 1.0
 shader_parameter/brightness_boost = 1.0
+
+[sub_resource type="Animation" id="Animation_mh2jt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_bdrrg"]
 resource_name = "fade"
@@ -124,33 +160,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_mh2jt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mh2jt"]
@@ -243,6 +252,15 @@ offset_bottom = 850.0
 mouse_filter = 2
 color = Color(0.517647, 0.8, 1, 0.141176)
 
+[node name="ColorRect3" type="ColorRect" parent="MenuTitulo/Control"]
+material = SubResource("ShaderMaterial_bdrrg")
+layout_mode = 0
+offset_left = 517.0
+offset_top = 154.0
+offset_right = 1408.0
+offset_bottom = 850.0
+mouse_filter = 2
+
 [node name="TextureRect" type="TextureRect" parent="MenuTitulo/Control"]
 layout_mode = 1
 anchors_preset = 15
@@ -254,15 +272,6 @@ mouse_filter = 2
 texture = ExtResource("4_s5ody")
 expand_mode = 3
 stretch_mode = 5
-
-[node name="ColorRect3" type="ColorRect" parent="MenuTitulo/Control"]
-material = SubResource("ShaderMaterial_bdrrg")
-layout_mode = 0
-offset_left = 517.0
-offset_top = 154.0
-offset_right = 1408.0
-offset_bottom = 850.0
-mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MenuTitulo"]
 stream = ExtResource("6_bdrrg")
