@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://dbni6o826cp8b"]
+[gd_scene load_steps=19 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 [ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://Escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
+[ext_resource type="PackedScene" uid="uid://cd2v5pj0cpiuo" path="res://Escenas/Componentes/Jugador/audio_controller.tscn" id="3_r5jap"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -306,3 +307,5 @@ libraries = {
 [node name="HackingCooldown" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="AudioController" parent="." instance=ExtResource("3_r5jap")]

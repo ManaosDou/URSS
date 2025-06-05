@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cd2v5pj0cpiuo"]
+
+[node name="AudioController" type="Node3D"]
