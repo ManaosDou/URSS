@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://7d1ajcs4m3ik"]
 
-[ext_resource type="PackedScene" uid="uid://cmg1jgp5d3cse" path="res://escenas/Componentes/ui/arbol_habilidades/habilidad_item_arbol.tscn" id="1_yw7m4"]
+[ext_resource type="PackedScene" uid="uid://cmg1jgp5d3cse" path="res://Escenas/Componentes/ui/arbol_habilidades/habilidad_item_arbol.tscn" id="1_yw7m4"]
 [ext_resource type="Texture2D" uid="uid://d4hfyew31mefe" path="res://icon.svg" id="2_84dcb"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o7hdi"]
@@ -152,8 +152,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1620.0
-offset_bottom = 328.0
+offset_right = 1.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 

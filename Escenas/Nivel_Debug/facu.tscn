@@ -1,9 +1,9 @@
 [gd_scene load_steps=25 format=3 uid="uid://dt1dk8opj2iwv"]
 
-[ext_resource type="Script" uid="uid://cb875hmdw1whe" path="res://escenas/nivel_debug/facu/puerta_hackeable.gd" id="1_8v0j3"]
-[ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://escenas/Componentes/Jugador/jugador.tscn" id="1_eigfb"]
-[ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://escenas/nivel_debug/facu/lampara_hackeable.gd" id="2_w016u"]
-[ext_resource type="PackedScene" uid="uid://mfejefpnaroc" path="res://escenas/Componentes/camara/camara.tscn" id="4_myhkv"]
+[ext_resource type="Script" uid="uid://cb875hmdw1whe" path="res://Escenas/Nivel_Debug/facu/puerta_hackeable.gd" id="1_8v0j3"]
+[ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_eigfb"]
+[ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://Escenas/Nivel_Debug/facu/lampara_hackeable.gd" id="2_w016u"]
+[ext_resource type="PackedScene" uid="uid://mfejefpnaroc" path="res://Escenas/Componentes/camara/camara.tscn" id="4_myhkv"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_saidh"]
 
