@@ -1,5 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://vcwfnlbm47uh"]
 
+<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
 [ext_resource type="Script" uid="uid://bmtygo874kxa7" path="res://Escenas/Componentes/niveles/clase_nivel.gd" id="1_ihcya"]
 [ext_resource type="PackedScene" uid="uid://cjbeb7qembhbw" path="res://Escenas/nivel_1/a.tscn" id="3_4mi7b"]
@@ -9,6 +10,18 @@
 [ext_resource type="PackedScene" uid="uid://c4l3lf6xupbau" path="res://Escenas/nivel_1/f.tscn" id="6_spbm1"]
 [ext_resource type="PackedScene" uid="uid://dw2goglsahn8h" path="res://Escenas/Componentes/enemigos/enemigo_test.tscn" id="7_akklk"]
 [ext_resource type="Script" uid="uid://b8iq7gelwjd0b" path="res://Escenas/Componentes/enemigos/enemy_manager/enemy_manager.gd" id="7_ehg28"]
+=======
+[ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
+[ext_resource type="PackedScene" uid="uid://cjbeb7qembhbw" path="res://escenas/nivel_1/a.tscn" id="3_4mi7b"]
+[ext_resource type="PackedScene" uid="uid://b3nvgg8ff80to" path="res://escenas/nivel_1/c.tscn" id="3_4nq7f"]
+[ext_resource type="VoxelGIData" uid="uid://dkfr3ei7wnix4" path="res://escenas/nivel_1/Nivel1.VoxelGI_data.res" id="3_jt4gu"]
+[ext_resource type="PackedScene" uid="uid://bx5kc122jg7r5" path="res://escenas/nivel_1/b.tscn" id="4_4mi7b"]
+[ext_resource type="PackedScene" uid="uid://c4l3lf6xupbau" path="res://escenas/nivel_1/f.tscn" id="6_spbm1"]
+[ext_resource type="PackedScene" uid="uid://dw2goglsahn8h" path="res://escenas/Componentes/enemigos/enemigo_test.tscn" id="7_akklk"]
+[ext_resource type="Script" uid="uid://b8iq7gelwjd0b" path="res://escenas/Componentes/enemigos/enemy_manager/enemy_manager.gd" id="7_ehg28"]
+[ext_resource type="Script" uid="uid://cb875hmdw1whe" path="res://escenas/nivel_debug/facu/puerta_hackeable.gd" id="9_ihcya"]
+[ext_resource type="PackedScene" uid="uid://cynopchc85yxk" path="res://escenas/Componentes/Lampara/lampara.tscn" id="10_qa56l"]
+>>>>>>> Stashed changes
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vxico"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)

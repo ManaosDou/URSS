@@ -1,7 +1,16 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=18 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 [ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://Escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
+=======
+[gd_scene load_steps=20 format=3 uid="uid://dbni6o826cp8b"]
+
+[ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
+[ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
+[ext_resource type="PackedScene" uid="uid://5pshi02b2aod" path="res://escenas/Componentes/Jugador/hud/radar/radar.tscn" id="3_r5jap"]
+[ext_resource type="AudioStream" uid="uid://6pj2tgts006d" path="res://assets/audio/Paso corregido.mp3" id="4_yqcka"]
+>>>>>>> Stashed changes
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -303,6 +312,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_5howd")
 }
 
+<<<<<<< Updated upstream
 [node name="HackingCooldown" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+=======
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_yqcka")
+>>>>>>> Stashed changes

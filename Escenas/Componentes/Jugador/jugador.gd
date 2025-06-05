@@ -15,6 +15,7 @@ class_name Jugador
 @export var hacking_cooldown : Timer
 @export var hacking_cooldown_bar : ProgressBar
 
+
 var agachado : bool 
 @export var agacharse_animacion : AnimationPlayer
 
@@ -76,7 +77,7 @@ func _physics_process(delta):
 		Globals.nivel.triggers.jugador_salto = true
 	if not is_on_floor():
 		velocity.y -= 15 * delta
-
+		
 	# Arma
 	if Input.is_action_just_pressed("disparar") and not arma_animacion.is_playing() and municion_en_arma > 0:
 		arma_animacion.play("disparar")

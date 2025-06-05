@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cjbeb7qembhbw"]
 
-[ext_resource type="PackedScene" uid="uid://mfejefpnaroc" path="res://Escenas/Componentes/camara/camara.tscn" id="1_qvdvw"]
-[ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://Escenas/Nivel_Debug/facu/lampara_hackeable.gd" id="2_2bt8x"]
+[ext_resource type="PackedScene" uid="uid://mfejefpnaroc" path="res://escenas/Componentes/camara/camara.tscn" id="1_qvdvw"]
+[ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://escenas/nivel_debug/facu/lampara_hackeable.gd" id="2_2bt8x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxxr6"]
 
