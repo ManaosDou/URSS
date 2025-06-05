@@ -23,6 +23,7 @@ var max_municion_en_arma : int = 10
 var municion_de_reserva : int = 30
 var max_municion_de_reserva : int = 30
 
+var puntos_de_experiencia : int = 0
 
 var vida : int = 100
 var max_vida : int = 100
