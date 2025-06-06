@@ -276,3 +276,10 @@ objeto_detectado = NodePath("../Marker3D")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 609.221, 50.7499, 533.545)
+
+[node name="Objetos" type="Node3D" parent="."]
+
+[node name="Guardias" type="Node3D" parent="Objetos"]
+
+[node name="Guardia" type="Marker3D" parent="Objetos/Guardias"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 365.822, -17, 0)
