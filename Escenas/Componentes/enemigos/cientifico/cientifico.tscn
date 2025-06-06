@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxqrcm13k6coa"]
+[gd_scene load_steps=5 format=3 uid="uid://bxqrcm13k6coa"]
 
 [ext_resource type="Script" uid="uid://dpmnuvoma41d7" path="res://Escenas/Componentes/enemigos/cientifico/cientifico.gd" id="1_bgmxs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xit8o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgmxs"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bgmxs"]
+material = SubResource("StandardMaterial3D_bgmxs")
 
 [node name="Cientifico" type="CharacterBody3D"]
 script = ExtResource("1_bgmxs")
@@ -13,3 +19,6 @@ shape = SubResource("CapsuleShape3D_xit8o")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_bgmxs")
