@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0ij3gxx7ii36"]
+[gd_scene load_steps=5 format=3 uid="uid://b0ij3gxx7ii36"]
 
+[ext_resource type="PackedScene" uid="uid://hmccynvegse3" path="res://Escenas/Componentes/enemigos/guardia/guardia.tscn" id="2_3un58"]
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="2_ac0y3"]
+[ext_resource type="PackedScene" uid="uid://dt7f00ohye4h1" path="res://Escenas/Componentes/pickups/botiquin.tscn" id="3_p6eh7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_24s25"]
 load_path = "res://.godot/imported/mapa (3).jpg-2d84bfb89234d6fa351979019a69166f.s3tc.ctex"
@@ -30,10 +32,10 @@ use_collision = true
 size = Vector3(449.504, 1, 284.283)
 
 [node name="CSGBox3D27" type="CSGBox3D" parent="CSGCombiner3D2"]
-transform = Transform3D(1, 0, 0, 0, 104.46, 0, 0, 0, 1, 96.8878, -0.271569, -303.271)
+transform = Transform3D(1, 0, 0, 0, 104.46, 0, 0, 0, 1, 96.8878, -0.271569, -302.004)
 operation = 2
 use_collision = true
-size = Vector3(436.409, 0.980606, 292.365)
+size = Vector3(436.409, 0.980606, 289.83)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D2"]
 transform = Transform3D(1, 0, 0, 0, 104.46, 0, 0, 0, 1, 107.278, 0.566044, -105.552)
@@ -213,6 +215,16 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 104.46, 0, -8.74228e-08, 0, -1, -
 use_collision = true
 size = Vector3(181.026, 1.03003, 33.8464)
 
+[node name="CSGBox3D45" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 104.46, 0, 1, 0, -4.37114e-08, 44.0246, -1.00239, -302.953)
+use_collision = true
+size = Vector3(289.123, 1.03003, 10.91)
+
+[node name="CSGBox3D46" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 104.46, 0, 1, 0, -4.37114e-08, 175.58, -1.00239, -302.953)
+use_collision = true
+size = Vector3(289.123, 1.03003, 27.059)
+
 [node name="CSGBox3D43" type="CSGBox3D" parent="CSGCombiner3D2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 104.46, 0, -8.74228e-08, 0, -1, -43.6338, -1.00239, -455.293)
 use_collision = true
@@ -279,7 +291,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 609.221, 50.7499, 533.545)
 
 [node name="Objetos" type="Node3D" parent="."]
 
-[node name="Guardias" type="Node3D" parent="Objetos"]
+[node name="Cientificos" type="Node3D" parent="Objetos"]
 
-[node name="Guardia" type="Marker3D" parent="Objetos/Guardias"]
+[node name="Cientifico" parent="Objetos/Cientificos" instance=ExtResource("2_3un58")]
+transform = Transform3D(17.005, 0, 0, 0, 17.005, 0, 0, 0, 17.005, 91.7696, -35.8488, -385.644)
+
+[node name="Cientifico2" parent="Objetos/Cientificos" instance=ExtResource("2_3un58")]
+transform = Transform3D(17.005, 0, 0, 0, 17.005, 0, 0, 0, 17.005, 616.456, -35.8488, 108.377)
+
+[node name="Cientifico3" parent="Objetos/Cientificos" instance=ExtResource("2_3un58")]
+transform = Transform3D(17.005, 0, 0, 0, 17.005, 0, 0, 0, 17.005, -462.2, -35.8488, 450.997)
+
+[node name="Guardias2" type="Node3D" parent="Objetos"]
+
+[node name="Guardia" type="Marker3D" parent="Objetos/Guardias2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 365.822, -17, 0)
+
+[node name="Guardia2" type="Marker3D" parent="Objetos/Guardias2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 365.822, -17, 192.755)
+
+[node name="Guardia3" type="Marker3D" parent="Objetos/Guardias2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 153.33, -17, 343.69)
+
+[node name="Guardia4" type="Marker3D" parent="Objetos/Guardias2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 657.036, -17, 240.949)
+
+[node name="Guardia5" type="Marker3D" parent="Objetos/Guardias2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -307.327, -17, 116.47)
+
+[node name="Guardia6" type="Marker3D" parent="Objetos/Guardias2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.959, -17, -340.906)
+
+[node name="Pickups" type="Node3D" parent="Objetos"]
+
+[node name="Botiquin" parent="Objetos/Pickups" instance=ExtResource("3_p6eh7")]
+transform = Transform3D(11.345, 0, 0, 0, 11.345, 0, 0, 0, 11.345, -546.035, 0, -50.6082)
+
+[node name="Botiquin2" parent="Objetos/Pickups" instance=ExtResource("3_p6eh7")]
+transform = Transform3D(11.345, 0, 0, 0, 11.345, 0, 0, 0, 11.345, 657.026, -28.0389, 158.618)
