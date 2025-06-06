@@ -1,4 +1,4 @@
 extends PickUp
 
 func agarrar(jugador: Jugador):
-	pass
+	jugador.puntos_de_experiencia + 10
