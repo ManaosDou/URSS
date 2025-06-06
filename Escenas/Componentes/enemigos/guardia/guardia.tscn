@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://hmccynvegse3"]
+[gd_scene load_steps=5 format=3 uid="uid://hmccynvegse3"]
+
+[ext_resource type="Script" uid="uid://ea7h8nur3tsx" path="res://Escenas/Componentes/enemigos/guardia/guardia.gd" id="1_4ws1q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xit8o"]
 
@@ -7,7 +9,8 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sovxp"]
 albedo_color = Color(0, 0.678431, 1, 1)
 
-[node name="Cientifico" type="CharacterBody3D"]
+[node name="Guardia" type="CharacterBody3D"]
+script = ExtResource("1_4ws1q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_xit8o")
