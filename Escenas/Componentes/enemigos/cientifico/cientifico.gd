@@ -2,17 +2,19 @@ extends CharacterBody3D
 class_name Cientifico
 
 ## Clase del cientifico. Inspirarse en el viejo script "res://Escenas/Componentes/enemigos/enemigo_clase.gd" para implementaciones.
+## Sobre NavigationAgents: https://docs.godotengine.org/en/4.4/tutorials/navigation/navigation_using_navigationagents.html
 
 var velocidad : float = 120
 var vida : int = 2
 
-var lista_puntos : Array[Node3D]
+@export var lista_puntos : Array[Node3D]
 var indice_punto : int = 0
 var area_segura : Node3D
 
 var estado_alerta : int
 
-var agent : NavigationAgent3D
+@export var agent : NavigationAgent3D
+@export var raycast : RayCast3D
 
 func _ready() -> void:
 	#setea la target_position inicial en relacion al primer item de la lista de puntos
@@ -50,7 +52,7 @@ func procesar_patrulla():
 		indice_punto += 1
 		agent.target_position = lista_puntos[indice_punto].global_position
 
-## Codigo que corre cada process frame mientras el estado sea de patrulla
+## Codigo que corre cada process frame mientras el estado sea de alerta
 func procesar_alerta():
 	# lo mismo que en procesar patrulla, pero va al area segura
 	var distancia_a_punto : Vector3 = global_position.direction_to(agent.get_next_path_position())
