@@ -10,8 +10,10 @@ albedo_color = Color(0, 1, 0, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bgmxs"]
 material = SubResource("StandardMaterial3D_bgmxs")
 
-[node name="Cientifico" type="CharacterBody3D"]
+[node name="Cientifico" type="CharacterBody3D" node_paths=PackedStringArray("agent", "raycast")]
 script = ExtResource("1_bgmxs")
+agent = NodePath("NavigationAgent3D")
+raycast = NodePath("RayCast3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_xit8o")
