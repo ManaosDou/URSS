@@ -4,9 +4,9 @@ class_name Cientifico
 ## Clase del cientifico. Inspirarse en el viejo script "res://Escenas/Componentes/enemigos/enemigo_clase.gd" para implementaciones.
 ## Sobre NavigationAgents: https://docs.godotengine.org/en/4.4/tutorials/navigation/navigation_using_navigationagents.html
 
-var velocidad : float = 120
+var velocidad : float = 5
 var vida : int = 2
-@export var distancia_vision : float = 15
+@export var distancia_vision : float = 5
 
 @export var lista_puntos : Array[Node]
 var indice_punto : int = 0
@@ -79,19 +79,22 @@ func procesar_patrulla():
 	#si la distancia a la target_position es menor a 1, ir al siguiente punto.
 	if global_position.distance_to(agent.target_position) < 1:
 		indice_punto += 1
+		if indice_punto >= lista_puntos.size():
+			indice_punto = 0
 		agent.target_position = lista_puntos[indice_punto].global_position
+
 	
 
 ## Codigo que corre cada process frame mientras el estado sea de alerta
 func procesar_alerta():
 	# lo mismo que en procesar patrulla, pero va al area segura
-	agent.target_position = area_segura.global_position
 	
 	var distancia_a_punto : Vector3 = global_position.direction_to(agent.get_next_path_position())
 	if global_position.distance_to(agent.target_position) > 1:
 		velocity = distancia_a_punto.normalized() * velocidad
 		velocity.y = 0
 	else: velocity = Vector3.ZERO # quedarse quieto si ya llego al area segura
+	move_and_slide()
 
 ## Funcion que interpreta un disparo al cientifico.
 func disparo(headshot : bool = false):

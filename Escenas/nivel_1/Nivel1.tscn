@@ -152,7 +152,7 @@ area_segura = NodePath("Area segura")
 jugador = NodePath("../Jugador")
 
 [node name="Area segura" type="Marker3D" parent="Cientifico"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.9692, -0.799999, 7.6854)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.7483, -0.799999, -35.4605)
 
 [node name="Patrulla2" type="Node" parent="Cientifico"]
 
