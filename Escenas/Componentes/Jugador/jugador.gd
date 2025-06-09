@@ -1,10 +1,10 @@
 extends CharacterBody3D
 class_name Jugador
 
-@export var velocidad_normal : float = 10
-@export var velocidad_correr : float = 20
+@export var velocidad_normal : float = 5
+@export var velocidad_correr : float = 10
 @export var velocidad_agachado : float = 3
-@export var mouse_sens : float = 0.025
+@export var mouse_sens : float = 0.001
 @onready var camera : Camera3D = get_node("Camera3D")
 @export var arma_flash : GPUParticles3D
 @export var arma_animacion : AnimationPlayer
@@ -20,8 +20,8 @@ var agachado : bool
 
 var municion_en_arma : int = 10
 var max_municion_en_arma : int = 10
-var municion_de_reserva : int = 30
-var max_municion_de_reserva : int = 30
+var municion_de_reserva : int = 2
+var max_municion_de_reserva : int = 10
 
 var puntos_de_experiencia : int = 0
 
@@ -116,8 +116,8 @@ func detectar_hackeo():
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		camera.rotation.x = camera.rotation.x - event.relative.y * 0.05
-		camera.rotation.y = camera.rotation.y - event.relative.x * 0.05
+		camera.rotation.x = camera.rotation.x - event.relative.y * 0.008
+		camera.rotation.y = camera.rotation.y - event.relative.x * 0.008
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x,-90,90)
 
 func recargar():
