@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://dt7f00ohye4h1" path="res://Escenas/Componentes/pickups/botiquin.tscn" id="3_p6eh7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_24s25"]
-load_path = "res://.godot/imported/mapa (3).jpg-2d84bfb89234d6fa351979019a69166f.s3tc.ctex"
 
 [node name="Node3D" type="Node3D"]
 
