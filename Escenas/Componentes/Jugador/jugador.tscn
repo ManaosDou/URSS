@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 [ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://Escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
-[ext_resource type="PackedScene" uid="uid://cd2v5pj0cpiuo" path="res://Escenas/Componentes/Jugador/audio_controller.tscn" id="3_r5jap"]
+[ext_resource type="AudioStream" uid="uid://bewu1fs0xwc0e" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -218,8 +218,10 @@ _data = {
 &"agacharse": SubResource("Animation_04w7q")
 }
 
-[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion")]
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion")]
 script = ExtResource("1_lwbgw")
+pasos_audio = NodePath("PasosAudio")
+pasos_audio_timer = NodePath("PasosAudio/Timer")
 arma_flash = NodePath("Camera3D/ArmaMesh/ArmaFlash")
 arma_animacion = NodePath("Camera3D/ArmaMesh/ArmaAnimacion")
 hud = NodePath("CanvasLayer/HUD")
@@ -308,4 +310,10 @@ libraries = {
 wait_time = 5.0
 one_shot = true
 
-[node name="AudioController" parent="." instance=ExtResource("3_r5jap")]
+[node name="PasosAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_04w7q")
+
+[node name="Timer" type="Timer" parent="PasosAudio"]
+wait_time = 0.001
+
+[connection signal="timeout" from="PasosAudio/Timer" to="." method="_on_timer_timeout"]
