@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Jugador
 
+@export var pasos_audio : AudioStreamPlayer3D
+@export var pasos_audio_timer : Timer
 @export var velocidad_normal : float = 5
 @export var velocidad_correr : float = 10
 @export var velocidad_agachado : float = 3
@@ -14,6 +16,8 @@ class_name Jugador
 @export var fase_label : Label
 @export var hacking_cooldown : Timer
 @export var hacking_cooldown_bar : ProgressBar
+
+var quiere_correr
 
 var agachado : bool 
 @export var agacharse_animacion : AnimationPlayer
@@ -49,7 +53,7 @@ func _physics_process(delta):
 	else: velocidad = velocidad_normal
 	
 	# correr
-	var quiere_correr = Input.is_action_pressed("correr") and stamina > 0 and agachado == false
+	quiere_correr = Input.is_action_pressed("correr") and stamina > 0 and agachado == false
 	
 	if quiere_correr:
 		velocidad = velocidad_correr
@@ -70,6 +74,13 @@ func _physics_process(delta):
 	velocity.z = velocidad * Input.get_axis("mover_adelante","mover_atras")
 	velocity.x = velocidad * Input.get_axis("mover_izquierda","mover_derecha")
 	velocity = velocity.rotated(Vector3(0,1,0), camera.rotation.y)
+	
+	
+
+	if velocity.length() > 0 and is_on_floor():
+		if pasos_audio_timer.is_stopped():
+			pasos_audio_timer.start()
+	else: pasos_audio_timer.stop()
 
 	if Input.is_action_just_pressed("saltar") and is_on_floor():
 		velocity.y = 500 * delta
@@ -136,3 +147,10 @@ func recibir_dano(cantidad: int):
 
 func morir():
 	pass
+
+func _on_timer_timeout() -> void:
+	var velocidad_pasos = 0.25
+	var velocidad_pasos_c = 0.1
+	if quiere_correr: pasos_audio_timer.wait_time = velocidad_pasos_c
+	else: pasos_audio_timer.wait_time = velocidad_pasos
+	pasos_audio.play()

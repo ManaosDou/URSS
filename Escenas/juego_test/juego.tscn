@@ -470,6 +470,8 @@ offset_right = 1408.0
 offset_bottom = 850.0
 mouse_filter = 2
 
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="pressed" from="MenuTitulo/Control/VBoxContainer/VBoxContainer/JugarBoton" to="." method="_on_jugar_pressed"]
 [connection signal="pressed" from="MenuTitulo/Control/VBoxContainer/VBoxContainer/SettingsBoton" to="." method="_on_opciones_pressed"]
 [connection signal="pressed" from="MenuTitulo/Control/VBoxContainer/VBoxContainer/CreditosBoton" to="." method="_on_creditos_boton_pressed"]

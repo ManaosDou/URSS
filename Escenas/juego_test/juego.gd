@@ -2,6 +2,9 @@ extends Node
 
 var nivel : PackedScene = preload("res://Escenas/nivel_1/Nivel1.tscn")
 
+func _ready() -> void:
+	Globals.music_player = $MusicPlayer
+
 func _on_jugar_pressed() -> void:
 	$MenuTitulo/AnimationPlayer.play("fade")
 	await get_tree().create_timer(3).timeout
