@@ -9,7 +9,7 @@ var vida : int = 2
 @export var distancia_vision : float = 5
 @export var velocidad_rotacion : float = 5
 
-var timer_espera_patrulla : Timer
+@export var timer_espera_patrulla : Timer
 @export var tiempo_espera : float = 2
 var esperando_en_punto : bool = false
 
@@ -28,10 +28,7 @@ func _ready() -> void:
 	#setea la target_position inicial en relacion al primer item de la lista de puntos
 	agent.target_position = lista_puntos[indice_punto].global_position
 	
-	timer_espera_patrulla = Timer.new()
 	timer_espera_patrulla.wait_time = tiempo_espera
-	timer_espera_patrulla.one_shot = true
-	add_child(timer_espera_patrulla)
 	timer_espera_patrulla.timeout.connect(_on_timer_espera_timeout)
 
 func _physics_process(delta: float) -> void:
@@ -127,7 +124,6 @@ func procesar_alerta(delta: float):
 
 func _on_timer_espera_timeout():
 	esperando_en_punto = false
-	# Ir al siguiente punto
 	indice_punto += 1
 	if indice_punto >= lista_puntos.size():
 		indice_punto = 0

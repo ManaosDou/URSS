@@ -12,8 +12,9 @@ material = SubResource("StandardMaterial3D_bgmxs")
 
 [sub_resource type="SphereMesh" id="SphereMesh_bgmxs"]
 
-[node name="Cientifico" type="CharacterBody3D" node_paths=PackedStringArray("agent", "raycast")]
+[node name="Cientifico" type="CharacterBody3D" node_paths=PackedStringArray("timer_espera_patrulla", "agent", "raycast")]
 script = ExtResource("1_bgmxs")
+timer_espera_patrulla = NodePath("Timer")
 agent = NodePath("NavigationAgent3D")
 raycast = NodePath("RayCast3D")
 
@@ -30,3 +31,6 @@ mesh = SubResource("CapsuleMesh_bgmxs")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38583, -0.0696989)
 mesh = SubResource("SphereMesh_bgmxs")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

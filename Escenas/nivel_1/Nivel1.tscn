@@ -63,8 +63,16 @@ func _process(delta: float) -> void:
 		queue_free()
 "
 
-[node name="Nivel1" type="Node3D"]
+[node name="Nivel1" type="Node3D" node_paths=PackedStringArray("timer_caza_a_alerta", "timer_alerta_a_patrulla")]
 script = ExtResource("1_ihcya")
+timer_caza_a_alerta = NodePath("Timer")
+timer_alerta_a_patrulla = NodePath("Timer2")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+one_shot = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4nq7f")
