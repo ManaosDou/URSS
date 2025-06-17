@@ -9,6 +9,10 @@ var vida : int = 2
 @export var distancia_vision : float = 5
 @export var velocidad_rotacion : float = 5
 
+var timer_espera_patrulla : Timer
+@export var tiempo_espera : float = 2
+var esperando_en_punto : bool = false
+
 @export var lista_puntos : Array[Node]
 var indice_punto : int = 0
 @export var area_segura : Node3D
@@ -23,6 +27,12 @@ var estado_alerta : int
 func _ready() -> void:
 	#setea la target_position inicial en relacion al primer item de la lista de puntos
 	agent.target_position = lista_puntos[indice_punto].global_position
+	
+	timer_espera_patrulla = Timer.new()
+	timer_espera_patrulla.wait_time = tiempo_espera
+	timer_espera_patrulla.one_shot = true
+	add_child(timer_espera_patrulla)
+	timer_espera_patrulla.timeout.connect(_on_timer_espera_timeout)
 
 func _physics_process(delta: float) -> void:
 	# hace que las funciones de procesamiento cambien en relacion al estado
@@ -84,6 +94,12 @@ func procesar_patrulla(delta: float):
 
 	# direccion al siguiente paso hacia la target_position
 	agent.target_position = lista_puntos[indice_punto].global_position
+	
+	if esperando_en_punto:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+	
 	var distancia_a_punto : Vector3 = global_position.direction_to(agent.get_next_path_position())
 	
 	#se mueve hacia esa direccion multiplicado por su velocidad
@@ -94,12 +110,8 @@ func procesar_patrulla(delta: float):
 	move_and_slide()
 	#si la distancia a la target_position es menor a 1, ir al siguiente punto.
 	if global_position.distance_to(agent.target_position) < 1:
-		indice_punto += 1
-		if indice_punto >= lista_puntos.size():
-			indice_punto = 0
-		agent.target_position = lista_puntos[indice_punto].global_position
-
-	
+		esperando_en_punto = true
+		timer_espera_patrulla.start()
 
 ## Codigo que corre cada process frame mientras el estado sea de alerta
 func procesar_alerta(delta: float):
@@ -112,6 +124,14 @@ func procesar_alerta(delta: float):
 		rotar_hacia_direccion(distancia_a_punto, delta)
 	else: velocity = Vector3.ZERO # quedarse quieto si ya llego al area segura
 	move_and_slide()
+
+func _on_timer_espera_timeout():
+	esperando_en_punto = false
+	# Ir al siguiente punto
+	indice_punto += 1
+	if indice_punto >= lista_puntos.size():
+		indice_punto = 0
+	agent.target_position = lista_puntos[indice_punto].global_position
 
 ## Funcion que interpreta un disparo al cientifico.
 func disparo(headshot : bool = false):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://hmccynvegse3"]
+[gd_scene load_steps=6 format=3 uid="uid://hmccynvegse3"]
 
 [ext_resource type="Script" uid="uid://ea7h8nur3tsx" path="res://Escenas/Componentes/enemigos/guardia/guardia.gd" id="1_4ws1q"]
 
@@ -8,6 +8,8 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sovxp"]
 albedo_color = Color(0, 0.678431, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4ws1q"]
 
 [node name="Guardia" type="CharacterBody3D"]
 script = ExtResource("1_4ws1q")
@@ -22,3 +24,7 @@ shape = SubResource("CapsuleShape3D_xit8o")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_sovxp")
 surface_material_override/0 = SubResource("StandardMaterial3D_sovxp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38583, -0.0696989)
+mesh = SubResource("SphereMesh_4ws1q")
