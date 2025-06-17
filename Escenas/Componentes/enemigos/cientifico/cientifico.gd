@@ -57,7 +57,11 @@ func esta_jugador_en_foco() -> bool:
 ## Procesa los cambios de estado. En el caso del cientifico, hace que vaya al estado de casa cuando ve al jugador, y va hacia el area segura.
 func procesar_estados():
 	if esta_jugador_en_foco():
-		Globals.nivel.estado_alerta = Globals.nivel.Caza
+		if Globals.nivel.estado_alerta != Globals.nivel.Caza:
+			Globals.nivel.activar_estado_caza()
+		else:
+			# Si ya esta en caza resetea el timer
+			Globals.nivel.resetear_timer_caza()
 		agent.target_position = area_segura.global_position
 
 ## Codigo que corre cada process frame mientras el estado sea de patrulla
@@ -79,13 +83,14 @@ func procesar_patrulla(delta: float):
 		#else:
 
 	# direccion al siguiente paso hacia la target_position
+	agent.target_position = lista_puntos[indice_punto].global_position
 	var distancia_a_punto : Vector3 = global_position.direction_to(agent.get_next_path_position())
 	
 	#se mueve hacia esa direccion multiplicado por su velocidad
 	velocity = distancia_a_punto.normalized() * velocidad
 	velocity.y = 0
 	rotar_hacia_direccion(distancia_a_punto, delta)
-	print(distancia_a_punto)
+	#print(distancia_a_punto)
 	move_and_slide()
 	#si la distancia a la target_position es menor a 1, ir al siguiente punto.
 	if global_position.distance_to(agent.target_position) < 1:
