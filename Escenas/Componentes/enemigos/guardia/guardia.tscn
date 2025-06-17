@@ -14,8 +14,10 @@ albedo_color = Color(0, 0.678431, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_p2ht6"]
 size = Vector3(0.1, 0.1, 1)
 
-[node name="Guardia" type="CharacterBody3D" node_paths=PackedStringArray("agent", "raycast")]
+[node name="Guardia" type="CharacterBody3D" node_paths=PackedStringArray("timer_espera_patrulla", "timer_disparo", "agent", "raycast")]
 script = ExtResource("1_4ws1q")
+timer_espera_patrulla = NodePath("Timer")
+timer_disparo = NodePath("Timer2")
 agent = NodePath("NavigationAgent3D")
 raycast = NodePath("RayCast3D")
 
@@ -40,3 +42,9 @@ mesh = SubResource("BoxMesh_p2ht6")
 
 [node name="Node3D" type="Node3D" parent="MeshInstance3D/ArmaMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.507591)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+one_shot = true

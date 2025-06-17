@@ -8,7 +8,7 @@ var vida : int = 3
 @export var distancia_disparo : float = 8
 @export var velocidad_rotacion : float = 5
 
-var timer_espera_patrulla : Timer
+@export var timer_espera_patrulla : Timer
 @export var tiempo_espera : float = 2
 var esperando_en_punto : bool = false
 
@@ -16,8 +16,8 @@ var esperando_en_punto : bool = false
 var indice_punto : int = 0
 
 var ultima_posicion_jugador : Vector3
-var timer_disparo : Timer
-@export var tiempo_entre_disparos : float = 1
+@export var timer_disparo : Timer
+@export var tiempo_entre_disparos : float = 3
 @export var dano_disparo : int = 20
 
 @export var agent : NavigationAgent3D
@@ -26,16 +26,10 @@ var timer_disparo : Timer
 @export var jugador : Jugador
 
 func _ready() -> void:
-	timer_espera_patrulla = Timer.new()
 	timer_espera_patrulla.wait_time = tiempo_espera
-	timer_espera_patrulla.one_shot = true
-	add_child(timer_espera_patrulla)
 	timer_espera_patrulla.timeout.connect(_on_timer_espera_timeout)
 	
-	timer_disparo = Timer.new()
 	timer_disparo.wait_time = tiempo_entre_disparos
-	timer_disparo.one_shot = true
-	add_child(timer_disparo)
 	timer_disparo.timeout.connect(_on_timer_disparo_timeout)
 	
 	agent.target_position = lista_puntos[indice_punto].global_position
