@@ -7,8 +7,8 @@ enum {Patrulla,Alerta,Caza}
 
 @export var timer_caza_a_alerta : Timer
 @export var timer_alerta_a_patrulla : Timer
-@export var tiempo_caza : float = 5
-@export var tiempo_alerta : float = 5
+@export var tiempo_caza : float = 10
+@export var tiempo_alerta : float = 10
 
 func _ready() -> void:
 	Globals.nivel = self

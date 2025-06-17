@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Guardia
+class_name Guardia_viejo
 ## Un guardia que persigue al jugador.
 
 ## Cantidad de vida del enemigo. Al llegar a 0 explota y dice pum.

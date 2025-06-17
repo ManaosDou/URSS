@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://hmccynvegse3"]
+[gd_scene load_steps=7 format=3 uid="uid://hmccynvegse3"]
 
-[ext_resource type="Script" uid="uid://ea7h8nur3tsx" path="res://Escenas/Componentes/enemigos/guardia/guardia.gd" id="1_4ws1q"]
+[ext_resource type="Script" uid="uid://c5yp8bq7t0ndf" path="res://Escenas/Componentes/enemigos/guardia/guardia_nuevo.gd" id="1_4ws1q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xit8o"]
 
@@ -11,8 +11,13 @@ albedo_color = Color(0, 0.678431, 1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_4ws1q"]
 
-[node name="Guardia" type="CharacterBody3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_p2ht6"]
+size = Vector3(0.1, 0.1, 1)
+
+[node name="Guardia" type="CharacterBody3D" node_paths=PackedStringArray("agent", "raycast")]
 script = ExtResource("1_4ws1q")
+agent = NodePath("NavigationAgent3D")
+raycast = NodePath("RayCast3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_xit8o")
@@ -28,3 +33,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_sovxp")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38583, -0.0696989)
 mesh = SubResource("SphereMesh_4ws1q")
+
+[node name="ArmaMesh" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.474789, 0, -0.338083)
+mesh = SubResource("BoxMesh_p2ht6")
+
+[node name="Node3D" type="Node3D" parent="MeshInstance3D/ArmaMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.507591)
