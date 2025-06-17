@@ -7,6 +7,7 @@ class_name Cientifico
 var velocidad : float = 5
 var vida : int = 2
 @export var distancia_vision : float = 5
+@export var velocidad_rotacion : float = 5
 
 @export var lista_puntos : Array[Node]
 var indice_punto : int = 0
@@ -26,10 +27,19 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# hace que las funciones de procesamiento cambien en relacion al estado
 	match Globals.nivel.estado_alerta:
-		Globals.nivel.Alerta: procesar_alerta()
-		Globals.nivel.Caza: procesar_alerta() #Un detalle mas, cuando entra al estado de caza tambien queremos que vaya al area segura, asi que lo puse aca tambien en el match. 
-		Globals.nivel.Patrulla: procesar_patrulla()
+		Globals.nivel.Alerta: procesar_alerta(delta)
+		Globals.nivel.Caza: procesar_alerta(delta) #Un detalle mas, cuando entra al estado de caza tambien queremos que vaya al area segura, asi que lo puse aca tambien en el match. 
+		Globals.nivel.Patrulla: procesar_patrulla(delta)
 	procesar_estados()
+	
+
+func rotar_hacia_direccion(direccion: Vector3, delta: float):
+	if direccion.length() > 0.1:  
+		var direccion_horizontal = Vector3(direccion.x, 0, direccion.z).normalized()
+		var target_transform = transform.looking_at(global_position + direccion_horizontal, Vector3.UP)
+		
+		transform = transform.interpolate_with(target_transform, velocidad_rotacion * delta)
+
 
 ## Se llama para saber si el cientifico esta mirando al jugador
 func esta_jugador_en_foco() -> bool:
@@ -51,7 +61,7 @@ func procesar_estados():
 		agent.target_position = area_segura.global_position
 
 ## Codigo que corre cada process frame mientras el estado sea de patrulla
-func procesar_patrulla():
+func procesar_patrulla(delta: float):
 	# Aca esta el codigo anterior de procesar_patrulla.
 	# Aca copiaste la parte que utilizaba una manera distinta de sacar la lista de puntos usando los hijos de un nodo llamado Patrulla
 	# Si te fijas, te vas a dar cuenta que todo el codigo que pusimos la clase pasada que se encarga del comportamiento del cientifico esta dentro de un if que siempre va a dar true.
@@ -74,6 +84,7 @@ func procesar_patrulla():
 	#se mueve hacia esa direccion multiplicado por su velocidad
 	velocity = distancia_a_punto.normalized() * velocidad
 	velocity.y = 0
+	rotar_hacia_direccion(distancia_a_punto, delta)
 	print(distancia_a_punto)
 	move_and_slide()
 	#si la distancia a la target_position es menor a 1, ir al siguiente punto.
@@ -86,13 +97,14 @@ func procesar_patrulla():
 	
 
 ## Codigo que corre cada process frame mientras el estado sea de alerta
-func procesar_alerta():
+func procesar_alerta(delta: float):
 	# lo mismo que en procesar patrulla, pero va al area segura
 	
 	var distancia_a_punto : Vector3 = global_position.direction_to(agent.get_next_path_position())
 	if global_position.distance_to(agent.target_position) > 1:
 		velocity = distancia_a_punto.normalized() * velocidad
 		velocity.y = 0
+		rotar_hacia_direccion(distancia_a_punto, delta)
 	else: velocity = Vector3.ZERO # quedarse quieto si ya llego al area segura
 	move_and_slide()
 
