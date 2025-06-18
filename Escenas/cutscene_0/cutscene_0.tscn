@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bv172ewllobfn"]
 
-[ext_resource type="FontFile" uid="uid://dmcwatpbcrlq7" path="res://assets/UI/soviet_program (1)/EBGaramond-Medium.ttf" id="1_ld6d8"]
-[ext_resource type="AudioStream" uid="uid://ckoo4a2xoqxi2" path="res://assets/audio/Intro soundtrack.ogg" id="2_50yqo"]
+[ext_resource type="FontFile" uid="uid://cusatnssmsif6" path="res://assets/UI/soviet_program (1)/EBGaramond-Medium.ttf" id="1_ld6d8"]
+[ext_resource type="AudioStream" uid="uid://duophl308tjx5" path="res://assets/audio/Intro soundtrack.ogg" id="2_50yqo"]
 
 [sub_resource type="GDScript" id="GDScript_c3yhp"]
 resource_name = "Cutscene0"

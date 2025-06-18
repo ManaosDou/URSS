@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b0ij3gxx7ii36"]
 
-[ext_resource type="PackedScene" uid="uid://hmccynvegse3" path="res://Escenas/Componentes/enemigos/guardia/guardia.tscn" id="2_3un58"]
-[ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="2_ac0y3"]
-[ext_resource type="PackedScene" uid="uid://dt7f00ohye4h1" path="res://Escenas/Componentes/pickups/botiquin.tscn" id="3_p6eh7"]
+[ext_resource type="PackedScene" uid="uid://hmccynvegse3" path="res://escenas/Componentes/enemigos/guardia/guardia.tscn" id="2_3un58"]
+[ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://escenas/Componentes/Jugador/jugador.tscn" id="2_ac0y3"]
+[ext_resource type="PackedScene" uid="uid://dt7f00ohye4h1" path="res://escenas/Componentes/pickups/botiquin.tscn" id="3_p6eh7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_24s25"]
 

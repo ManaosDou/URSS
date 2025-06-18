@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://crp7ildmhc6a3"]
 
-[ext_resource type="Script" uid="uid://cr01xk8qievet" path="res://Escenas/Componentes/pickups/pickup_municion.gd" id="2_3hwal"]
+[ext_resource type="Script" path="res://Escenas/Componentes/pickups/pickup_municion.gd" id="2_3hwal"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7cnxl"]
 transparency = 1
@@ -11,6 +11,21 @@ material = SubResource("StandardMaterial3D_7cnxl")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vr5e6"]
 size = Vector3(1, 0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_t4sae"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0.329412, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_mbe6k"]
 resource_name = "pickup"
@@ -27,21 +42,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 0.329412, 1), Color(1, 1, 0.329412, 0.588235), Color(1, 1, 0.329412, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_t4sae"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 0.329412, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3hwal"]

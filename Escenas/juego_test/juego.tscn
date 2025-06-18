@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://dxuvxp1j4hb0r"]
 
-[ext_resource type="Script" uid="uid://embnvkxc0qt3" path="res://Escenas/juego_test/juego.gd" id="1_bd63v"]
-[ext_resource type="Texture2D" uid="uid://r2kss5khi3ed" path="res://assets/UI/Menú/grabber.png" id="2_7bx68"]
-[ext_resource type="FontFile" uid="uid://dhjwrjuewp0m4" path="res://assets/UI/soviet_program (1)/SovietProgram.ttf" id="2_s5ody"]
-[ext_resource type="Texture2D" uid="uid://760fruuux01m" path="res://assets/UI/Menú/The Soviet Threat PNG.png" id="4_bdrrg"]
-[ext_resource type="Texture2D" uid="uid://cc3n3vhq6ryet" path="res://assets/UI/Menú/Fondo menú.png" id="4_s5ody"]
-[ext_resource type="AudioStream" uid="uid://bfde4cvebqypt" path="res://assets/audio/The Soviet Threat (OST).ogg" id="6_bdrrg"]
-[ext_resource type="AudioStream" uid="uid://cj82jp67aenbg" path="res://assets/audio/fedeaprobacion.ogg" id="7_bdrrg"]
+[ext_resource type="Script" uid="uid://embnvkxc0qt3" path="res://escenas/juego_test/juego.gd" id="1_bd63v"]
+[ext_resource type="Texture2D" uid="uid://beqefks37oa0t" path="res://assets/UI/Menú/grabber.png" id="2_7bx68"]
+[ext_resource type="FontFile" uid="uid://bix35ibuvuedp" path="res://assets/UI/soviet_program (1)/SovietProgram.ttf" id="2_s5ody"]
+[ext_resource type="Texture2D" uid="uid://y2bfum78pmwe" path="res://assets/UI/Menú/The Soviet Threat PNG.png" id="4_bdrrg"]
+[ext_resource type="Texture2D" uid="uid://cci0ryy6ofc52" path="res://assets/UI/Menú/Fondo menú.png" id="4_s5ody"]
+[ext_resource type="AudioStream" uid="uid://htatrhpj6uoy" path="res://assets/audio/The Soviet Threat (OST).ogg" id="6_bdrrg"]
+[ext_resource type="AudioStream" uid="uid://bwkdcbbxxu4cp" path="res://assets/audio/fedeaprobacion.ogg" id="7_bdrrg"]
 
 [sub_resource type="GDScript" id="GDScript_bdrrg"]
 resource_name = "MenuTitulo"
