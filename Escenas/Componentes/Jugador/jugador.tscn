@@ -1,12 +1,12 @@
 [gd_scene load_steps=23 format=3 uid="uid://dbni6o826cp8b"]
 
-[ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
-[ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://Escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
-[ext_resource type="AudioStream" uid="uid://bx1sr34nbj2j7" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
-[ext_resource type="Script" uid="uid://dvcswaltu2pey" path="res://Escenas/Componentes/Jugador/barra_vida.gd" id="4_0541f"]
-[ext_resource type="Texture2D" uid="uid://byva1lgxt15rl" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
-[ext_resource type="Texture2D" uid="uid://18xy1y2y4osn" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
-[ext_resource type="Texture2D" uid="uid://c4gi1golnju3s" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
+[ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
+[ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
+[ext_resource type="AudioStream" uid="uid://wlugd28mn21p" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
+[ext_resource type="Script" uid="uid://dvcswaltu2pey" path="res://escenas/Componentes/Jugador/barra_vida.gd" id="4_0541f"]
+[ext_resource type="Texture2D" uid="uid://2t7662tomges" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://dcuhksuwdkjuv" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://di1y4rek4yxqb" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -318,6 +318,7 @@ one_shot = true
 
 [node name="PasosAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_04w7q")
+max_db = -15.0
 
 [node name="Timer" type="Timer" parent="PasosAudio"]
 wait_time = 0.001
