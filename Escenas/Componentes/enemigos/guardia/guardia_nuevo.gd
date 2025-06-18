@@ -151,6 +151,8 @@ func disparo(headshot : bool = false):
 		vida -= 1
 		if vida <= 0:
 			morir()
+		else:
+			Globals.nivel.activar_estado_caza()
 
 func morir():
 	queue_free()

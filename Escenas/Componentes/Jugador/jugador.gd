@@ -112,8 +112,10 @@ func _process(delta: float) -> void:
 
 func detectar_enemigo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
-	if collider is Enemigo:
-		collider.morir()
+	if collider is Guardia or collider is Cientifico:
+		var es_headshot = false
+		collider.disparo(es_headshot)
+
 
 func detectar_hackeo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
