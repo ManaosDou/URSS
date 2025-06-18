@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://hmccynvegse3"]
+[gd_scene load_steps=16 format=3 uid="uid://hmccynvegse3"]
 
 [ext_resource type="Script" uid="uid://c5yp8bq7t0ndf" path="res://Escenas/Componentes/enemigos/guardia/guardia_nuevo.gd" id="1_4ws1q"]
 
@@ -14,10 +14,155 @@ albedo_color = Color(0, 0.678431, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_p2ht6"]
 size = Vector3(0.1, 0.1, 1)
 
-[node name="Guardia" type="CharacterBody3D" node_paths=PackedStringArray("timer_espera_patrulla", "timer_disparo", "agent", "raycast")]
+[sub_resource type="Gradient" id="Gradient_4ws1q"]
+colors = PackedColorArray(1, 0.529412, 0.219608, 1, 1, 0.529412, 0.219608, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u0du3"]
+gradient = SubResource("Gradient_4ws1q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p2ht6"]
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 0, -1)
+spread = 10.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, -4.9, 0)
+color_ramp = SubResource("GradientTexture1D_u0du3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0du3"]
+transparency = 4
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_vmp5e"]
+material = SubResource("StandardMaterial3D_u0du3")
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="Animation" id="Animation_u0du3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmaFlash:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..:municion")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_lwbgw"]
+resource_name = "disparar"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.174533, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmaFlash:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmaFlash")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"restart"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_r5jap"]
+resource_name = "recargar"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.14159, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..:municion")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5jap"]
+_data = {
+&"RESET": SubResource("Animation_u0du3"),
+&"disparar": SubResource("Animation_lwbgw"),
+&"recargar": SubResource("Animation_r5jap")
+}
+
+[node name="Guardia" type="CharacterBody3D" node_paths=PackedStringArray("timer_espera_patrulla", "timer_disparo", "arma_animacion", "agent", "raycast")]
 script = ExtResource("1_4ws1q")
 timer_espera_patrulla = NodePath("Timer")
 timer_disparo = NodePath("Timer2")
+arma_animacion = NodePath("MeshInstance3D/ArmaMesh/ArmaAnimacion")
 agent = NodePath("NavigationAgent3D")
 raycast = NodePath("RayCast3D")
 
@@ -42,6 +187,22 @@ mesh = SubResource("BoxMesh_p2ht6")
 
 [node name="Node3D" type="Node3D" parent="MeshInstance3D/ArmaMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.507591)
+
+[node name="ArmaFlash" type="GPUParticles3D" parent="MeshInstance3D/ArmaMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+emitting = false
+amount = 32
+lifetime = 0.1
+one_shot = true
+explosiveness = 0.79
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_p2ht6")
+draw_pass_1 = SubResource("QuadMesh_vmp5e")
+
+[node name="ArmaAnimacion" type="AnimationPlayer" parent="MeshInstance3D/ArmaMesh"]
+libraries = {
+&"": SubResource("AnimationLibrary_r5jap")
+}
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
