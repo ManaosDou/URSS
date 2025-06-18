@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://vcwfnlbm47uh"]
+[gd_scene load_steps=28 format=3 uid="uid://vcwfnlbm47uh"]
 
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
 [ext_resource type="Script" uid="uid://bmtygo874kxa7" path="res://Escenas/Componentes/niveles/clase_nivel.gd" id="1_ihcya"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://hmccynvegse3" path="res://Escenas/Componentes/enemigos/guardia/guardia.tscn" id="11_dxtua"]
 [ext_resource type="PackedScene" uid="uid://djxhc8lw130wd" path="res://Escenas/Componentes/Hackeables/puerta/puerta.tscn" id="12_14hvx"]
 [ext_resource type="PackedScene" uid="uid://cynopchc85yxk" path="res://Escenas/Componentes/Hackeables/Lampara/lampara.tscn" id="13_t5nma"]
+[ext_resource type="PackedScene" uid="uid://dt7f00ohye4h1" path="res://Escenas/Componentes/pickups/botiquin.tscn" id="14_iqcjr"]
+[ext_resource type="PackedScene" uid="uid://crp7ildmhc6a3" path="res://Escenas/Componentes/pickups/municion.tscn" id="15_tjvp2"]
+[ext_resource type="PackedScene" uid="uid://c4tu1n3dnymvv" path="res://Escenas/Componentes/pickups/experiencia.tscn" id="16_xy5gv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vxico"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -197,3 +200,12 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17.46
 
 [node name="Lampara" parent="." instance=ExtResource("13_t5nma")]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 9.34245, 3.09395, -0.858034)
+
+[node name="Botiquin" parent="." instance=ExtResource("14_iqcjr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.7456, -3, -20.4372)
+
+[node name="Municion" parent="." instance=ExtResource("15_tjvp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.3283, -3.25, -20.3671)
+
+[node name="Experiencia" parent="." instance=ExtResource("16_xy5gv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.1897, -3, -29.5677)

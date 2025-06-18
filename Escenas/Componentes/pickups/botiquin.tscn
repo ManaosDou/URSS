@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dt7f00ohye4h1"]
+[gd_scene load_steps=8 format=3 uid="uid://dt7f00ohye4h1"]
 
 [ext_resource type="Script" uid="uid://d1hw08ql3u4h1" path="res://Escenas/Componentes/pickups/pickup_botiquin.gd" id="2_fvby0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywose"]
+transparency = 1
 albedo_color = Color(1, 0, 0.0117647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ukkql"]
@@ -10,6 +11,44 @@ material = SubResource("StandardMaterial3D_ywose")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pfthc"]
 size = Vector3(1, 1, 0.5)
+
+[sub_resource type="Animation" id="Animation_ukkql"]
+resource_name = "pickup"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0.0117647, 1), Color(1, 0, 0.0117647, 0.588235), Color(1, 0, 0.0117647, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fvby0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0.0117647, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfthc"]
+_data = {
+&"RESET": SubResource("Animation_fvby0"),
+&"pickup": SubResource("Animation_ukkql")
+}
 
 [node name="Botiquin" type="Node3D"]
 
@@ -23,3 +62,9 @@ metadata/_custom_type_script = "uid://dvxpcycipgd7y"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp"]
 shape = SubResource("BoxShape3D_pfthc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pfthc")
+}
+autoplay = "pickup"
