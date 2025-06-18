@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dbni6o826cp8b"]
+[gd_scene load_steps=24 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 [ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://2t7662tomges" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
 [ext_resource type="Texture2D" uid="uid://dcuhksuwdkjuv" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
 [ext_resource type="Texture2D" uid="uid://di1y4rek4yxqb" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
+[ext_resource type="AudioStream" uid="uid://cu0y56blx8vvt" path="res://assets/audio/Efectos de sonido/Disparo silenciado.mp3" id="8_elmla"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -222,8 +223,9 @@ _data = {
 &"agacharse": SubResource("Animation_04w7q")
 }
 
-[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion")]
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion")]
 script = ExtResource("1_lwbgw")
+disparos_audio = NodePath("DisparoAudio")
 pasos_audio = NodePath("PasosAudio")
 pasos_audio_timer = NodePath("PasosAudio/Timer")
 arma_flash = NodePath("Camera3D/ArmaMesh/ArmaFlash")
@@ -398,5 +400,9 @@ grow_vertical = 0
 texture = ExtResource("5_g6jpv")
 expand_mode = 4
 stretch_mode = 5
+
+[node name="DisparoAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_elmla")
+max_db = -4.0
 
 [connection signal="timeout" from="PasosAudio/Timer" to="." method="_on_timer_timeout"]

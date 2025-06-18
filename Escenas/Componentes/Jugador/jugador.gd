@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Jugador
 
+@export var disparos_audio : AudioStreamPlayer3D
 @export var pasos_audio : AudioStreamPlayer3D
 @export var pasos_audio_timer : Timer
 @export var velocidad_normal : float = 5
@@ -92,6 +93,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("disparar") and not arma_animacion.is_playing() and municion_en_arma > 0:
 		arma_animacion.play("disparar")
 		municion_en_arma -= 1
+		disparos_audio.play()
 		detectar_enemigo()
 	if Input.is_action_just_pressed("recargar"):
 		recargar()
