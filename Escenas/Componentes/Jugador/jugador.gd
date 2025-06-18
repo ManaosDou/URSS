@@ -149,8 +149,8 @@ func morir():
 	pass
 
 func _on_timer_timeout() -> void:
-	var velocidad_pasos = 0.25
-	var velocidad_pasos_c = 0.1
+	var velocidad_pasos = 0.75
+	var velocidad_pasos_c = 0.5
 	if quiere_correr: pasos_audio_timer.wait_time = velocidad_pasos_c
 	else: pasos_audio_timer.wait_time = velocidad_pasos
 	pasos_audio.play()
