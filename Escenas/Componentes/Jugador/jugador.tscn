@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 [ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://Escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
-[ext_resource type="AudioStream" uid="uid://bewu1fs0xwc0e" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
+[ext_resource type="AudioStream" uid="uid://bx1sr34nbj2j7" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
 [ext_resource type="Script" uid="uid://dvcswaltu2pey" path="res://Escenas/Componentes/Jugador/barra_vida.gd" id="4_0541f"]
-[ext_resource type="Texture2D" uid="uid://kkbora5hhvot" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
-[ext_resource type="Texture2D" uid="uid://7xchswntbvyq" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
-[ext_resource type="Texture2D" uid="uid://7utkqcp5r4il" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
+[ext_resource type="Texture2D" uid="uid://byva1lgxt15rl" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://18xy1y2y4osn" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://c4gi1golnju3s" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -267,7 +267,6 @@ libraries = {
 }
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="HackingLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
@@ -288,12 +287,14 @@ offset_bottom = 23.0
 text = "Fase: ALERTA"
 
 [node name="HackingCooldownContainer" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
-grow_vertical = 0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 250.0
+offset_right = 185.0
+offset_bottom = 290.0
+grow_vertical = 2
 
 [node name="HackLabel" type="Label" parent="CanvasLayer/HackingCooldownContainer"]
 layout_mode = 2
