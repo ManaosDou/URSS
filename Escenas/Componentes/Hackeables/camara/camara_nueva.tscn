@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy2kn0wdxv28w"]
+
+[ext_resource type="Script" uid="uid://3yg0rwc6xjjj" path="res://Escenas/Componentes/Hackeables/camara/camara_nueva.gd" id="1_k2wud"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahbtq"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.57
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_vf7mf"]
+material = SubResource("StandardMaterial3D_ahbtq")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xj3a5"]
+material = SubResource("StandardMaterial3D_ahbtq")
+top_radius = 0.0
+bottom_radius = 0.25
+height = 0.25
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ekjh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u63t4"]
+height = 20.9959
+
+[node name="CamaraNueva" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
+
+[node name="CamaraMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vf7mf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CamaraMesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.4)
+mesh = SubResource("CylinderMesh_xj3a5")
+
+[node name="ObjectoHackeable" type="Area3D" parent="."]
+script = ExtResource("1_k2wud")
+metadata/_custom_type_script = "uid://do4tacrtqixlk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectoHackeable"]
+shape = SubResource("BoxShape3D_3ekjh")
+
+[node name="CamaraDeteccion" type="Area3D" parent="ObjectoHackeable"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectoHackeable/CamaraDeteccion"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.004, 0.118, 10.737)
+shape = SubResource("CylinderShape3D_u63t4")
