@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Jugador
 
+@export var disparos_audio : AudioStreamPlayer3D
 @export var pasos_audio : AudioStreamPlayer3D
 @export var pasos_audio_timer : Timer
 @export var velocidad_normal : float = 5
@@ -92,6 +93,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("disparar") and not arma_animacion.is_playing() and municion_en_arma > 0:
 		arma_animacion.play("disparar")
 		municion_en_arma -= 1
+		disparos_audio.play()
 		detectar_enemigo()
 	if Input.is_action_just_pressed("recargar"):
 		recargar()
@@ -112,8 +114,10 @@ func _process(delta: float) -> void:
 
 func detectar_enemigo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
-	if collider is Enemigo:
-		collider.morir()
+	if collider is Guardia or collider is Cientifico:
+		var es_headshot = false
+		collider.disparo(es_headshot)
+
 
 func detectar_hackeo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
@@ -149,8 +153,8 @@ func morir():
 	pass
 
 func _on_timer_timeout() -> void:
-	var velocidad_pasos = 0.25
-	var velocidad_pasos_c = 0.1
+	var velocidad_pasos = 0.75
+	var velocidad_pasos_c = 0.5
 	if quiere_correr: pasos_audio_timer.wait_time = velocidad_pasos_c
 	else: pasos_audio_timer.wait_time = velocidad_pasos
 	pasos_audio.play()

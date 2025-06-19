@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxqrcm13k6coa"]
 
-[ext_resource type="Script" uid="uid://dpmnuvoma41d7" path="res://Escenas/Componentes/enemigos/cientifico/cientifico.gd" id="1_bgmxs"]
+[ext_resource type="Script" uid="uid://dpmnuvoma41d7" path="res://escenas/Componentes/enemigos/cientifico/cientifico.gd" id="1_bgmxs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xit8o"]
 

@@ -1,4 +1,8 @@
 extends PickUp
 
 func agarrar(jugador: Jugador):
-	jugador.vida = jugador.max_vida
+	if jugador.vida < jugador.max_vida:
+		jugador.vida = jugador.max_vida
+	else:
+		ya_recogido = false
+		return

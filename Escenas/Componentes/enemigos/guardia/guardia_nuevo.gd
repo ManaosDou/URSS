@@ -20,6 +20,7 @@ var ultima_posicion_jugador : Vector3
 @export var tiempo_entre_disparos : float = 3
 @export var dano_disparo : int = 20
 
+@export var arma_animacion : AnimationPlayer
 @export var agent : NavigationAgent3D
 @export var raycast : RayCast3D
 
@@ -129,6 +130,7 @@ func procesar_caza(delta: float):
 	move_and_slide()
 
 func disparar_a_jugador():
+	arma_animacion.play("disparar")
 	jugador.recibir_dano(dano_disparo)
 
 func _on_timer_espera_timeout():
@@ -149,6 +151,8 @@ func disparo(headshot : bool = false):
 		vida -= 1
 		if vida <= 0:
 			morir()
+		else:
+			Globals.nivel.activar_estado_caza()
 
 func morir():
 	queue_free()

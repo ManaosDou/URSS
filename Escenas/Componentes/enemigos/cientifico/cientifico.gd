@@ -136,6 +136,8 @@ func disparo(headshot : bool = false):
 		vida -= 1
 		if vida <= 0:
 			morir()
+		else:
+			Globals.nivel.activar_estado_caza()
 
 ## Funcion que debe ser llamada cuando muere el cientifico. Por ahora solo desaparece inmediatamente.
 func morir():

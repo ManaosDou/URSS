@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cynopchc85yxk"]
 
-[ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://Escenas/Nivel_Debug/facu/lampara_hackeable.gd" id="1_1ot81"]
+[ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://Escenas/Componentes/Hackeables/Lampara/lampara_hackeable.gd" id="1_1ot81"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8v0j3"]
 albedo_color = Color(1, 0, 0, 1)

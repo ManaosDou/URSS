@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://mfejefpnaroc"]
 
-[ext_resource type="Script" uid="uid://djjb6cjga70q1" path="res://Escenas/Nivel_Debug/facu/camara.gd" id="1_ahbtq"]
+[ext_resource type="Script" uid="uid://djjb6cjga70q1" path="res://Escenas/Componentes/Hackeables/camara/camara.gd" id="1_ahbtq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahbtq"]
 albedo_color = Color(0, 0, 0, 1)
