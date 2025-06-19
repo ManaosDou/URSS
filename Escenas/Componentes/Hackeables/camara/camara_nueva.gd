@@ -6,7 +6,7 @@ var jugador_detectado : bool = false
 var jugador
 
 @export var timer_apagada : Timer
-@export var tiempo_espera : float = 2
+@export var tiempo_espera : float = 10
 
 func _ready() -> void:
 	timer_apagada.wait_time = tiempo_espera
@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 				jugador_detectado = true
 				jugador = collider
 		if jugador_detectado:
+			timer_apagada.start()
 			Globals.nivel.activar_estado_caza()
 			look_at(jugador.position)
 	

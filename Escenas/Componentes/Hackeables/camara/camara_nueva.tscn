@@ -32,8 +32,9 @@ mesh = SubResource("BoxMesh_vf7mf")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.4)
 mesh = SubResource("CylinderMesh_xj3a5")
 
-[node name="ObjectoHackeable" type="Area3D" parent="."]
+[node name="ObjectoHackeable" type="Area3D" parent="." node_paths=PackedStringArray("timer_apagada")]
 script = ExtResource("1_k2wud")
+timer_apagada = NodePath("../Timer")
 metadata/_custom_type_script = "uid://do4tacrtqixlk"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectoHackeable"]
@@ -44,3 +45,6 @@ shape = SubResource("BoxShape3D_3ekjh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectoHackeable/CamaraDeteccion"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.004, 0.118, 10.737)
 shape = SubResource("CylinderShape3D_u63t4")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
