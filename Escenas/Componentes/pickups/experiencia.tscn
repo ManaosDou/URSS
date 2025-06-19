@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c4tu1n3dnymvv"]
 
-[ext_resource type="Script" uid="uid://dvxpcycipgd7y" path="res://Escenas/Componentes/pickups/pickup.gd" id="1_niqnd"]
+[ext_resource type="Script" uid="uid://y71ecj84fclx" path="res://Escenas/Componentes/pickups/pickup_experiencia.gd" id="1_niqnd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kn201"]
 
