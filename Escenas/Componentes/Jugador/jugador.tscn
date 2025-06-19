@@ -403,6 +403,7 @@ stretch_mode = 5
 
 [node name="DisparoAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_elmla")
-max_db = -4.0
+max_db = -24.0
+pitch_scale = 0.8
 
 [connection signal="timeout" from="PasosAudio/Timer" to="." method="_on_timer_timeout"]
