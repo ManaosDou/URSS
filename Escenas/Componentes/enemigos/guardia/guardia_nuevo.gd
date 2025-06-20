@@ -50,7 +50,7 @@ func rotar_hacia_direccion(direccion: Vector3, delta: float):
 		transform = transform.interpolate_with(target_transform, velocidad_rotacion * delta)
 
 func esta_jugador_en_foco() -> bool:
-	if global_position.distance_to(jugador.global_position) < distancia_vision:
+	if global_position.distance_to(jugador.global_position) < distancia_vision and jugador.iluminado:
 		raycast.enabled = true
 		raycast.target_position = to_local(jugador.global_position)
 		if raycast.get_collider() is Jugador:

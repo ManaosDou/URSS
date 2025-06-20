@@ -36,12 +36,22 @@ var max_vida : int = 100
 var stamina : float = 100
 var max_stamina : float = 100
 var velocidad : float = velocidad_normal
-var tiempo_sin_correr : float = 0.0
+var tiempo_sin_correr : float = 0
+
+var iluminado : bool = false
+@export var area_luz : Area3D
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
+	
+	#Luz
+	for area in area_luz.get_overlapping_areas():
+		iluminado = false
+		if area is ObjetoDistractorioLuz:
+			iluminado = true
+	
 	# agacharse
 	if Input.is_action_pressed("agachar"):
 		agachado = true

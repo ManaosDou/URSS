@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://mnsogjbcg3ts"]
+
+[ext_resource type="Script" uid="uid://bf6rt1t7wr3vn" path="res://Escenas/Componentes/Hackeables/Distractorio/objeto_distractorio_luz.gd" id="1_mcxse"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_n5r2a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oj88s"]
+radius = 8.0
+
+[node name="Area3D" type="Area3D" node_paths=PackedStringArray("collision")]
+script = ExtResource("1_mcxse")
+rango = 8.0
+collision = NodePath("CollisionShape3D")
+
+[node name="ObjetoDistractorioLuz" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_n5r2a")
+skeleton = NodePath("../ObjetoDistractorioLuz")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_oj88s")

@@ -50,7 +50,7 @@ func rotar_hacia_direccion(direccion: Vector3, delta: float):
 
 ## Se llama para saber si el cientifico esta mirando al jugador
 func esta_jugador_en_foco() -> bool:
-	if global_position.distance_to(jugador.global_position) < distancia_vision:
+	if global_position.distance_to(jugador.global_position) < distancia_vision and jugador.iluminado:
 		raycast.enabled = true
 		raycast.target_position = to_local(jugador.global_position)
 		if raycast.get_collider() is Jugador:

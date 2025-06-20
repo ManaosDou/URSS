@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://vcwfnlbm47uh"]
+[gd_scene load_steps=30 format=3 uid="uid://vcwfnlbm47uh"]
 
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
 [ext_resource type="Script" uid="uid://bmtygo874kxa7" path="res://Escenas/Componentes/niveles/clase_nivel.gd" id="1_ihcya"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://crp7ildmhc6a3" path="res://Escenas/Componentes/pickups/municion.tscn" id="15_tjvp2"]
 [ext_resource type="PackedScene" uid="uid://c4tu1n3dnymvv" path="res://Escenas/Componentes/pickups/experiencia.tscn" id="16_xy5gv"]
 [ext_resource type="PackedScene" uid="uid://dy2kn0wdxv28w" path="res://Escenas/Componentes/Hackeables/camara/camara_nueva.tscn" id="17_xy5gv"]
+[ext_resource type="PackedScene" uid="uid://mnsogjbcg3ts" path="res://Escenas/Componentes/Hackeables/Distractorio/objeto_distractorio_luz.tscn" id="18_lb6rf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vxico"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -213,3 +214,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.1897, -3, -29.5677)
 
 [node name="CamaraNueva" parent="." instance=ExtResource("17_xy5gv")]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, -29.7243, -0.260903, -34.1938)
+
+[node name="Area3D" parent="." instance=ExtResource("18_lb6rf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1.24783, 11.0152)

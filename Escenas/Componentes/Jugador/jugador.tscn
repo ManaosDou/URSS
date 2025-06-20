@@ -1,13 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://dbni6o826cp8b"]
+[gd_scene load_steps=25 format=3 uid="uid://dbni6o826cp8b"]
 
-[ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
-[ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
-[ext_resource type="AudioStream" uid="uid://wlugd28mn21p" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
-[ext_resource type="Script" uid="uid://dvcswaltu2pey" path="res://escenas/Componentes/Jugador/barra_vida.gd" id="4_0541f"]
-[ext_resource type="Texture2D" uid="uid://2t7662tomges" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
-[ext_resource type="Texture2D" uid="uid://dcuhksuwdkjuv" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
-[ext_resource type="Texture2D" uid="uid://di1y4rek4yxqb" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
-[ext_resource type="AudioStream" uid="uid://cu0y56blx8vvt" path="res://assets/audio/Efectos de sonido/Disparo silenciado.mp3" id="8_elmla"]
+[ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
+[ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://Escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
+[ext_resource type="AudioStream" uid="uid://bx1sr34nbj2j7" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
+[ext_resource type="Script" uid="uid://dvcswaltu2pey" path="res://Escenas/Componentes/Jugador/barra_vida.gd" id="4_0541f"]
+[ext_resource type="Texture2D" uid="uid://byva1lgxt15rl" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://18xy1y2y4osn" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://c4gi1golnju3s" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
+[ext_resource type="AudioStream" uid="uid://s361a2yej1mp" path="res://assets/audio/Efectos de sonido/Disparo silenciado.mp3" id="8_elmla"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -223,7 +223,9 @@ _data = {
 &"agacharse": SubResource("Animation_04w7q")
 }
 
-[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f14ml"]
+
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion", "area_luz")]
 script = ExtResource("1_lwbgw")
 disparos_audio = NodePath("DisparoAudio")
 pasos_audio = NodePath("PasosAudio")
@@ -235,6 +237,7 @@ fase_label = NodePath("CanvasLayer/FaseLabel")
 hacking_cooldown = NodePath("HackingCooldown")
 hacking_cooldown_bar = NodePath("CanvasLayer/HackingCooldownContainer/HackingCooldown")
 agacharse_animacion = NodePath("AgacharseAnimacion")
+area_luz = NodePath("Area3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_oq0nd")
@@ -405,5 +408,10 @@ stretch_mode = 5
 stream = ExtResource("8_elmla")
 max_db = -24.0
 pitch_scale = 0.8
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_f14ml")
 
 [connection signal="timeout" from="PasosAudio/Timer" to="." method="_on_timer_timeout"]
