@@ -9,7 +9,7 @@ radius = 8.0
 
 [node name="Area3D" type="Area3D" node_paths=PackedStringArray("collision")]
 script = ExtResource("1_mcxse")
-rango = 8.0
+rango = 6.095
 collision = NodePath("CollisionShape3D")
 
 [node name="ObjetoDistractorioLuz" type="Node3D" parent="."]
@@ -17,6 +17,7 @@ collision = NodePath("CollisionShape3D")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_n5r2a")
 skeleton = NodePath("../ObjetoDistractorioLuz")
 

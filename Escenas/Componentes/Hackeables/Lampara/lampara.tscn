@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cynopchc85yxk"]
+[gd_scene load_steps=8 format=3 uid="uid://cynopchc85yxk"]
 
 [ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://Escenas/Componentes/Hackeables/Lampara/lampara_hackeable.gd" id="1_1ot81"]
+[ext_resource type="PackedScene" uid="uid://mnsogjbcg3ts" path="res://Escenas/Componentes/Hackeables/Distractorio/objeto_distractorio_luz.tscn" id="2_3ydim"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8v0j3"]
 albedo_color = Color(1, 0, 0, 1)
@@ -37,11 +38,15 @@ mesh = SubResource("SphereMesh_eigfb")
 [node name="OmniLight3D" type="OmniLight3D" parent="LamparaPunta"]
 light_color = Color(1, 0.556863, 0.556863, 1)
 
-[node name="ObjectoHackeable" type="Area3D" parent="."]
+[node name="ObjectoHackeable" type="Area3D" parent="." node_paths=PackedStringArray("area")]
 collision_layer = 256
 script = ExtResource("1_1ot81")
+area = NodePath("../Area3D")
 metadata/_custom_type_script = "uid://do4tacrtqixlk"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectoHackeable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("SphereShape3D_myhkv")
+
+[node name="Area3D" parent="." instance=ExtResource("2_3ydim")]
+rango = 8.0

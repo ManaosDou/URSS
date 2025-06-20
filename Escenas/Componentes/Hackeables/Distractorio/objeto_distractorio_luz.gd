@@ -4,6 +4,10 @@ class_name ObjetoDistractorioLuz
 
 @export var rango : float
 @export var collision : CollisionShape3D
+@export var encendida : bool = true
 
 func _physics_process(delta):
-	collision.shape.radius = rango
+	if encendida:
+		collision.shape.radius = rango
+	else:
+		collision.shape.radius = 0
