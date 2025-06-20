@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cpxbxx7n7luqv"]
 
-[ext_resource type="Script" uid="uid://rvrdp77wpetu" path="res://Escenas/Componentes/Jugador/hud/hud.gd" id="1_l23of"]
-[ext_resource type="Texture2D" uid="uid://dlwgoecd3jqgf" path="res://assets/texturas/ui/crosshair.png" id="1_ml2ct"]
+[ext_resource type="Script" uid="uid://rvrdp77wpetu" path="res://escenas/Componentes/Jugador/hud/hud.gd" id="1_l23of"]
+[ext_resource type="Texture2D" uid="uid://ctpfda74vxscc" path="res://assets/UI/HUD/Crosshair.png" id="2_xsmc5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ml2ct"]
 font_size = 64
@@ -38,7 +38,9 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_ml2ct")
+scale = Vector2(5, 5)
+pivot_offset = Vector2(21.225, 19.665)
+texture = ExtResource("2_xsmc5")
 expand_mode = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -46,6 +48,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -29.0
+offset_top = -18.0
+offset_right = -29.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 32

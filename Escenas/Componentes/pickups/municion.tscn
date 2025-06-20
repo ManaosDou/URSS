@@ -1,6 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://crp7ildmhc6a3"]
 
-[ext_resource type="Script" path="res://Escenas/Componentes/pickups/pickup_municion.gd" id="2_3hwal"]
+[ext_resource type="Script" uid="uid://cr01xk8qievet" path="res://Escenas/Componentes/pickups/pickup_municion.gd" id="2_3hwal"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vr5e6"]
+size = Vector3(1, 0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7cnxl"]
 transparency = 1
@@ -8,9 +11,6 @@ albedo_color = Color(1, 1, 0.329412, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mbe6k"]
 material = SubResource("StandardMaterial3D_7cnxl")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vr5e6"]
-size = Vector3(1, 0.5, 0.5)
 
 [sub_resource type="Animation" id="Animation_t4sae"]
 length = 0.001
@@ -50,20 +50,20 @@ _data = {
 &"pickup": SubResource("Animation_mbe6k")
 }
 
-[node name="Municion" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-mesh = SubResource("BoxMesh_mbe6k")
-
-[node name="PickUp" type="Area3D" parent="."]
+[node name="PickUp" type="Area3D"]
 script = ExtResource("2_3hwal")
 metadata/_custom_type_script = "uid://dvxpcycipgd7y"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_vr5e6")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Municion" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Municion"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_mbe6k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Municion"]
 libraries = {
 &"": SubResource("AnimationLibrary_3hwal")
 }

@@ -1,21 +1,22 @@
-[gd_scene load_steps=28 format=3 uid="uid://vcwfnlbm47uh"]
+[gd_scene load_steps=29 format=3 uid="uid://vcwfnlbm47uh"]
 
-[ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
-[ext_resource type="Script" uid="uid://bmtygo874kxa7" path="res://escenas/Componentes/niveles/clase_nivel.gd" id="1_ihcya"]
-[ext_resource type="PackedScene" uid="uid://cjbeb7qembhbw" path="res://escenas/nivel_1/a.tscn" id="3_4mi7b"]
-[ext_resource type="PackedScene" uid="uid://b3nvgg8ff80to" path="res://escenas/nivel_1/c.tscn" id="3_4nq7f"]
-[ext_resource type="VoxelGIData" uid="uid://dkfr3ei7wnix4" path="res://escenas/nivel_1/Nivel1.VoxelGI_data.res" id="3_jt4gu"]
-[ext_resource type="PackedScene" uid="uid://bx5kc122jg7r5" path="res://escenas/nivel_1/b.tscn" id="4_4mi7b"]
-[ext_resource type="PackedScene" uid="uid://c4l3lf6xupbau" path="res://escenas/nivel_1/f.tscn" id="6_spbm1"]
-[ext_resource type="PackedScene" uid="uid://dw2goglsahn8h" path="res://escenas/Componentes/enemigos/enemigo_test.tscn" id="7_akklk"]
-[ext_resource type="Script" uid="uid://b8iq7gelwjd0b" path="res://escenas/Componentes/enemigos/enemy_manager/enemy_manager.gd" id="7_ehg28"]
-[ext_resource type="PackedScene" uid="uid://bxqrcm13k6coa" path="res://escenas/Componentes/enemigos/cientifico/cientifico.tscn" id="10_qa56l"]
-[ext_resource type="PackedScene" uid="uid://hmccynvegse3" path="res://escenas/Componentes/enemigos/guardia/guardia.tscn" id="11_dxtua"]
-[ext_resource type="PackedScene" uid="uid://djxhc8lw130wd" path="res://escenas/Componentes/Hackeables/puerta/puerta.tscn" id="12_14hvx"]
-[ext_resource type="PackedScene" uid="uid://cynopchc85yxk" path="res://escenas/Componentes/Hackeables/Lampara/lampara.tscn" id="13_t5nma"]
-[ext_resource type="PackedScene" uid="uid://dt7f00ohye4h1" path="res://escenas/Componentes/pickups/botiquin.tscn" id="14_iqcjr"]
-[ext_resource type="PackedScene" uid="uid://crp7ildmhc6a3" path="res://escenas/Componentes/pickups/municion.tscn" id="15_tjvp2"]
-[ext_resource type="PackedScene" uid="uid://c4tu1n3dnymvv" path="res://escenas/Componentes/pickups/experiencia.tscn" id="16_xy5gv"]
+[ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
+[ext_resource type="Script" uid="uid://bmtygo874kxa7" path="res://Escenas/Componentes/niveles/clase_nivel.gd" id="1_ihcya"]
+[ext_resource type="PackedScene" uid="uid://cjbeb7qembhbw" path="res://Escenas/nivel_1/a.tscn" id="3_4mi7b"]
+[ext_resource type="PackedScene" uid="uid://b3nvgg8ff80to" path="res://Escenas/nivel_1/c.tscn" id="3_4nq7f"]
+[ext_resource type="VoxelGIData" uid="uid://dkfr3ei7wnix4" path="res://Escenas/nivel_1/Nivel1.VoxelGI_data.res" id="3_jt4gu"]
+[ext_resource type="PackedScene" uid="uid://bx5kc122jg7r5" path="res://Escenas/nivel_1/b.tscn" id="4_4mi7b"]
+[ext_resource type="PackedScene" uid="uid://c4l3lf6xupbau" path="res://Escenas/nivel_1/f.tscn" id="6_spbm1"]
+[ext_resource type="PackedScene" uid="uid://dw2goglsahn8h" path="res://Escenas/Componentes/enemigos/enemigo_test.tscn" id="7_akklk"]
+[ext_resource type="Script" uid="uid://b8iq7gelwjd0b" path="res://Escenas/Componentes/enemigos/enemy_manager/enemy_manager.gd" id="7_ehg28"]
+[ext_resource type="PackedScene" uid="uid://bxqrcm13k6coa" path="res://Escenas/Componentes/enemigos/cientifico/cientifico.tscn" id="10_qa56l"]
+[ext_resource type="PackedScene" uid="uid://hmccynvegse3" path="res://Escenas/Componentes/enemigos/guardia/guardia.tscn" id="11_dxtua"]
+[ext_resource type="PackedScene" uid="uid://djxhc8lw130wd" path="res://Escenas/Componentes/Hackeables/puerta/puerta.tscn" id="12_14hvx"]
+[ext_resource type="PackedScene" uid="uid://cynopchc85yxk" path="res://Escenas/Componentes/Hackeables/Lampara/lampara.tscn" id="13_t5nma"]
+[ext_resource type="PackedScene" uid="uid://dt7f00ohye4h1" path="res://Escenas/Componentes/pickups/botiquin.tscn" id="14_iqcjr"]
+[ext_resource type="PackedScene" uid="uid://crp7ildmhc6a3" path="res://Escenas/Componentes/pickups/municion.tscn" id="15_tjvp2"]
+[ext_resource type="PackedScene" uid="uid://c4tu1n3dnymvv" path="res://Escenas/Componentes/pickups/experiencia.tscn" id="16_xy5gv"]
+[ext_resource type="PackedScene" uid="uid://dy2kn0wdxv28w" path="res://Escenas/Componentes/Hackeables/camara/camara_nueva.tscn" id="17_xy5gv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vxico"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -209,3 +210,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.3283, -3.25, -20.3671)
 
 [node name="Experiencia" parent="." instance=ExtResource("16_xy5gv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.1897, -3, -29.5677)
+
+[node name="CamaraNueva" parent="." instance=ExtResource("17_xy5gv")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, -29.7243, -0.260903, -34.1938)
