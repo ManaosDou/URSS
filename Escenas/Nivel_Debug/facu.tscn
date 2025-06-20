@@ -1,7 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://dt1dk8opj2iwv"]
+[gd_scene load_steps=27 format=3 uid="uid://dt1dk8opj2iwv"]
 
 [ext_resource type="Script" uid="uid://cb875hmdw1whe" path="res://escenas/Componentes/Hackeables/puerta/puerta_hackeable.gd" id="1_8v0j3"]
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://escenas/Componentes/Jugador/jugador.tscn" id="1_eigfb"]
+[ext_resource type="AudioStream" uid="uid://dtkk3rmjmhq3j" path="res://assets/audio/Efectos de sonido/Luz rota.mp3" id="2_04rp4"]
+[ext_resource type="AudioStream" uid="uid://c1j1mbqhs5aux" path="res://assets/audio/Efectos de sonido/Abrir compuerta.mp3" id="2_40mev"]
 [ext_resource type="Script" uid="uid://d4cdg12qcai1d" path="res://escenas/Componentes/Hackeables/Lampara/lampara_hackeable.gd" id="2_w016u"]
 [ext_resource type="PackedScene" uid="uid://mfejefpnaroc" path="res://escenas/Componentes/Hackeables/camara/camara.tscn" id="4_myhkv"]
 
@@ -169,10 +171,11 @@ skeleton = NodePath("../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puerta/Barrera/Puerta/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_8nkos")
 
-[node name="HackeoPuerta" type="Area3D" parent="Puerta/Barrera/Puerta" node_paths=PackedStringArray("barrera")]
+[node name="HackeoPuerta" type="Area3D" parent="Puerta/Barrera/Puerta" node_paths=PackedStringArray("barrera", "puerta_audio")]
 collision_layer = 256
 script = ExtResource("1_8v0j3")
 barrera = NodePath("../..")
+puerta_audio = NodePath("Abrir_cerrar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puerta/Barrera/Puerta/HackeoPuerta"]
 shape = SubResource("SphereShape3D_8v0j3")
@@ -181,6 +184,9 @@ shape = SubResource("SphereShape3D_8v0j3")
 libraries = {
 &"": SubResource("AnimationLibrary_6i5g0")
 }
+
+[node name="Abrir_cerrar" type="AudioStreamPlayer3D" parent="Puerta/Barrera/Puerta/HackeoPuerta"]
+stream = ExtResource("2_40mev")
 
 [node name="Lampara" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
@@ -193,9 +199,13 @@ mesh = SubResource("SphereMesh_eigfb")
 [node name="OmniLight3D" type="OmniLight3D" parent="Lampara/LamparaPunta"]
 light_color = Color(1, 0.556863, 0.556863, 1)
 
-[node name="ObjectoHackeable" type="Area3D" parent="Lampara"]
+[node name="SonidoLuz" type="AudioStreamPlayer3D" parent="Lampara/LamparaPunta"]
+stream = ExtResource("2_04rp4")
+
+[node name="ObjectoHackeable" type="Area3D" parent="Lampara" node_paths=PackedStringArray("luz_audio")]
 collision_layer = 256
 script = ExtResource("2_w016u")
+luz_audio = NodePath("../LamparaPunta/SonidoLuz")
 metadata/_custom_type_script = "uid://do4tacrtqixlk"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lampara/ObjectoHackeable"]

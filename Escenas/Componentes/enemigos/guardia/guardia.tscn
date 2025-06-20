@@ -1,15 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://hmccynvegse3"]
+[gd_scene load_steps=17 format=3 uid="uid://hmccynvegse3"]
 
-[ext_resource type="Script" uid="uid://c5yp8bq7t0ndf" path="res://Escenas/Componentes/enemigos/guardia/guardia_nuevo.gd" id="1_4ws1q"]
+[ext_resource type="Script" uid="uid://c5yp8bq7t0ndf" path="res://escenas/Componentes/enemigos/guardia/guardia_nuevo.gd" id="1_4ws1q"]
+[ext_resource type="AudioStream" uid="uid://ba4motuc0anp6" path="res://assets/audio/Efectos de sonido/Sonido AK-47.mp3" id="2_62bdg"]
+[ext_resource type="AudioStream" uid="uid://wlugd28mn21p" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="3_cegru"]
+[ext_resource type="PackedScene" uid="uid://drfxfar6c6iim" path="res://assets/modelos/Personajes/guardiaFinalFinal.glb" id="4_r7nfh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xit8o"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_sovxp"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sovxp"]
-albedo_color = Color(0, 0.678431, 1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_4ws1q"]
+[sub_resource type="SphereMesh" id="SphereMesh_r7nfh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_p2ht6"]
 size = Vector3(0.1, 0.1, 1)
@@ -158,11 +156,13 @@ _data = {
 &"recargar": SubResource("Animation_r5jap")
 }
 
-[node name="Guardia" type="CharacterBody3D" node_paths=PackedStringArray("timer_espera_patrulla", "timer_disparo", "arma_animacion", "agent", "raycast")]
+[node name="Guardia" type="CharacterBody3D" node_paths=PackedStringArray("pasos_audio", "sonido_disparos", "timer_espera_patrulla", "timer_disparo", "arma_animacion", "agent", "raycast")]
 script = ExtResource("1_4ws1q")
+pasos_audio = NodePath("SonidoPasos")
+sonido_disparos = NodePath("ArmaMesh/SonidoDisparos")
 timer_espera_patrulla = NodePath("Timer")
 timer_disparo = NodePath("Timer2")
-arma_animacion = NodePath("MeshInstance3D/ArmaMesh/ArmaAnimacion")
+arma_animacion = NodePath("ArmaMesh/ArmaAnimacion")
 agent = NodePath("NavigationAgent3D")
 raycast = NodePath("RayCast3D")
 
@@ -173,22 +173,27 @@ shape = SubResource("CapsuleShape3D_xit8o")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_sovxp")
-surface_material_override/0 = SubResource("StandardMaterial3D_sovxp")
+[node name="guardiaFinalFinal" parent="." instance=ExtResource("4_r7nfh")]
+transform = Transform3D(-0.432186, -0.000324314, 0.0825542, 0.000241214, 0.43999, 0.00299127, -0.0825545, 0.00298341, -0.432176, 0, -0.91, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38583, -0.0696989)
-mesh = SubResource("SphereMesh_4ws1q")
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="guardiaFinalFinal/RIG_CREATOR/Skeleton3D" index="11"]
+transform = Transform3D(-0.00833408, 0.999708, -0.0226391, -0.999965, -0.00834921, -0.000573331, -0.000762225, 0.0226336, 0.999743, 0.61041, 2.23844, -0.128001)
+bone_name = "Base_Ojo_R"
+bone_idx = 7
 
-[node name="ArmaMesh" type="MeshInstance3D" parent="MeshInstance3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="guardiaFinalFinal/RIG_CREATOR/Skeleton3D/BoneAttachment3D"]
+visible = false
+mesh = SubResource("SphereMesh_r7nfh")
+
+[node name="ArmaMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.474789, 0, -0.338083)
 mesh = SubResource("BoxMesh_p2ht6")
+skeleton = NodePath("")
 
-[node name="Node3D" type="Node3D" parent="MeshInstance3D/ArmaMesh"]
+[node name="Node3D" type="Node3D" parent="ArmaMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.507591)
 
-[node name="ArmaFlash" type="GPUParticles3D" parent="MeshInstance3D/ArmaMesh"]
+[node name="ArmaFlash" type="GPUParticles3D" parent="ArmaMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 emitting = false
 amount = 32
@@ -199,13 +204,25 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_p2ht6")
 draw_pass_1 = SubResource("QuadMesh_vmp5e")
 
-[node name="ArmaAnimacion" type="AnimationPlayer" parent="MeshInstance3D/ArmaMesh"]
+[node name="ArmaAnimacion" type="AnimationPlayer" parent="ArmaMesh"]
 libraries = {
 &"": SubResource("AnimationLibrary_r5jap")
 }
+
+[node name="SonidoDisparos" type="AudioStreamPlayer3D" parent="ArmaMesh"]
+stream = ExtResource("2_62bdg")
+max_db = -10.0
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Timer2" type="Timer" parent="."]
 one_shot = true
+
+[node name="SonidoDisparos" type="AudioStreamPlayer3D" parent="."]
+
+[node name="SonidoPasos" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_cegru")
+max_db = -15.0
+
+[editable path="guardiaFinalFinal"]
