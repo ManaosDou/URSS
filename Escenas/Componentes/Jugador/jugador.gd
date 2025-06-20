@@ -51,20 +51,17 @@ func _ready():
 
 func _physics_process(delta):
 	
-<<<<<<< Updated upstream
 	#Luz
 	for area in area_luz.get_overlapping_areas():
 		iluminado = false
 		if area is ObjetoDistractorioLuz:
 			iluminado = true
-=======
 	# crosshair
 	var collider_crosshair = get_node("Camera3D/RayCast3D").get_collider()
 	if collider_crosshair is Guardia or collider_crosshair is Cientifico:
 		crosshair.modulate = Color.RED
 	else:
 		crosshair.modulate = Color.CYAN
->>>>>>> Stashed changes
 	
 	# agacharse
 	if Input.is_action_pressed("agachar"):
