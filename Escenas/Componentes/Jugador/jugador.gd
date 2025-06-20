@@ -1,6 +1,11 @@
 extends CharacterBody3D
 class_name Jugador
 
+@export var indicador_hack : TextureRect
+@export var indicador_fade : AnimationPlayer
+@export var crosshair : TextureRect
+@export var hack_audio : AudioStreamPlayer3D
+@export var recargar_audio : AudioStreamPlayer3D
 @export var disparos_audio : AudioStreamPlayer3D
 @export var pasos_audio : AudioStreamPlayer3D
 @export var pasos_audio_timer : Timer
@@ -51,6 +56,12 @@ func _physics_process(delta):
 		iluminado = false
 		if area is ObjetoDistractorioLuz:
 			iluminado = true
+	# crosshair
+	var collider_crosshair = get_node("Camera3D/RayCast3D").get_collider()
+	if collider_crosshair is Guardia or collider_crosshair is Cientifico:
+		crosshair.modulate = Color.RED
+	else:
+		crosshair.modulate = Color.CYAN
 	
 	# agacharse
 	if Input.is_action_pressed("agachar"):
@@ -119,8 +130,7 @@ func _physics_process(delta):
 	detectar_hackeo()
 
 func _process(delta: float) -> void:
-	hacking_cooldown_bar.max_value = hacking_cooldown.wait_time
-	hacking_cooldown_bar.value = hacking_cooldown.wait_time - hacking_cooldown.time_left
+	pass
 
 func detectar_enemigo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
@@ -132,12 +142,15 @@ func detectar_enemigo():
 func detectar_hackeo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
 	if collider is ObjectoHackeable and hacking_cooldown.is_stopped():
-		$CanvasLayer/HackingLabel.visible = true
+		if indicador_hack.modulate != Color.WHITE and not indicador_fade.is_playing():
+			indicador_fade.play("fade")
 		if Input.is_action_just_pressed("hackear"):
 			collider.hack()
 			hacking_cooldown.start()
+			hack_audio.play()
 	else:
-		$CanvasLayer/HackingLabel.visible = false
+		if indicador_hack.modulate != Color.TRANSPARENT and not indicador_fade.is_playing():
+			indicador_fade.play_backwards("fade")
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -152,6 +165,8 @@ func recargar():
 		municion_en_arma += balas_a_recargar
 		municion_de_reserva -= balas_a_recargar
 		arma_animacion.play("recargar")
+		recargar_audio.play()
+		
 
 func recibir_dano(cantidad: int):
 	vida -= cantidad

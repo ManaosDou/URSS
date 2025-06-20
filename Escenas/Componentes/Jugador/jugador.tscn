@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=25 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
@@ -8,6 +9,23 @@
 [ext_resource type="Texture2D" uid="uid://18xy1y2y4osn" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
 [ext_resource type="Texture2D" uid="uid://c4gi1golnju3s" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
 [ext_resource type="AudioStream" uid="uid://s361a2yej1mp" path="res://assets/audio/Efectos de sonido/Disparo silenciado.mp3" id="8_elmla"]
+=======
+[gd_scene load_steps=35 format=3 uid="uid://dbni6o826cp8b"]
+
+[ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
+[ext_resource type="Script" uid="uid://rvrdp77wpetu" path="res://escenas/Componentes/Jugador/hud/hud.gd" id="2_ti02m"]
+[ext_resource type="Texture2D" uid="uid://ctpfda74vxscc" path="res://assets/UI/HUD/Crosshair.png" id="3_33vpj"]
+[ext_resource type="AudioStream" uid="uid://wlugd28mn21p" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
+[ext_resource type="Texture2D" uid="uid://225ww6wrnpi3" path="res://assets/UI/HUD/Cuadro de texto.png" id="4_33vpj"]
+[ext_resource type="Script" uid="uid://dvcswaltu2pey" path="res://escenas/Componentes/Jugador/barra_vida.gd" id="4_0541f"]
+[ext_resource type="Texture2D" uid="uid://2t7662tomges" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://dcuhksuwdkjuv" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://xpaieufk17b5" path="res://assets/UI/HUD/Objetivo.png" id="5_hqsdy"]
+[ext_resource type="Texture2D" uid="uid://di1y4rek4yxqb" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
+[ext_resource type="AudioStream" uid="uid://cu0y56blx8vvt" path="res://assets/audio/Efectos de sonido/Disparo silenciado.mp3" id="8_elmla"]
+[ext_resource type="AudioStream" uid="uid://br5fjljl6kwsc" path="res://assets/audio/Efectos de sonido/Sonido de recarga.mp3" id="9_e8aji"]
+[ext_resource type="AudioStream" uid="uid://mxg6215kl7fw" path="res://assets/audio/Efectos de sonido/Audio hack.mp3" id="10_c0px6"]
+>>>>>>> Stashed changes
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -162,6 +180,52 @@ _data = {
 &"recargar": SubResource("Animation_r5jap")
 }
 
+[sub_resource type="Animation" id="Animation_33vpj"]
+resource_name = "fade"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hqsdy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nyymx"]
+_data = {
+&"RESET": SubResource("Animation_hqsdy"),
+&"fade": SubResource("Animation_33vpj")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_ml2ct"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_l23of"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_qu2qm"]
+font_size = 64
+
 [sub_resource type="Animation" id="Animation_g6jpv"]
 length = 0.001
 tracks/0/type = "value"
@@ -223,10 +287,19 @@ _data = {
 &"agacharse": SubResource("Animation_04w7q")
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f14ml"]
 
 [node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion", "area_luz")]
+=======
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("indicador_hack", "indicador_fade", "crosshair", "hack_audio", "recargar_audio", "disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "agacharse_animacion")]
+>>>>>>> Stashed changes
 script = ExtResource("1_lwbgw")
+indicador_hack = NodePath("CanvasLayer/HUD/Crosshair/IndicadorHack")
+indicador_fade = NodePath("CanvasLayer/HUD/Crosshair/IndicadorHack/IndicadorHack")
+crosshair = NodePath("CanvasLayer/HUD/Crosshair")
+hack_audio = NodePath("SonidoHackeo")
+recargar_audio = NodePath("RecargaAudio")
 disparos_audio = NodePath("DisparoAudio")
 pasos_audio = NodePath("PasosAudio")
 pasos_audio_timer = NodePath("PasosAudio/Timer")
@@ -235,7 +308,6 @@ arma_animacion = NodePath("Camera3D/ArmaMesh/ArmaAnimacion")
 hud = NodePath("CanvasLayer/HUD")
 fase_label = NodePath("CanvasLayer/FaseLabel")
 hacking_cooldown = NodePath("HackingCooldown")
-hacking_cooldown_bar = NodePath("CanvasLayer/HackingCooldownContainer/HackingCooldown")
 agacharse_animacion = NodePath("AgacharseAnimacion")
 area_luz = NodePath("Area3D")
 
@@ -273,44 +345,122 @@ libraries = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HackingLabel" type="Label" parent="CanvasLayer"]
+[node name="HUD" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("municion_label", "max_municion_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_ti02m")
+municion_label = NodePath("MarginContainer/MunicionLabelContainer/MunicionLabel")
+max_municion_label = NodePath("MarginContainer/MunicionLabelContainer/MaxMunicionLabel")
+
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer/HUD"]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+pivot_offset = Vector2(21.225, 19.665)
+texture = ExtResource("3_33vpj")
+expand_mode = 5
+
+[node name="IndicadorHack" type="TextureRect" parent="CanvasLayer/HUD/Crosshair"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 5.0
+offset_right = 2025.0
+offset_bottom = 2005.0
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("4_33vpj")
+
+[node name="IndicadorHack" type="AnimationPlayer" parent="CanvasLayer/HUD/Crosshair/IndicadorHack"]
+libraries = {
+&"": SubResource("AnimationLibrary_nyymx")
+}
+
+[node name="HackingLabel" type="Label" parent="CanvasLayer/HUD/Crosshair/IndicadorHack"]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
+offset_left = -825.0
+offset_top = 775.0
+offset_right = -638.0
+offset_bottom = 798.0
 grow_horizontal = 2
+scale = Vector2(9, 9)
 text = "Presiona E para hackear"
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("2_u0du3")]
-mouse_filter = 2
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -29.0
+offset_top = -18.0
+offset_right = -29.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="MunicionLabelContainer" type="HBoxContainer" parent="CanvasLayer/HUD/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="MunicionLabel" type="Label" parent="CanvasLayer/HUD/MarginContainer/MunicionLabelContainer"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_ml2ct")
+
+[node name="BarraLabel" type="Label" parent="CanvasLayer/HUD/MarginContainer/MunicionLabelContainer"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_l23of")
+
+[node name="MaxMunicionLabel" type="Label" parent="CanvasLayer/HUD/MarginContainer/MunicionLabelContainer"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_qu2qm")
+
+[node name="Objetivo" type="TextureRect" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_hqsdy")
+
+[node name="ObjetivoLabel" type="Label" parent="CanvasLayer/HUD/Objetivo"]
+layout_mode = 0
+offset_right = 626.0
+offset_bottom = 115.0
+text = "Tu objetivo principal es colocar una bomba y destruir el laboratorio para siempre"
 
 [node name="FaseLabel" type="Label" parent="CanvasLayer"]
-offset_right = 40.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_right = 51.0
 offset_bottom = 23.0
+grow_horizontal = 2
 text = "Fase: ALERTA"
-
-[node name="HackingCooldownContainer" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = 250.0
-offset_right = 185.0
-offset_bottom = 290.0
-grow_vertical = 2
-
-[node name="HackLabel" type="Label" parent="CanvasLayer/HackingCooldownContainer"]
-layout_mode = 2
-text = "HACK"
-
-[node name="HackingCooldown" type="ProgressBar" parent="CanvasLayer/HackingCooldownContainer"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-size_flags_vertical = 1
-value = 100.0
-show_percentage = false
 
 [node name="AgacharseAnimacion" type="AnimationPlayer" parent="."]
 libraries = {
@@ -341,11 +491,13 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="BarraVida" type="Control" parent="CanvasLayer2/Control" node_paths=PackedStringArray("rect_vida", "rect_cooldown")]
+[node name="BarraVida" type="Control" parent="CanvasLayer2/Control" node_paths=PackedStringArray("rect_vida", "rect_cooldown", "hacking_cooldown", "jugador")]
 layout_mode = 2
 script = ExtResource("4_0541f")
 rect_vida = NodePath("ColorRectVida")
 rect_cooldown = NodePath("ColorRectCooldown")
+hacking_cooldown = NodePath("../../../HackingCooldown")
+jugador = NodePath("../../..")
 
 [node name="Fondo" type="TextureRect" parent="CanvasLayer2/Control/BarraVida"]
 layout_mode = 1
@@ -364,9 +516,9 @@ stretch_mode = 5
 clip_children = 1
 layout_mode = 0
 offset_left = 161.0
-offset_top = 923.0
-offset_right = 266.0
-offset_bottom = 935.0
+offset_top = 911.0
+offset_right = 270.0
+offset_bottom = 947.0
 
 [node name="BarraCooldown" type="TextureRect" parent="CanvasLayer2/Control/BarraVida/ColorRectCooldown"]
 layout_mode = 1
@@ -374,9 +526,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = -161.0
-offset_top = -294.0
+offset_top = -306.0
 offset_right = 351.0
-offset_bottom = 218.0
+offset_bottom = 206.0
 grow_vertical = 0
 texture = ExtResource("6_5howd")
 expand_mode = 4
@@ -386,9 +538,9 @@ stretch_mode = 5
 clip_children = 1
 layout_mode = 0
 offset_left = 161.0
-offset_top = 887.0
-offset_right = 478.0
-offset_bottom = 911.0
+offset_top = 833.0
+offset_right = 480.0
+offset_bottom = 923.0
 
 [node name="CantidadVida" type="TextureRect" parent="CanvasLayer2/Control/BarraVida/ColorRectVida"]
 layout_mode = 1
@@ -396,9 +548,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = -161.0
-offset_top = -270.0
+offset_top = -282.0
 offset_right = 351.0
-offset_bottom = 242.0
+offset_bottom = 230.0
 grow_vertical = 0
 texture = ExtResource("5_g6jpv")
 expand_mode = 4
@@ -409,9 +561,20 @@ stream = ExtResource("8_elmla")
 max_db = -24.0
 pitch_scale = 0.8
 
+<<<<<<< Updated upstream
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_f14ml")
+=======
+[node name="RecargaAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_e8aji")
+max_db = -10.0
+
+[node name="SonidoHackeo" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_c0px6")
+max_db = -24.0
+pitch_scale = 0.5
+>>>>>>> Stashed changes
 
 [connection signal="timeout" from="PasosAudio/Timer" to="." method="_on_timer_timeout"]

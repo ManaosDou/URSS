@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://djxhc8lw130wd"]
+[gd_scene load_steps=14 format=3 uid="uid://djxhc8lw130wd"]
 
-[ext_resource type="Script" uid="uid://cb875hmdw1whe" path="res://Escenas/Componentes/Hackeables/puerta/puerta_hackeable.gd" id="1_7vhvi"]
+[ext_resource type="Script" uid="uid://cb875hmdw1whe" path="res://escenas/Componentes/Hackeables/puerta/puerta_hackeable.gd" id="1_7vhvi"]
+[ext_resource type="AudioStream" uid="uid://c1j1mbqhs5aux" path="res://assets/audio/Efectos de sonido/Abrir compuerta.mp3" id="2_dmtq2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_a7bo2"]
 size = Vector3(1, 4, 1)
@@ -113,10 +114,11 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrera/Puerta/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_plp72")
 
-[node name="HackeoPuerta" type="Area3D" parent="Barrera/Puerta" node_paths=PackedStringArray("barrera")]
+[node name="HackeoPuerta" type="Area3D" parent="Barrera/Puerta" node_paths=PackedStringArray("barrera", "puerta_audio")]
 collision_layer = 256
 script = ExtResource("1_7vhvi")
 barrera = NodePath("../..")
+puerta_audio = NodePath("../Abrir_Cerrar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrera/Puerta/HackeoPuerta"]
 shape = SubResource("SphereShape3D_4xk3p")
@@ -125,3 +127,7 @@ shape = SubResource("SphereShape3D_4xk3p")
 libraries = {
 &"": SubResource("AnimationLibrary_6i5g0")
 }
+
+[node name="Abrir_Cerrar" type="AudioStreamPlayer3D" parent="Barrera/Puerta"]
+stream = ExtResource("2_dmtq2")
+max_db = -6.0

@@ -1,4 +1,4 @@
-extends ObjectoHackeable
+	extends ObjectoHackeable
 @export var apagada : bool = false
 @export var area : Area3D 
 
@@ -13,3 +13,4 @@ func hack():
 		$"../LamparaPunta".visible = true
 		area.encendido = true
 		apagada = false
+		luz_audio.play()
