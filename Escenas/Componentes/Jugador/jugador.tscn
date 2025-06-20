@@ -1,13 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://dbni6o826cp8b"]
+[gd_scene load_steps=29 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
-[ext_resource type="PackedScene" uid="uid://cpxbxx7n7luqv" path="res://Escenas/Componentes/Jugador/hud/hud.tscn" id="2_u0du3"]
-[ext_resource type="AudioStream" uid="uid://bx1sr34nbj2j7" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
+[ext_resource type="Script" uid="uid://rvrdp77wpetu" path="res://Escenas/Componentes/Jugador/hud/hud.gd" id="2_n06o3"]
+[ext_resource type="Texture2D" uid="uid://dl2a45xxql8ia" path="res://assets/UI/HUD/Crosshair.png" id="3_cop5c"]
+[ext_resource type="AudioStream" uid="uid://6ctq62otghun" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
 [ext_resource type="Script" uid="uid://dvcswaltu2pey" path="res://Escenas/Componentes/Jugador/barra_vida.gd" id="4_0541f"]
-[ext_resource type="Texture2D" uid="uid://byva1lgxt15rl" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
-[ext_resource type="Texture2D" uid="uid://18xy1y2y4osn" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
-[ext_resource type="Texture2D" uid="uid://c4gi1golnju3s" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
-[ext_resource type="AudioStream" uid="uid://s361a2yej1mp" path="res://assets/audio/Efectos de sonido/Disparo silenciado.mp3" id="8_elmla"]
+[ext_resource type="Texture2D" uid="uid://c5ynae3kx8hnc" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://bn7trblkg8toi" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://ddosjs63vr35r" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
+[ext_resource type="AudioStream" uid="uid://cqcthprmpkdw4" path="res://assets/audio/Efectos de sonido/Disparo silenciado.mp3" id="8_elmla"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -162,6 +163,15 @@ _data = {
 &"recargar": SubResource("Animation_r5jap")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_ml2ct"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_l23of"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_qu2qm"]
+font_size = 64
+
 [sub_resource type="Animation" id="Animation_g6jpv"]
 length = 0.001
 tracks/0/type = "value"
@@ -283,8 +293,73 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Presiona E para hackear"
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("2_u0du3")]
+[node name="HUD" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("municion_label", "max_municion_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("2_n06o3")
+municion_label = NodePath("MarginContainer/MunicionLabelContainer/MunicionLabel")
+max_municion_label = NodePath("MarginContainer/MunicionLabelContainer/MaxMunicionLabel")
+
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer/HUD"]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+pivot_offset = Vector2(21.225, 19.665)
+texture = ExtResource("3_cop5c")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -29.0
+offset_top = -18.0
+offset_right = -29.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="MunicionLabelContainer" type="HBoxContainer" parent="CanvasLayer/HUD/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="MunicionLabel" type="Label" parent="CanvasLayer/HUD/MarginContainer/MunicionLabelContainer"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_ml2ct")
+
+[node name="BarraLabel" type="Label" parent="CanvasLayer/HUD/MarginContainer/MunicionLabelContainer"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_l23of")
+
+[node name="MaxMunicionLabel" type="Label" parent="CanvasLayer/HUD/MarginContainer/MunicionLabelContainer"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_qu2qm")
 
 [node name="FaseLabel" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
@@ -363,20 +438,20 @@ stretch_mode = 5
 [node name="ColorRectCooldown" type="ColorRect" parent="CanvasLayer2/Control/BarraVida"]
 clip_children = 1
 layout_mode = 0
-offset_left = 161.0
-offset_top = 923.0
-offset_right = 266.0
-offset_bottom = 935.0
+offset_left = 165.0
+offset_top = 910.0
+offset_right = 269.0
+offset_bottom = 948.0
 
 [node name="BarraCooldown" type="TextureRect" parent="CanvasLayer2/Control/BarraVida/ColorRectCooldown"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -161.0
-offset_top = -294.0
-offset_right = 351.0
-offset_bottom = 218.0
+offset_left = -165.0
+offset_top = -307.0
+offset_right = 347.0
+offset_bottom = 205.0
 grow_vertical = 0
 texture = ExtResource("6_5howd")
 expand_mode = 4
@@ -385,20 +460,20 @@ stretch_mode = 5
 [node name="ColorRectVida" type="ColorRect" parent="CanvasLayer2/Control/BarraVida"]
 clip_children = 1
 layout_mode = 0
-offset_left = 161.0
-offset_top = 887.0
-offset_right = 478.0
-offset_bottom = 911.0
+offset_left = 165.0
+offset_top = 835.0
+offset_right = 480.0
+offset_bottom = 923.0
 
 [node name="CantidadVida" type="TextureRect" parent="CanvasLayer2/Control/BarraVida/ColorRectVida"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -161.0
-offset_top = -270.0
-offset_right = 351.0
-offset_bottom = 242.0
+offset_left = -165.0
+offset_top = -282.0
+offset_right = 347.0
+offset_bottom = 230.0
 grow_vertical = 0
 texture = ExtResource("5_g6jpv")
 expand_mode = 4

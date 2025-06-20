@@ -1,0 +1,13 @@
+diff a/Escenas/Componentes/Jugador/jugador.gd b/Escenas/Componentes/Jugador/jugador.gd	(rejected hunks)
+@@ -1,6 +1,11 @@
+ extends CharacterBody3D
+ class_name Jugador
+ 
++@export var indicador_hack : TextureRect
++@export var indicador_fade : AnimationPlayer
++@export var crosshair : TextureRect
++@export var hack_audio : AudioStreamPlayer3D
++@export var recargar_audio : AudioStreamPlayer3D
+ @export var disparos_audio : AudioStreamPlayer3D
+ @export var pasos_audio : AudioStreamPlayer3D
+ @export var pasos_audio_timer : Timer

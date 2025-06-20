@@ -26,6 +26,9 @@ var ultima_posicion_jugador : Vector3
 
 @export var jugador : Jugador
 
+@export var pasos_audio : AudioStreamPlayer3D
+@export var sonido_disparos : AudioStreamPlayer3D
+
 func _ready() -> void:
 	timer_espera_patrulla.wait_time = tiempo_espera
 	timer_espera_patrulla.timeout.connect(_on_timer_espera_timeout)
@@ -48,6 +51,7 @@ func rotar_hacia_direccion(direccion: Vector3, delta: float):
 		var target_transform = transform.looking_at(global_position + direccion_horizontal, Vector3.UP)
 		
 		transform = transform.interpolate_with(target_transform, velocidad_rotacion * delta)
+		pasos_audio.play()
 
 func esta_jugador_en_foco() -> bool:
 	if global_position.distance_to(jugador.global_position) < distancia_vision and jugador.iluminado:
@@ -132,6 +136,7 @@ func procesar_caza(delta: float):
 func disparar_a_jugador():
 	arma_animacion.play("disparar")
 	jugador.recibir_dano(dano_disparo)
+	sonido_disparos.play()
 
 func _on_timer_espera_timeout():
 	esperando_en_punto = false

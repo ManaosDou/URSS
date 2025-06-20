@@ -113,10 +113,11 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrera/Puerta/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_plp72")
 
-[node name="HackeoPuerta" type="Area3D" parent="Barrera/Puerta" node_paths=PackedStringArray("barrera")]
+[node name="HackeoPuerta" type="Area3D" parent="Barrera/Puerta" node_paths=PackedStringArray("barrera", "puerta_audio")]
 collision_layer = 256
 script = ExtResource("1_7vhvi")
 barrera = NodePath("../..")
+puerta_audio = NodePath("../../../AudioPuerta")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrera/Puerta/HackeoPuerta"]
 shape = SubResource("SphereShape3D_4xk3p")
@@ -125,3 +126,6 @@ shape = SubResource("SphereShape3D_4xk3p")
 libraries = {
 &"": SubResource("AnimationLibrary_6i5g0")
 }
+
+[node name="AudioPuerta" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
