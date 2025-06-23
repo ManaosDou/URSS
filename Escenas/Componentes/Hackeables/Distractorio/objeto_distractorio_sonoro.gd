@@ -2,10 +2,10 @@
 extends Area3D
 class_name ObjetoDistractorioSonoro
 
-@export var rango : float
+@export var rango : float = 20
 @export var collision : CollisionShape3D
 @export var mesh : MeshInstance3D
-@export var encendida : bool = true
+@export var encendida : bool = false
 
 func _physics_process(delta):
 	if encendida:
