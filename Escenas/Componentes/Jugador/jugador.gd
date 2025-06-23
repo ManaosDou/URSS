@@ -52,11 +52,11 @@ func _ready():
 func _physics_process(delta):
 	
 	#Luz
+	iluminado = false
 	for area in area_luz.get_overlapping_areas():
-		iluminado = false
 		if area is ObjetoDistractorioLuz:
 			iluminado = true
-		
+			break
 	
 	# crosshair
 	var collider_crosshair = get_node("Camera3D/RayCast3D").get_collider()
