@@ -134,9 +134,10 @@ func procesar_caza(delta: float):
 	move_and_slide()
 
 func disparar_a_jugador():
-	arma_animacion.play("disparar")
-	jugador.recibir_dano(dano_disparo)
-	sonido_disparos.play()
+	if esta_jugador_en_foco():
+		arma_animacion.play("disparar")
+		jugador.recibir_dano(dano_disparo)
+		sonido_disparos.play()
 
 func _on_timer_espera_timeout():
 	esperando_en_punto = false

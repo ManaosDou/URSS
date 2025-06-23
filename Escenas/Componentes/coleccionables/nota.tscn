@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://s6mo5bcd5ynv"]
+
+[ext_resource type="Script" uid="uid://btfbx81elkvxu" path="res://Escenas/Componentes/coleccionables/notas.gd" id="1_7joci"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7joci"]
+albedo_color = Color(1, 0.839216, 0.121569, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rs6mg"]
+material = SubResource("StandardMaterial3D_7joci")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ck4g6"]
+radius = 1.29469
+
+[node name="Nota" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 1, 0, 0, 0, 0.04, 0, 0, 0)
+mesh = SubResource("BoxMesh_rs6mg")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 4.42378e-09, 0, 2.56114e-09, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_7joci")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, -1.0943e-08, 0, 2.56114e-09, 1, -7.45058e-09, 0, 7.45058e-09, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_ck4g6")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]
+[connection signal="body_shape_exited" from="Area3D" to="Area3D" method="_on_body_shape_exited"]

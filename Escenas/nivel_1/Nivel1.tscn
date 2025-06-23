@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://vcwfnlbm47uh"]
+[gd_scene load_steps=31 format=3 uid="uid://vcwfnlbm47uh"]
 
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
 [ext_resource type="Script" uid="uid://bmtygo874kxa7" path="res://Escenas/Componentes/niveles/clase_nivel.gd" id="1_ihcya"]
+[ext_resource type="PackedScene" uid="uid://s6mo5bcd5ynv" path="res://Escenas/Componentes/coleccionables/nota.tscn" id="2_lb6rf"]
 [ext_resource type="PackedScene" uid="uid://cjbeb7qembhbw" path="res://Escenas/nivel_1/a.tscn" id="3_4mi7b"]
 [ext_resource type="PackedScene" uid="uid://b3nvgg8ff80to" path="res://Escenas/nivel_1/c.tscn" id="3_4nq7f"]
 [ext_resource type="VoxelGIData" uid="uid://dkfr3ei7wnix4" path="res://Escenas/nivel_1/Nivel1.VoxelGI_data.res" id="3_jt4gu"]
@@ -17,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://crp7ildmhc6a3" path="res://Escenas/Componentes/pickups/municion.tscn" id="15_tjvp2"]
 [ext_resource type="PackedScene" uid="uid://c4tu1n3dnymvv" path="res://Escenas/Componentes/pickups/experiencia.tscn" id="16_xy5gv"]
 [ext_resource type="PackedScene" uid="uid://dy2kn0wdxv28w" path="res://Escenas/Componentes/Hackeables/camara/camara_nueva.tscn" id="17_xy5gv"]
+[ext_resource type="PackedScene" uid="uid://chncofvukl5nx" path="res://Escenas/Componentes/Hackeables/Radio/radio.tscn" id="19_dqejs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vxico"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -73,6 +75,9 @@ func _process(delta: float) -> void:
 script = ExtResource("1_ihcya")
 timer_caza_a_alerta = NodePath("Timer")
 timer_alerta_a_patrulla = NodePath("Timer2")
+
+[node name="Nota" parent="." instance=ExtResource("2_lb6rf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.5148, -1.87494, -33.7902)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -209,7 +214,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.3283, -3.25, -20.3671)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.1897, -3, -29.5677)
 
 [node name="CamaraNueva" parent="." instance=ExtResource("17_xy5gv")]
-transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, -29.7243, -0.260903, -34.1938)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7243, -0.260903, -34.1938)
 
 [node name="Lampara" parent="." instance=ExtResource("13_t5nma")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 9.63036, 2.94437, -1.90021)
+
+[node name="Radio" parent="." instance=ExtResource("19_dqejs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1924, -3, 13.5161)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dbni6o826cp8b"]
+[gd_scene load_steps=31 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 [ext_resource type="Script" uid="uid://rvrdp77wpetu" path="res://Escenas/Componentes/Jugador/hud/hud.gd" id="2_n06o3"]
@@ -163,6 +163,14 @@ _data = {
 &"recargar": SubResource("Animation_r5jap")
 }
 
+[sub_resource type="Animation" id="Animation_n06o3"]
+resource_name = "fade"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cop5c"]
+_data = {
+&"fade": SubResource("Animation_n06o3")
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_ml2ct"]
 font_size = 64
 
@@ -235,8 +243,13 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f14ml"]
 
-[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "hacking_cooldown_bar", "agacharse_animacion", "area_luz")]
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("indicador_hack", "indicador_fade", "crosshair", "hack_audio", "recargar_audio", "disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "hacking_cooldown", "agacharse_animacion", "area_luz")]
 script = ExtResource("1_lwbgw")
+indicador_hack = NodePath("CanvasLayer/HUD/Crosshair/IndicadorHack")
+indicador_fade = NodePath("CanvasLayer/HUD/Crosshair/IndicadorHack/IndicadorFade")
+crosshair = NodePath("CanvasLayer/HUD/Crosshair")
+hack_audio = NodePath("HackAudio")
+recargar_audio = NodePath("RecargarAudio")
 disparos_audio = NodePath("DisparoAudio")
 pasos_audio = NodePath("PasosAudio")
 pasos_audio_timer = NodePath("PasosAudio/Timer")
@@ -245,7 +258,6 @@ arma_animacion = NodePath("Camera3D/ArmaMesh/ArmaAnimacion")
 hud = NodePath("CanvasLayer/HUD")
 fase_label = NodePath("CanvasLayer/FaseLabel")
 hacking_cooldown = NodePath("HackingCooldown")
-hacking_cooldown_bar = NodePath("CanvasLayer/HackingCooldownContainer/HackingCooldown")
 agacharse_animacion = NodePath("AgacharseAnimacion")
 area_luz = NodePath("Area3D")
 
@@ -256,7 +268,7 @@ shape = SubResource("CapsuleShape3D_oq0nd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
-target_position = Vector3(0, 0, -15)
+target_position = Vector3(0, 0, -30)
 collision_mask = 257
 collide_with_areas = true
 
@@ -325,6 +337,16 @@ pivot_offset = Vector2(21.225, 19.665)
 texture = ExtResource("3_cop5c")
 expand_mode = 5
 
+[node name="IndicadorHack" type="TextureRect" parent="CanvasLayer/HUD/Crosshair"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="IndicadorFade" type="AnimationPlayer" parent="CanvasLayer/HUD/Crosshair/IndicadorHack"]
+libraries = {
+&"": SubResource("AnimationLibrary_cop5c")
+}
+
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HUD"]
 layout_mode = 1
 anchors_preset = 15
@@ -365,27 +387,6 @@ label_settings = SubResource("LabelSettings_qu2qm")
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Fase: ALERTA"
-
-[node name="HackingCooldownContainer" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = 250.0
-offset_right = 185.0
-offset_bottom = 290.0
-grow_vertical = 2
-
-[node name="HackLabel" type="Label" parent="CanvasLayer/HackingCooldownContainer"]
-layout_mode = 2
-text = "HACK"
-
-[node name="HackingCooldown" type="ProgressBar" parent="CanvasLayer/HackingCooldownContainer"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-size_flags_vertical = 1
-value = 100.0
-show_percentage = false
 
 [node name="AgacharseAnimacion" type="AnimationPlayer" parent="."]
 libraries = {
@@ -488,5 +489,9 @@ pitch_scale = 0.8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_f14ml")
+
+[node name="HackAudio" type="AudioStreamPlayer3D" parent="."]
+
+[node name="RecargarAudio" type="AudioStreamPlayer3D" parent="."]
 
 [connection signal="timeout" from="PasosAudio/Timer" to="." method="_on_timer_timeout"]

@@ -56,6 +56,7 @@ func _physics_process(delta):
 		iluminado = false
 		if area is ObjetoDistractorioLuz:
 			iluminado = true
+		
 	
 	# crosshair
 	var collider_crosshair = get_node("Camera3D/RayCast3D").get_collider()
@@ -98,8 +99,6 @@ func _physics_process(delta):
 	velocity.x = velocidad * Input.get_axis("mover_izquierda","mover_derecha")
 	velocity = velocity.rotated(Vector3(0,1,0), camera.rotation.y)
 	
-	
-
 	if velocity.length() > 0 and is_on_floor():
 		if pasos_audio_timer.is_stopped():
 			pasos_audio_timer.start()

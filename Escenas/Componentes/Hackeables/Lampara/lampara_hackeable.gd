@@ -6,10 +6,10 @@ func hack():
 	if apagada == false:
 		$"../LamparaPunta/OmniLight3D".visible = false
 		$"../LamparaPunta".visible = false
-		area.encendido = false
+		area.encendida = false
 		apagada = true
 	else:
 		$"../LamparaPunta/OmniLight3D".visible = true
 		$"../LamparaPunta".visible = true
-		area.encendido = true
+		area.encendida = true
 		apagada = false

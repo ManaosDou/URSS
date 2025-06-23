@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://chncofvukl5nx"]
+
+[ext_resource type="AudioStream" uid="uid://dda4n5yiujrra" path="res://Escenas/nivel_1/sonido_telefono.mp3" id="1_i14yw"]
+[ext_resource type="Script" uid="uid://cb1avvbtj7pk7" path="res://Escenas/Componentes/Hackeables/Radio/radio.gd" id="2_hxnhu"]
+[ext_resource type="PackedScene" uid="uid://bfhcyihn6dxxw" path="res://Escenas/Componentes/Hackeables/Distractorio/objeto_distractorio_sonoro.tscn" id="3_hxnhu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hxnhu"]
+albedo_color = Color(1, 0.52549, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xl463"]
+material = SubResource("StandardMaterial3D_hxnhu")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e18cj"]
+
+[node name="Radio" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_xl463")
+
+[node name="Radio" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_i14yw")
+
+[node name="ObjectoHackeable" type="Area3D" parent="." node_paths=PackedStringArray("audio")]
+script = ExtResource("2_hxnhu")
+audio = NodePath("../AudioStreamPlayer3D")
+metadata/_custom_type_script = "uid://do4tacrtqixlk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectoHackeable"]
+shape = SubResource("BoxShape3D_e18cj")
+
+[node name="Area3D" parent="." instance=ExtResource("3_hxnhu")]
