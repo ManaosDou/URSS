@@ -20,6 +20,7 @@ class_name Jugador
 @export var objeto_detectado : Marker3D
 @export var radar : Control
 @export var fase_label : Label
+@export var notas_label : Label
 @export var hacking_cooldown : Timer
 @export var hacking_cooldown_bar : ProgressBar
 
@@ -180,3 +181,12 @@ func _on_timer_timeout() -> void:
 	if quiere_correr: pasos_audio_timer.wait_time = velocidad_pasos_c
 	else: pasos_audio_timer.wait_time = velocidad_pasos
 	pasos_audio.play()
+	
+
+func mostrar_texto_nota(texto: String):
+	
+	notas_label.text = texto
+	notas_label.visible = true
+
+func ocultar_texto_nota():
+	notas_label.visible = false

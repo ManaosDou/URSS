@@ -20,9 +20,6 @@ mesh = NodePath("MeshInstance3D")
 
 [node name="ObjetoDistractorioLuz" type="Node3D" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_n5r2a")
 skeleton = NodePath("../ObjetoDistractorioLuz")

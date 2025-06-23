@@ -76,8 +76,13 @@ script = ExtResource("1_ihcya")
 timer_caza_a_alerta = NodePath("Timer")
 timer_alerta_a_patrulla = NodePath("Timer2")
 
-[node name="Nota" parent="." instance=ExtResource("2_lb6rf")]
+[node name="Nota1" parent="." instance=ExtResource("2_lb6rf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.5148, -1.87494, -33.7902)
+texto_nota = "Fecha: 12/02/1990 Se detectaron tres fallas en el sistema de contención de la celda S-09. El protocolo sugiere revisar manualmente los cierres antes de cada cambio de guardia. Se recomienda activar el cierre electromagnético en caso de actividad anormal. El sujeto mostró resistencia al somnífero estándar."
+
+[node name="Nota2" parent="." instance=ExtResource("2_lb6rf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5824, -1.87494, -33.7902)
+texto_nota = "Hoy aplicamos una nueva variante del suero androgénico con base en metanfetaminas. El sujeto S-03 mostró mayor agresividad pero una rápida regeneración de tejido. Su ritmo cardíaco se disparó, pero los signos vitales siguen estables."
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
