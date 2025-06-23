@@ -1,6 +1,7 @@
 extends ObjectoHackeable
 
 @export var apagada : bool = false
+@export var animacion_vigilar : AnimationPlayer
 
 var jugador_detectado : bool = false
 var jugador
@@ -19,14 +20,17 @@ func _process(delta: float) -> void:
 				jugador_detectado = true
 				jugador = collider
 		if jugador_detectado:
-			timer_apagada.start()
 			Globals.nivel.activar_estado_caza()
-			look_at(jugador.position)
-	
+			jugador_detectado = false
 
 func hack():
 	if apagada == false:
 		apagada = true
+		jugador_detectado = false
+		animacion_vigilar.stop()
+		timer_apagada.start()
 
 func _on_timer_apagada_timeout():
 	apagada = false
+	jugador_detectado = false
+	animacion_vigilar.play("vigilar")

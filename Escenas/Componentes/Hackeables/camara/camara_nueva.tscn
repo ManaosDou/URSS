@@ -48,10 +48,10 @@ tracks/0/path = NodePath("..:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.11, 5, 7.5, 10),
+"times": PackedFloat32Array(0, 2.13333, 5, 7.5, 10),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 1.39626, 0), Vector3(0, 0, 0), Vector3(0, -1.39626, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0.261799, 0, 0), Vector3(0.261799, 1.39626, 0), Vector3(0.261799, 0, 0), Vector3(0.261799, -1.39626, 0), Vector3(0.261799, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xj3a5"]
@@ -70,9 +70,9 @@ mesh = SubResource("CylinderMesh_xj3a5")
 [node name="CamaraNueva" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
 
-[node name="ObjectoHackeable" type="Area3D" parent="." node_paths=PackedStringArray("timer_apagada")]
-transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
+[node name="ObjectoHackeable" type="Area3D" parent="." node_paths=PackedStringArray("animacion_vigilar", "timer_apagada")]
 script = ExtResource("1_k2wud")
+animacion_vigilar = NodePath("../AnimationPlayer")
 timer_apagada = NodePath("../Timer")
 metadata/_custom_type_script = "uid://do4tacrtqixlk"
 
