@@ -13,6 +13,7 @@ radius = 8.0
 radius = 8.0
 
 [node name="Area3D" type="Area3D" node_paths=PackedStringArray("collision", "mesh")]
+collision_layer = 4
 script = ExtResource("1_mcxse")
 rango = 6.0
 collision = NodePath("CollisionShape3D")
