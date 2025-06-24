@@ -28,5 +28,5 @@ mesh = SubResource("SphereMesh_yqkn6")
 shape = SubResource("SphereShape3D_051tw")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 10.0
 one_shot = true

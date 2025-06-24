@@ -132,9 +132,21 @@ func _physics_process(delta):
 
 func detectar_enemigo():
 	var collider = get_node("Camera3D/RayCast3D").get_collider()
-	if collider is Guardia or collider is Cientifico:
-		var es_headshot = false
-		collider.disparo(es_headshot)
+	var es_headshot = false
+	var enemigo = null
+	
+	if collider is Area3D:
+		enemigo = collider.get_parent()
+		
+		if collider.name == "CabezaArea":
+			es_headshot = true
+			
+	elif collider is CharacterBody3D:
+		enemigo = collider
+		
+	if enemigo != null and (enemigo is Guardia or enemigo is Cientifico):
+		enemigo.disparo(es_headshot)
+		
 
 
 func detectar_hackeo():
