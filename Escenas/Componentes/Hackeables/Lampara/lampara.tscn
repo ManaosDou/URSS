@@ -48,6 +48,9 @@ metadata/_custom_type_script = "uid://do4tacrtqixlk"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("SphereShape3D_myhkv")
 
+[node name="Timer" type="Timer" parent="ObjectoHackeable"]
+one_shot = true
+
 [node name="Area3D" parent="." instance=ExtResource("2_3ydim")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
 rango = 8.0

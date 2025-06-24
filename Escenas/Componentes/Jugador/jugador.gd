@@ -60,7 +60,7 @@ func _physics_process(delta):
 	#Bomba
 	if Input.is_action_just_pressed("poner_bomba"):
 		if en_area_bomba == true and tiene_bomba == true:
-			queue_free()
+			pass
 	
 	#Foto
 	if Input.is_action_just_pressed("mostrar_foto"):
