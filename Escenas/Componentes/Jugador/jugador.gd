@@ -47,10 +47,30 @@ var tiempo_sin_correr : float = 0
 var iluminado : bool = false
 @export var area_luz : Area3D
 
+@export var foto : TextureRect
+@export var bomba_label : Label
+var foto_visible : bool = false
+var en_area_bomba : bool = false
+var tiene_bomba : bool = false
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
+	#Bomba
+	if Input.is_action_just_pressed("poner_bomba"):
+		if en_area_bomba == true and tiene_bomba == true:
+			queue_free()
+	
+	#Foto
+	if Input.is_action_just_pressed("mostrar_foto"):
+		if foto_visible == false:
+			foto_visible = true
+			foto.visible = true
+		else:
+			foto_visible = false
+			foto.visible = false
+	
 	
 	#Luz
 	iluminado = false

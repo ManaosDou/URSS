@@ -1,10 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxu46iov6r4op"]
+[gd_scene load_steps=4 format=3 uid="uid://cxu46iov6r4op"]
+
+[ext_resource type="Script" uid="uid://ga5hnukul5hn" path="res://Escenas/Componentes/bomba/area_bomba.gd" id="1_vrl8s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e3wkq"]
 
-[node name="Area3D" type="Area3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_vrl8s"]
 
-[node name="AreaBomba" type="Node3D" parent="."]
+[node name="Area3D" type="Area3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+script = ExtResource("1_vrl8s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_e3wkq")
+
+[node name="AreaBomba" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vrl8s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

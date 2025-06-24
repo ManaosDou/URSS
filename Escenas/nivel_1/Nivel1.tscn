@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://vcwfnlbm47uh"]
+[gd_scene load_steps=33 format=3 uid="uid://vcwfnlbm47uh"]
 
 [ext_resource type="PackedScene" uid="uid://dbni6o826cp8b" path="res://Escenas/Componentes/Jugador/jugador.tscn" id="1_13d7j"]
 [ext_resource type="Script" uid="uid://bmtygo874kxa7" path="res://Escenas/Componentes/niveles/clase_nivel.gd" id="1_ihcya"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://c4tu1n3dnymvv" path="res://Escenas/Componentes/pickups/experiencia.tscn" id="16_xy5gv"]
 [ext_resource type="PackedScene" uid="uid://dy2kn0wdxv28w" path="res://Escenas/Componentes/Hackeables/camara/camara_nueva.tscn" id="17_xy5gv"]
 [ext_resource type="PackedScene" uid="uid://chncofvukl5nx" path="res://Escenas/Componentes/Hackeables/Radio/radio.tscn" id="19_dqejs"]
+[ext_resource type="PackedScene" uid="uid://cxu46iov6r4op" path="res://Escenas/Componentes/bomba/area_bomba.tscn" id="20_nmih8"]
+[ext_resource type="PackedScene" uid="uid://dqdbtyvaqqnrm" path="res://Escenas/Componentes/pickups/bomba.tscn" id="21_p6ivi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vxico"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -226,3 +228,9 @@ transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 9.6303
 
 [node name="Radio" parent="." instance=ExtResource("19_dqejs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1924, -3, 13.5161)
+
+[node name="Area3D" parent="." instance=ExtResource("20_nmih8")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -13.6455, -3.5, -13.7406)
+
+[node name="PickUp" parent="." instance=ExtResource("21_p6ivi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6143, -3, 15.3771)

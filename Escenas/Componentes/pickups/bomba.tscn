@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqdbtyvaqqnrm"]
+
+[ext_resource type="Script" uid="uid://7bi8r0iyhjfu" path="res://Escenas/Componentes/pickups/bomba.gd" id="1_3aftu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwav7"]
+transparency = 1
+albedo_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_u865u"]
+material = SubResource("StandardMaterial3D_lwav7")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4jf57"]
+
+[sub_resource type="Animation" id="Animation_ydnqb"]
+resource_name = "pickup"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.0646965, 0.0646965, 0.0646965, 1), Color(0.0627451, 0.0627451, 0.0627451, 0.588235), Color(0.0646965, 0.0646965, 0.0646965, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qqmfy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0646965, 0.0646965, 0.0646965, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o3vl5"]
+_data = {
+&"RESET": SubResource("Animation_qqmfy"),
+&"pickup": SubResource("Animation_ydnqb")
+}
+
+[node name="PickUp" type="Area3D"]
+script = ExtResource("1_3aftu")
+metadata/_custom_type_script = "uid://dvxpcycipgd7y"
+
+[node name="Bomba" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_u865u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_4jf57")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_o3vl5")
+}
+autoplay = "pickup"
