@@ -29,6 +29,10 @@ var ultima_posicion_jugador : Vector3
 @export var pasos_audio : AudioStreamPlayer3D
 @export var sonido_disparos : AudioStreamPlayer3D
 
+var distraido : bool = false
+var posicion_radio : Vector3
+var llegue_a_radio : bool = false
+
 func _ready() -> void:
 	timer_espera_patrulla.wait_time = tiempo_espera
 	timer_espera_patrulla.timeout.connect(_on_timer_espera_timeout)
@@ -78,6 +82,27 @@ func procesar_estados():
 			agent.target_position = jugador.global_position
 
 func procesar_patrulla(delta: float):
+	if distraido:
+		if not llegue_a_radio:
+			var distancia_a_radio = global_position.direction_to(agent.get_next_path_position())
+			
+			if global_position.distance_to(posicion_radio) > 2.0:
+				velocity = distancia_a_radio.normalized() * velocidad
+				velocity.y = 0
+				rotar_hacia_direccion(distancia_a_radio, delta)
+			else:
+				llegue_a_radio = true
+				velocity = Vector3.ZERO
+		else:
+			# Mirar hacia la radio
+			var direccion_a_radio = global_position.direction_to(posicion_radio)
+			rotar_hacia_direccion(direccion_a_radio, delta)
+			velocity = Vector3.ZERO
+		
+		move_and_slide()
+		return
+
+	
 	agent.target_position = lista_puntos[indice_punto].global_position
 	
 	if esperando_en_punto:
@@ -162,3 +187,13 @@ func disparo(headshot : bool = false):
 
 func morir():
 	queue_free()
+
+func activar_distraccion(pos_radio: Vector3):
+	distraido = true
+	posicion_radio = pos_radio
+	llegue_a_radio = false
+	agent.target_position = posicion_radio
+
+func desactivar_distraccion():
+	distraido = false
+	llegue_a_radio = false

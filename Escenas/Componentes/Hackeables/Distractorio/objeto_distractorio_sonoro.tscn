@@ -13,10 +13,11 @@ radius = 0.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_051tw"]
 radius = 0.0
 
-[node name="Area3D" type="Area3D" node_paths=PackedStringArray("collision", "mesh")]
+[node name="Area3D" type="Area3D" node_paths=PackedStringArray("collision", "mesh", "timer_distraccion")]
 script = ExtResource("1_yqkn6")
 collision = NodePath("CollisionShape3D")
 mesh = NodePath("MeshInstance3D")
+timer_distraccion = NodePath("Timer")
 
 [node name="ObjetoDistractorioSonoro" type="Node3D" parent="."]
 
@@ -25,3 +26,7 @@ mesh = SubResource("SphereMesh_yqkn6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_051tw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
