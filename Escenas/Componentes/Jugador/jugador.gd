@@ -54,7 +54,7 @@ var en_area_bomba : bool = false
 var tiene_bomba : bool = false
 
 var nivelGanar : PackedScene = preload("res://Escenas/cutscene_0/cutscene_0.tscn")
-var nivelPerder : PackedScene = preload("res://Escenas/cutscene_0/cutscene_0.tscn")
+var nivelPerder : PackedScene = preload("res://Escenas/Ganar_y_perder/Perder.tscn")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

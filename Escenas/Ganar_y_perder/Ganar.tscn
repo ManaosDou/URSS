@@ -1,0 +1,472 @@
+[gd_scene load_steps=19 format=3 uid="uid://dovlncr3shicu"]
+
+[ext_resource type="Script" uid="uid://bwjcswoq18u4w" path="res://Escenas/Ganar_y_perder/ganar.gd" id="1_4hoga"]
+[ext_resource type="Texture2D" uid="uid://bwxp3ik3b8kdk" path="res://assets/UI/Menú/grabber.png" id="2_cb65h"]
+[ext_resource type="FontFile" uid="uid://1o768f1851hv" path="res://assets/UI/soviet_program (1)/SovietProgram.ttf" id="3_2kiu8"]
+[ext_resource type="Texture2D" uid="uid://dk6vrxkgl63to" path="res://assets/UI/Menú/Fondo menú.png" id="4_mxo6b"]
+[ext_resource type="AudioStream" uid="uid://chofpwnio7sgr" path="res://assets/audio/The Soviet Threat (OST).ogg" id="5_fke31"]
+[ext_resource type="Texture2D" uid="uid://dcqigy5xemots" path="res://assets/UI/Menú/The Soviet Threat PNG.png" id="6_rn4wk"]
+[ext_resource type="AudioStream" uid="uid://bns66kh2prub3" path="res://assets/audio/fedeaprobacion.ogg" id="7_t7qfs"]
+
+[sub_resource type="GDScript" id="GDScript_bdrrg"]
+resource_name = "MenuTitulo"
+script/source = "extends CanvasLayer
+
+func _ready() -> void:
+	$AnimationPlayer.play_backwards(\"fade\")
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s5ody"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bx68"]
+bg_color = Color(0.498039, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.498039, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5ody"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="Theme" id="Theme_mh2jt"]
+default_font = ExtResource("3_2kiu8")
+default_font_size = 48
+Button/colors/font_color = Color(0.87451, 0, 0, 1)
+Button/colors/font_focus_color = Color(0.498039, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.498039, 0, 0, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_s5ody")
+HSlider/icons/grabber = ExtResource("2_cb65h")
+HSlider/icons/grabber_highlight = ExtResource("2_cb65h")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_7bx68")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_7bx68")
+HSlider/styles/slider = SubResource("StyleBoxFlat_s5ody")
+Label/colors/font_color = Color(0.87451, 0, 0, 1)
+
+[sub_resource type="Shader" id="Shader_7bx68"]
+code = "shader_type canvas_item;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+uniform vec2 resolution = vec2(320.0, 180.0);
+
+uniform float scan_line_amount : hint_range(0.0, 1.0) = 0.5;
+uniform float warp_amount : hint_range(0.0, 1.0) = 0.05;
+uniform float vignette_amount : hint_range(0.0, 1.0) = 0.5;
+uniform float vignette_intensity : hint_range(0.0, 1.0) = 0.3;
+uniform float grille_amount : hint_range(0.0, 1.0) = 0.05;
+uniform float brightness_boost : hint_range(1.0, 2.0) = 1.2;
+
+float random (vec2 uv) {
+    return fract(sin(dot(uv.xy,
+        vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+void fragment() {
+    vec2 uv = SCREEN_UV;
+    
+    vec2 delta = uv - 0.5;
+    float warp_factor = dot(delta, delta) * warp_amount;
+    uv += delta * warp_factor;
+    
+    float scanline = sin(uv.y * resolution.y * PI) * 0.5 + 0.5;
+    scanline = mix(1.0, scanline, scan_line_amount * 0.5); // Réduit l'impact
+    
+    float grille = mod(uv.x * resolution.x, 3.0) < 1.5 ? 0.95 : 1.05;
+    grille = mix(1.0, grille, grille_amount * 0.5);
+    
+    vec3 color = texture(SCREEN_TEXTURE, uv).rgb * scanline * grille;
+    
+    vec2 v_uv = uv * (1.0 - uv.xy);
+    float vignette = v_uv.x * v_uv.y * 15.0;
+    vignette = mix(1.0, vignette, vignette_amount * 0.7);
+
+    color *= vignette * brightness_boost;
+
+    COLOR.rgb = color;
+    COLOR.a = 1.0;
+	float pixel_size = 256.0;
+	vec2 pixel_uv = vec2(round(UV.x*pixel_size) / pixel_size,round(UV.y*pixel_size) / pixel_size);
+	float color_ruido = random(pixel_uv + vec2(TIME));
+	COLOR.rgb += vec3(color_ruido,color_ruido,color_ruido) * 0.15;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdrrg"]
+shader = SubResource("Shader_7bx68")
+shader_parameter/resolution = Vector2(640, 360)
+shader_parameter/scan_line_amount = 0.584
+shader_parameter/warp_amount = 0.173
+shader_parameter/vignette_amount = 1.0
+shader_parameter/vignette_intensity = 1.0
+shader_parameter/grille_amount = 1.0
+shader_parameter/brightness_boost = 1.0
+
+[sub_resource type="Animation" id="Animation_mh2jt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bdrrg"]
+resource_name = "fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -30.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mh2jt"]
+_data = {
+&"RESET": SubResource("Animation_mh2jt"),
+&"fade": SubResource("Animation_bdrrg")
+}
+
+[sub_resource type="GDScript" id="GDScript_7bx68"]
+resource_name = "SliderVolumen"
+script/source = "extends HSlider
+
+
+func _ready() -> void:
+	value = AudioServer.get_bus_volume_db(0)
+
+func _on_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(0,value)
+"
+
+[node name="Ganar" type="Node"]
+script = ExtResource("1_4hoga")
+
+[node name="MenuTitulo" type="CanvasLayer" parent="."]
+script = SubResource("GDScript_bdrrg")
+
+[node name="Control" type="Control" parent="MenuTitulo"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_mh2jt")
+
+[node name="ColorRect2" type="ColorRect" parent="MenuTitulo/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuTitulo/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -388.0
+offset_top = -231.0
+offset_right = 388.0
+offset_bottom = 231.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuTitulo/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MenuTitulo/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "CONTINUARA...
+
+
+
+"
+horizontal_alignment = 1
+
+[node name="JugarBoton" type="Button" parent="MenuTitulo/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "VOLVeR AL MeNU"
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="MenuTitulo/Control"]
+layout_mode = 0
+offset_left = 517.0
+offset_top = 154.0
+offset_right = 1408.0
+offset_bottom = 850.0
+mouse_filter = 2
+color = Color(0.517647, 0.8, 1, 0.141176)
+
+[node name="ColorRect3" type="ColorRect" parent="MenuTitulo/Control"]
+material = SubResource("ShaderMaterial_bdrrg")
+layout_mode = 0
+offset_left = 517.0
+offset_top = 154.0
+offset_right = 1408.0
+offset_bottom = 850.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="MenuTitulo/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_mxo6b")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MenuTitulo"]
+stream = ExtResource("5_fke31")
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="MenuTitulo"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuTitulo"]
+libraries = {
+&"": SubResource("AnimationLibrary_mh2jt")
+}
+autoplay = "fade"
+
+[node name="Creditos" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="Creditos"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_mh2jt")
+
+[node name="ColorRect2" type="ColorRect" parent="Creditos/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Creditos/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -410.0
+offset_top = -316.0
+offset_right = 507.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+theme_override_constants/separation = 64
+
+[node name="TextureRect" type="TextureRect" parent="Creditos/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+texture = ExtResource("6_rn4wk")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Creditos/Control/VBoxContainer"]
+layout_mode = 2
+text = "HECHO POR
+Lola Pilar Acuña
+Lucas Timoteo Arano
+Estefany Cordoba Jimenez
+Thiago Ojeda Scarano
+Federico Julian Perez Trench"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Creditos/Control/VBoxContainer"]
+layout_mode = 2
+text = "VOLVER"
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="Creditos/Control"]
+layout_mode = 0
+offset_left = 517.0
+offset_top = 154.0
+offset_right = 1408.0
+offset_bottom = 850.0
+mouse_filter = 2
+color = Color(0.517647, 0.8, 1, 0.141176)
+
+[node name="TextureRect" type="TextureRect" parent="Creditos/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_mxo6b")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="Creditos/Control"]
+material = SubResource("ShaderMaterial_bdrrg")
+layout_mode = 0
+offset_left = 517.0
+offset_top = 154.0
+offset_right = 1408.0
+offset_bottom = 850.0
+mouse_filter = 2
+
+[node name="FedePlayer" type="AudioStreamPlayer" parent="Creditos"]
+stream = ExtResource("7_t7qfs")
+
+[node name="Settings" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="Settings"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_mh2jt")
+
+[node name="ColorRect2" type="ColorRect" parent="Settings/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -388.0
+offset_top = -231.0
+offset_right = 388.0
+offset_bottom = 231.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Settings/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "vOLUMEN"
+
+[node name="HSlider" type="HSlider" parent="Settings/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = -20.0
+max_value = 6.0
+exp_edit = true
+script = SubResource("GDScript_7bx68")
+
+[node name="Button" type="Button" parent="Settings/Control/VBoxContainer"]
+layout_mode = 2
+text = "vOLVEr"
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="Settings/Control"]
+layout_mode = 0
+offset_left = 517.0
+offset_top = 154.0
+offset_right = 1408.0
+offset_bottom = 850.0
+mouse_filter = 2
+color = Color(0.517647, 0.8, 1, 0.141176)
+
+[node name="TextureRect" type="TextureRect" parent="Settings/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_mxo6b")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="Settings/Control"]
+material = SubResource("ShaderMaterial_bdrrg")
+layout_mode = 0
+offset_left = 517.0
+offset_top = 154.0
+offset_right = 1408.0
+offset_bottom = 850.0
+mouse_filter = 2
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="MenuTitulo/Control/VBoxContainer/VBoxContainer/JugarBoton" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="Creditos/Control/VBoxContainer/Button" to="." method="_on_volver_creditos_pressed"]
+[connection signal="value_changed" from="Settings/Control/VBoxContainer/HBoxContainer/HSlider" to="Settings/Control/VBoxContainer/HBoxContainer/HSlider" method="_on_value_changed"]
+[connection signal="pressed" from="Settings/Control/VBoxContainer/Button" to="." method="_on_volver_settings_pressed"]
