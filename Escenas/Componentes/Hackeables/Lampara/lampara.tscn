@@ -29,6 +29,7 @@ rings = 4
 [sub_resource type="SphereShape3D" id="SphereShape3D_myhkv"]
 
 [node name="Lampara" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_saidh")
 
 [node name="LamparaPunta" type="MeshInstance3D" parent="."]
@@ -38,19 +39,20 @@ mesh = SubResource("SphereMesh_eigfb")
 [node name="OmniLight3D" type="OmniLight3D" parent="LamparaPunta"]
 light_color = Color(1, 0.556863, 0.556863, 1)
 
-[node name="ObjectoHackeable" type="Area3D" parent="." node_paths=PackedStringArray("area")]
+[node name="ObjectoHackeable" type="Area3D" parent="." node_paths=PackedStringArray("area", "timer_apagada")]
 collision_layer = 256
 script = ExtResource("1_1ot81")
 area = NodePath("../Area3D")
+timer_apagada = NodePath("../Timer")
 metadata/_custom_type_script = "uid://do4tacrtqixlk"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectoHackeable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("SphereShape3D_myhkv")
 
-[node name="Timer" type="Timer" parent="ObjectoHackeable"]
-one_shot = true
-
 [node name="Area3D" parent="." instance=ExtResource("2_3ydim")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
 rango = 8.0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

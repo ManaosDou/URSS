@@ -29,10 +29,10 @@ var quiere_correr
 var agachado : bool 
 @export var agacharse_animacion : AnimationPlayer
 
-var municion_en_arma : int = 10
-var max_municion_en_arma : int = 10
-var municion_de_reserva : int = 2
-var max_municion_de_reserva : int = 10
+var municion_en_arma : int = 6
+var max_municion_en_arma : int = 6
+var municion_de_reserva : int = 0
+var max_municion_de_reserva : int = 12
 
 var puntos_de_experiencia : int = 0
 

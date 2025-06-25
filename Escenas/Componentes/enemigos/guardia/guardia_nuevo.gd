@@ -17,7 +17,7 @@ var indice_punto : int = 0
 
 var ultima_posicion_jugador : Vector3
 @export var timer_disparo : Timer
-@export var tiempo_entre_disparos : float = 3
+@export var tiempo_entre_disparos : float = 2
 @export var dano_disparo : int = 20
 
 @export var arma_animacion : AnimationPlayer

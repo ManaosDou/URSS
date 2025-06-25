@@ -12,6 +12,7 @@ enum {Patrulla,Alerta,Caza}
 
 func _ready() -> void:
 	Globals.nivel = self
+	Globals.nivel.estado_alerta = Globals.nivel.Patrulla
 	
 	print(estado_alerta)
 	timer_caza_a_alerta.wait_time = tiempo_caza
