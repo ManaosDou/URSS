@@ -9,9 +9,9 @@ class_name Jugador
 @export var disparos_audio : AudioStreamPlayer3D
 @export var pasos_audio : AudioStreamPlayer3D
 @export var pasos_audio_timer : Timer
-@export var velocidad_normal : float = 5
-@export var velocidad_correr : float = 10
-@export var velocidad_agachado : float = 3
+@export var velocidad_normal : float = 3
+@export var velocidad_correr : float = 7
+@export var velocidad_agachado : float = 2
 @export var mouse_sens : float = 0.001
 @onready var camera : Camera3D = get_node("Camera3D")
 @export var arma_flash : GPUParticles3D
@@ -102,7 +102,7 @@ func _physics_process(delta):
 	
 	if quiere_correr:
 		velocidad = velocidad_correr
-		stamina -= 20 * delta
+		stamina -= 25 * delta
 		if stamina < 0:
 			stamina = 0
 		tiempo_sin_correr = 0.0  
@@ -127,7 +127,6 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("saltar") and is_on_floor():
 		velocity.y = 500 * delta
-		Globals.nivel.triggers.jugador_salto = true
 	if not is_on_floor():
 		velocity.y -= 15 * delta
 
