@@ -220,8 +220,6 @@ func recibir_dano(cantidad: int):
 		morir()
 
 func morir():
-	get_tree().current_scene.queue_free()
-	await get_tree().process_frame
 	get_tree().change_scene_to_packed(nivelPerder)
 
 func _on_timer_timeout() -> void:
