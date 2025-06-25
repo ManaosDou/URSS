@@ -8,6 +8,7 @@ class_name Jugador
 @export var recargar_audio : AudioStreamPlayer3D
 @export var disparos_audio : AudioStreamPlayer3D
 @export var pasos_audio : AudioStreamPlayer3D
+@export var bomba_audio : AudioStreamPlayer3D
 @export var pasos_audio_timer : Timer
 @export var velocidad_normal : float = 3
 @export var velocidad_correr : float = 7
@@ -53,19 +54,29 @@ var foto_visible : bool = false
 var en_area_bomba : bool = false
 var tiene_bomba : bool = false
 
-var nivelGanar : PackedScene = preload("res://Escenas/cutscene_0/cutscene_0.tscn")
+var nivelGanar : PackedScene = preload("res://Escenas/Ganar_y_perder/Ganar.tscn")
 var nivelPerder : PackedScene = preload("res://Escenas/Ganar_y_perder/Perder.tscn")
+
+@export var canvas_pausa : CanvasLayer
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
+	#Pausa
+	if Input.is_action_just_pressed("pausa"):
+		if canvas_pausa.visible == false:
+			canvas_pausa.visible = true
+		else:
+			canvas_pausa.visible = false
+		 
+	
 	#Bomba
 	if Input.is_action_just_pressed("poner_bomba"):
 		if en_area_bomba == true and tiene_bomba == true:
+			await get_tree().create_timer(1).timeout
 			get_tree().change_scene_to_packed(nivelGanar)
 			
-	
 	#Foto
 	if Input.is_action_just_pressed("mostrar_foto"):
 		if foto_visible == false:
@@ -177,7 +188,7 @@ func detectar_hackeo():
 	if collider is ObjectoHackeable and hacking_cooldown.is_stopped():
 		if indicador_hack.modulate != Color.WHITE and not indicador_fade.is_playing():
 			indicador_fade.play("fade")
-		$CanvasLayer/HackingLabel.visible = true
+		$CanvasLayer/HUD/Crosshair/IndicadorHack.visible = true
 		if Input.is_action_just_pressed("hackear"):
 			collider.hack()
 			hacking_cooldown.start()
@@ -185,6 +196,7 @@ func detectar_hackeo():
 	else:
 		if indicador_hack.modulate != Color.TRANSPARENT and not indicador_fade.is_playing():
 			indicador_fade.play_backwards("fade")
+			$CanvasLayer/HUD/Crosshair/IndicadorHack.visible = false
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -208,6 +220,8 @@ func recibir_dano(cantidad: int):
 		morir()
 
 func morir():
+	get_tree().current_scene.queue_free()
+	await get_tree().process_frame
 	get_tree().change_scene_to_packed(nivelPerder)
 
 func _on_timer_timeout() -> void:
@@ -219,7 +233,6 @@ func _on_timer_timeout() -> void:
 	
 
 func mostrar_texto_nota(texto: String):
-	
 	notas_label.text = texto
 	notas_label.visible = true
 

@@ -7,10 +7,10 @@ albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_n5r2a"]
 material = SubResource("StandardMaterial3D_mcxse")
-radius = 8.0
+radius = 6.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oj88s"]
-radius = 8.0
+radius = 6.0
 
 [node name="Area3D" type="Area3D" node_paths=PackedStringArray("collision", "mesh")]
 collision_layer = 4
@@ -22,6 +22,7 @@ mesh = NodePath("MeshInstance3D")
 [node name="ObjetoDistractorioLuz" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_n5r2a")
 skeleton = NodePath("../ObjetoDistractorioLuz")
 

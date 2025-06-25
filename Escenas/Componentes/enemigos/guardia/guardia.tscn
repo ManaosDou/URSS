@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://hmccynvegse3"]
+[gd_scene load_steps=18 format=3 uid="uid://hmccynvegse3"]
 
 [ext_resource type="Script" uid="uid://c5yp8bq7t0ndf" path="res://Escenas/Componentes/enemigos/guardia/guardia_nuevo.gd" id="1_4ws1q"]
+[ext_resource type="AudioStream" uid="uid://cqcthprmpkdw4" path="res://assets/audio/Efectos de sonido/Disparo silenciado.mp3" id="2_p2ht6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xit8o"]
 
@@ -217,6 +218,8 @@ one_shot = true
 [node name="PasosAudio" type="AudioStreamPlayer3D" parent="."]
 
 [node name="DisparosAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_p2ht6")
+max_db = -10.0
 
 [node name="CabezaArea" type="Area3D" parent="."]
 

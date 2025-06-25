@@ -4,6 +4,8 @@ var nivel : PackedScene = preload("res://Escenas/cutscene_0/cutscene_0.tscn")
 
 func _ready() -> void:
 	Globals.music_player = $MusicPlayer
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_viewport().set_input_as_handled()
 
 func _on_jugar_pressed() -> void:
 	$MenuTitulo/AnimationPlayer.play("fade")

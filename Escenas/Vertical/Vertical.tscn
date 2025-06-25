@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cfwxsa501ibrk"]
+[gd_scene load_steps=42 format=3 uid="uid://cfwxsa501ibrk"]
 
 [ext_resource type="Texture2D" uid="uid://cocynwaxyrkgk" path="res://assets/modelos/Hospital_3D_Model_Pack/Hospital 3D Model Pack/textures/floor.tga" id="1_2sapm"]
 [ext_resource type="Script" uid="uid://bmtygo874kxa7" path="res://Escenas/Componentes/niveles/clase_nivel.gd" id="1_17sht"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://j3awn7a46ns8" path="res://assets/modelos/Hospital/Hospital/nightstand/nightstand.fbx" id="20_05of2"]
 [ext_resource type="PackedScene" uid="uid://h6v0328wan73" path="res://assets/modelos/Hospital/Hospital/Tools/Tools.fbx" id="21_0i7hj"]
 [ext_resource type="PackedScene" uid="uid://dss1hjlp4loim" path="res://assets/modelos/Hospital/Hospital/Mattress/Mattress.fbx" id="22_bkg4e"]
-[ext_resource type="PackedScene" uid="uid://cynopchc85yxk" path="res://Escenas/Componentes/Hackeables/Lampara/lampara.tscn" id="23_0phdj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sapm"]
 albedo_texture = ExtResource("2_x3hwa")
@@ -106,7 +105,6 @@ environment = SubResource("Environment_b7u13")
 
 [node name="Techo" type="MeshInstance3D" parent="Mapa"]
 transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 4.76634, 0)
-visible = false
 mesh = SubResource("BoxMesh_shms7")
 skeleton = NodePath("../..")
 
@@ -972,10 +970,6 @@ skeleton = NodePath("../../Enemigos/Cientifico")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10529, 4.22875, -17.1926)
 skeleton = NodePath("../..")
 
-[node name="CamaraMesh3" parent="Objetos" instance=ExtResource("9_17sht")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.35509, 3.54083, 11.596)
-skeleton = NodePath("../..")
-
 [node name="Radio2" parent="Objetos" instance=ExtResource("10_ptr4i")]
 transform = Transform3D(-4.37114e-08, 0, -0.5, 0, 0.6, 0, 1, 0, -2.18557e-08, -14.6983, 0.55, 9.78486)
 skeleton = NodePath("../..")
@@ -1098,7 +1092,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1267, 1, 2.86665)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.59221, 1, 3.997)
 
 [node name="Marker3D3" type="Marker3D" parent="Enemigos/Cientifico3/Patrulla2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4064, 1, 5.98446)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3205, 1, 5.98446)
 
 [node name="Pickups" type="Node3D" parent="."]
 
@@ -1167,7 +1161,3 @@ texto_nota = "De: Dr. B. Chernenko Para: Supervisión Moscú Solicito revisión 
 
 [node name="AreaBomba" parent="." instance=ExtResource("16_2lteb")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 2.89912, 2.03927, -21.0281)
-
-[node name="Lampara" parent="." instance=ExtResource("23_0phdj")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 12.6772, 5.95, 8.52843)
-visible = false

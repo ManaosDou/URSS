@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://djxhc8lw130wd"]
+[gd_scene load_steps=15 format=3 uid="uid://djxhc8lw130wd"]
 
 [ext_resource type="Script" uid="uid://cb875hmdw1whe" path="res://Escenas/Componentes/Hackeables/puerta/puerta_hackeable.gd" id="1_7vhvi"]
+[ext_resource type="AudioStream" uid="uid://dtkbvcxhn5hgr" path="res://assets/audio/Efectos de sonido/Abrir compuerta Corto.mp3" id="2_a7bo2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vhvi"]
 albedo_color = Color(0.54099, 0.54099, 0.54099, 1)
@@ -135,3 +136,5 @@ libraries = {
 
 [node name="AudioPuerta" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("2_a7bo2")
+max_db = 0.0

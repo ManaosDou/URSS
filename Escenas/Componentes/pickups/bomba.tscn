@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqdbtyvaqqnrm"]
+[gd_scene load_steps=9 format=3 uid="uid://dqdbtyvaqqnrm"]
 
 [ext_resource type="Script" uid="uid://7bi8r0iyhjfu" path="res://Escenas/Componentes/pickups/bomba.gd" id="1_3aftu"]
+[ext_resource type="AudioStream" uid="uid://cdfsd2et3eata" path="res://assets/audio/Efectos de sonido/Sonido agarrar.wav" id="2_lwav7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwav7"]
 transparency = 1
@@ -10,6 +11,21 @@ albedo_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
 material = SubResource("StandardMaterial3D_lwav7")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4jf57"]
+
+[sub_resource type="Animation" id="Animation_qqmfy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0646965, 0.0646965, 0.0646965, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ydnqb"]
 resource_name = "pickup"
@@ -28,29 +44,15 @@ tracks/0/keys = {
 "values": [Color(0.0646965, 0.0646965, 0.0646965, 1), Color(0.0627451, 0.0627451, 0.0627451, 0.588235), Color(0.0646965, 0.0646965, 0.0646965, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_qqmfy"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.0646965, 0.0646965, 0.0646965, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o3vl5"]
 _data = {
 &"RESET": SubResource("Animation_qqmfy"),
 &"pickup": SubResource("Animation_ydnqb")
 }
 
-[node name="PickUp" type="Area3D"]
+[node name="PickUp" type="Area3D" node_paths=PackedStringArray("audio_pickup")]
 script = ExtResource("1_3aftu")
+audio_pickup = NodePath("AudioPickup")
 metadata/_custom_type_script = "uid://dvxpcycipgd7y"
 
 [node name="Bomba" type="Node3D" parent="."]
@@ -66,3 +68,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_o3vl5")
 }
 autoplay = "pickup"
+
+[node name="AudioPickup" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_lwav7")
+pitch_scale = 0.8

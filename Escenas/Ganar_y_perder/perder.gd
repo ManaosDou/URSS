@@ -2,6 +2,10 @@ extends Node
 
 var nivel : PackedScene = preload("res://Escenas/Vertical/Vertical.tscn")
 
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_viewport().set_input_as_handled()
+
 func _on_jugar_pressed() -> void:
 	$MenuTitulo/AnimationPlayer.play("fade")
 	await get_tree().create_timer(3).timeout

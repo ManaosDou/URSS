@@ -58,7 +58,7 @@ func rotar_hacia_direccion(direccion: Vector3, delta: float):
 		pasos_audio.play()
 
 func esta_jugador_en_foco() -> bool:
-	if global_position.distance_to(jugador.global_position) < distancia_vision and jugador.iluminado:
+	if global_position.distance_to(jugador.global_position) < distancia_vision:
 		raycast.enabled = true
 		raycast.target_position = to_local(jugador.global_position)
 		if raycast.get_collider() is Jugador:

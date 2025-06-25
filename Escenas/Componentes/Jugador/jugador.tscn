@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dbni6o826cp8b"]
+[gd_scene load_steps=39 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 [ext_resource type="Script" uid="uid://rvrdp77wpetu" path="res://Escenas/Componentes/Jugador/hud/hud.gd" id="2_n06o3"]
@@ -7,9 +7,16 @@
 [ext_resource type="Script" uid="uid://dvcswaltu2pey" path="res://Escenas/Componentes/Jugador/barra_vida.gd" id="4_0541f"]
 [ext_resource type="Texture2D" uid="uid://cixyekxxwvgvj" path="res://PosBom.png" id="4_cop5c"]
 [ext_resource type="Texture2D" uid="uid://c5ynae3kx8hnc" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
+[ext_resource type="Texture2D" uid="uid://dubstx25k8117" path="res://assets/UI/HUD/Cuadro de texto.png" id="4_v31ux"]
 [ext_resource type="Texture2D" uid="uid://bn7trblkg8toi" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
 [ext_resource type="Texture2D" uid="uid://ddosjs63vr35r" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
 [ext_resource type="AudioStream" uid="uid://cqcthprmpkdw4" path="res://assets/audio/Efectos de sonido/Disparo silenciado.mp3" id="8_elmla"]
+[ext_resource type="Script" uid="uid://b3v7f2yntaj1p" path="res://Escenas/Componentes/Jugador/barra_municion.gd" id="11_1t23e"]
+[ext_resource type="AudioStream" uid="uid://paecnhjhfech" path="res://assets/audio/Efectos de sonido/Sonido de recarga.mp3" id="11_h171t"]
+[ext_resource type="AudioStream" uid="uid://bh4ihdxv5xvyn" path="res://assets/audio/Efectos de sonido/Audio hack.mp3" id="11_wswnc"]
+[ext_resource type="Texture2D" uid="uid://dbm25ia3hmmg1" path="res://assets/UI/HUD/Barra munición.png" id="11_xopr7"]
+[ext_resource type="Texture2D" uid="uid://c263r2rqommc4" path="res://assets/UI/HUD/Munición maxima.png" id="13_ygobe"]
+[ext_resource type="AudioStream" uid="uid://bjaox5i2uc7xh" path="res://assets/audio/Efectos de sonido/Poner bomba.wav" id="13_ysmvk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oq0nd"]
 
@@ -173,15 +180,6 @@ _data = {
 &"fade": SubResource("Animation_n06o3")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_ml2ct"]
-font_size = 64
-
-[sub_resource type="LabelSettings" id="LabelSettings_l23of"]
-font_size = 64
-
-[sub_resource type="LabelSettings" id="LabelSettings_qu2qm"]
-font_size = 64
-
 [sub_resource type="Animation" id="Animation_g6jpv"]
 length = 0.001
 tracks/0/type = "value"
@@ -243,6 +241,15 @@ _data = {
 &"agacharse": SubResource("Animation_04w7q")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_ml2ct"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_l23of"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_qu2qm"]
+font_size = 64
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f14ml"]
 
 [node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("indicador_hack", "indicador_fade", "crosshair", "hack_audio", "recargar_audio", "disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "notas_label", "hacking_cooldown", "agacharse_animacion", "area_luz", "foto", "bomba_label")]
@@ -300,16 +307,6 @@ libraries = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HackingLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "Presiona E para hackear"
-
 [node name="BombaLabel" type="Label" parent="CanvasLayer"]
 visible = false
 anchors_preset = 5
@@ -331,8 +328,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_n06o3")
-municion_label = NodePath("MarginContainer/MunicionLabelContainer/MunicionLabel")
-max_municion_label = NodePath("MarginContainer/MunicionLabelContainer/MaxMunicionLabel")
+municion_label = NodePath("../../CanvasLayer2/Control/BarraMunicion/Fondo/MunicionLabel")
+max_municion_label = NodePath("../../CanvasLayer2/Control/BarraMunicion/Fondo/MaxMunicionLabel")
 
 [node name="Crosshair" type="TextureRect" parent="CanvasLayer/HUD"]
 texture_filter = 1
@@ -356,8 +353,25 @@ expand_mode = 5
 
 [node name="IndicadorHack" type="TextureRect" parent="CanvasLayer/HUD/Crosshair"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 28.0
+offset_top = 7.0
+offset_right = 2028.0
+offset_bottom = 2007.0
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("4_v31ux")
+
+[node name="HackingLabel" type="Label" parent="CanvasLayer/HUD/Crosshair/IndicadorHack"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -941.0
+offset_top = 784.0
+offset_right = -754.0
+offset_bottom = 840.0
+grow_horizontal = 2
+scale = Vector2(10, 10)
+text = "Presiona E para hackear"
 
 [node name="IndicadorFade" type="AnimationPlayer" parent="CanvasLayer/HUD/Crosshair/IndicadorHack"]
 libraries = {
@@ -385,22 +399,8 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="MunicionLabel" type="Label" parent="CanvasLayer/HUD/MarginContainer/MunicionLabelContainer"]
-layout_mode = 2
-text = "10"
-label_settings = SubResource("LabelSettings_ml2ct")
-
-[node name="BarraLabel" type="Label" parent="CanvasLayer/HUD/MarginContainer/MunicionLabelContainer"]
-layout_mode = 2
-text = "/"
-label_settings = SubResource("LabelSettings_l23of")
-
-[node name="MaxMunicionLabel" type="Label" parent="CanvasLayer/HUD/MarginContainer/MunicionLabelContainer"]
-layout_mode = 2
-text = "10"
-label_settings = SubResource("LabelSettings_qu2qm")
-
 [node name="FaseLabel" type="Label" parent="CanvasLayer"]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Fase: ALERTA"
@@ -454,11 +454,13 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="BarraVida" type="Control" parent="CanvasLayer2/Control" node_paths=PackedStringArray("rect_vida", "rect_cooldown")]
+[node name="BarraVida" type="Control" parent="CanvasLayer2/Control" node_paths=PackedStringArray("rect_vida", "rect_cooldown", "hacking_cooldown", "jugador")]
 layout_mode = 2
 script = ExtResource("4_0541f")
 rect_vida = NodePath("ColorRectVida")
 rect_cooldown = NodePath("ColorRectCooldown")
+hacking_cooldown = NodePath("../../../HackingCooldown")
+jugador = NodePath("../../..")
 
 [node name="Fondo" type="TextureRect" parent="CanvasLayer2/Control/BarraVida"]
 layout_mode = 1
@@ -517,9 +519,75 @@ texture = ExtResource("5_g6jpv")
 expand_mode = 4
 stretch_mode = 5
 
+[node name="BarraMunicion" type="Control" parent="CanvasLayer2/Control" node_paths=PackedStringArray("rect_mun", "jugador")]
+layout_mode = 2
+script = ExtResource("11_1t23e")
+rect_mun = NodePath("Fondo/ColorRectMunicion")
+jugador = NodePath("../../..")
+
+[node name="Fondo" type="TextureRect" parent="CanvasLayer2/Control/BarraMunicion"]
+layout_mode = 1
+offset_left = 1500.0
+offset_top = 600.0
+offset_right = 3500.0
+offset_bottom = 2600.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_xopr7")
+
+[node name="MunicionLabel" type="Label" parent="CanvasLayer2/Control/BarraMunicion/Fondo"]
+modulate = Color(0, 0.996078, 0.996078, 1)
+layout_mode = 2
+offset_left = 900.0
+offset_top = 1390.0
+offset_right = 973.0
+offset_bottom = 1478.0
+scale = Vector2(3, 3)
+text = "6"
+label_settings = SubResource("LabelSettings_ml2ct")
+
+[node name="BarraLabel" type="Label" parent="CanvasLayer2/Control/BarraMunicion/Fondo"]
+modulate = Color(0, 0.996078, 0.996078, 1)
+layout_mode = 2
+offset_left = 1025.0
+offset_top = 1390.0
+offset_right = 1050.0
+offset_bottom = 1478.0
+scale = Vector2(3, 3)
+text = "/"
+label_settings = SubResource("LabelSettings_l23of")
+
+[node name="MaxMunicionLabel" type="Label" parent="CanvasLayer2/Control/BarraMunicion/Fondo"]
+modulate = Color(0, 0.996078, 0.996078, 1)
+layout_mode = 2
+offset_left = 1100.0
+offset_top = 1390.0
+offset_right = 1173.0
+offset_bottom = 1478.0
+scale = Vector2(3, 3)
+text = "6"
+label_settings = SubResource("LabelSettings_qu2qm")
+
+[node name="ColorRectMunicion" type="ColorRect" parent="CanvasLayer2/Control/BarraMunicion/Fondo"]
+visible = false
+clip_children = 1
+layout_mode = 0
+offset_left = 880.0
+offset_top = 755.0
+offset_right = 1130.0
+offset_bottom = 1760.0
+
+[node name="Municion" type="TextureRect" parent="CanvasLayer2/Control/BarraMunicion/Fondo/ColorRectMunicion"]
+visible = false
+layout_mode = 0
+offset_left = -880.0
+offset_top = -755.0
+offset_right = 1120.0
+offset_bottom = 1245.0
+texture = ExtResource("13_ygobe")
+
 [node name="DisparoAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_elmla")
-max_db = -24.0
+max_db = -10.0
 pitch_scale = 0.8
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -529,7 +597,15 @@ collision_mask = 5
 shape = SubResource("CapsuleShape3D_f14ml")
 
 [node name="HackAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_wswnc")
+max_db = -20.0
 
 [node name="RecargarAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_h171t")
+max_db = -10.0
+
+[node name="BombaAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("13_ysmvk")
+max_db = -10.0
 
 [connection signal="timeout" from="PasosAudio/Timer" to="." method="_on_timer_timeout"]

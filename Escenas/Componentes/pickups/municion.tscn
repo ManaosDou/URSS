@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://crp7ildmhc6a3"]
+[gd_scene load_steps=9 format=3 uid="uid://crp7ildmhc6a3"]
 
 [ext_resource type="Script" uid="uid://cr01xk8qievet" path="res://Escenas/Componentes/pickups/pickup_municion.gd" id="2_3hwal"]
+[ext_resource type="AudioStream" uid="uid://cbb0k52t33c8y" path="res://assets/audio/Efectos de sonido/Sonido agarrar 2.mp3" id="2_t4sae"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vr5e6"]
 size = Vector3(1, 0.5, 0.5)
@@ -50,8 +51,9 @@ _data = {
 &"pickup": SubResource("Animation_mbe6k")
 }
 
-[node name="PickUp" type="Area3D"]
+[node name="PickUp" type="Area3D" node_paths=PackedStringArray("audio_pickup")]
 script = ExtResource("2_3hwal")
+audio_pickup = NodePath("AudioPickup")
 metadata/_custom_type_script = "uid://dvxpcycipgd7y"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -68,3 +70,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_3hwal")
 }
 autoplay = "pickup"
+
+[node name="AudioPickup" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_t4sae")
+pitch_scale = 0.8
