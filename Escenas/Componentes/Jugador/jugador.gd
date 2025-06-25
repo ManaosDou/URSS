@@ -53,6 +53,9 @@ var foto_visible : bool = false
 var en_area_bomba : bool = false
 var tiene_bomba : bool = false
 
+var nivelGanar : PackedScene = preload("res://Escenas/cutscene_0/cutscene_0.tscn")
+var nivelPerder : PackedScene = preload("res://Escenas/cutscene_0/cutscene_0.tscn")
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -60,7 +63,8 @@ func _physics_process(delta):
 	#Bomba
 	if Input.is_action_just_pressed("poner_bomba"):
 		if en_area_bomba == true and tiene_bomba == true:
-			pass
+			get_tree().change_scene_to_packed(nivelGanar)
+			
 	
 	#Foto
 	if Input.is_action_just_pressed("mostrar_foto"):
@@ -204,7 +208,7 @@ func recibir_dano(cantidad: int):
 		morir()
 
 func morir():
-	pass
+	get_tree().change_scene_to_packed(nivelPerder)
 
 func _on_timer_timeout() -> void:
 	var velocidad_pasos = 0.75

@@ -7,9 +7,11 @@
 resource_name = "Cutscene0"
 script/source = "extends Control
 @export var timer : Timer
+var nivel : PackedScene = preload(\"res://Escenas/Vertical/Vertical.tscn\")
+@export var audio : AudioStreamPlayer
 
 func _ready() -> void:
-	timer.wait_time = 25
+	timer.wait_time = 20
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
 	$RichTextLabel.position.y = $RichTextLabel.size.y
@@ -18,10 +20,14 @@ func _process(delta: float) -> void:
 	$RichTextLabel.position.y -= 100 * delta
 
 func _on_timer_timeout():
-	pass
+	await get_tree().create_timer(3).timeout
+	get_tree().change_scene_to_packed(nivel)
+	audio.stop()
+	timer.stop()
+	
 "
 
-[node name="Control" type="Control" node_paths=PackedStringArray("timer")]
+[node name="Control" type="Control" node_paths=PackedStringArray("timer", "audio")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,6 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_c3yhp")
 timer = NodePath("Timer")
+audio = NodePath("RichTextLabel/AudioStreamPlayer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

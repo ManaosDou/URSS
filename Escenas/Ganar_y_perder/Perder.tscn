@@ -1,12 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxuvxp1j4hb0r"]
+[gd_scene load_steps=19 format=3 uid="uid://bl7dttu3k8xbl"]
 
-[ext_resource type="Script" uid="uid://embnvkxc0qt3" path="res://Escenas/juego_test/juego.gd" id="1_bd63v"]
-[ext_resource type="Texture2D" uid="uid://bwxp3ik3b8kdk" path="res://assets/UI/Menú/grabber.png" id="2_7bx68"]
-[ext_resource type="FontFile" uid="uid://1o768f1851hv" path="res://assets/UI/soviet_program (1)/SovietProgram.ttf" id="2_s5ody"]
-[ext_resource type="Texture2D" uid="uid://dcqigy5xemots" path="res://assets/UI/Menú/The Soviet Threat PNG.png" id="4_bdrrg"]
-[ext_resource type="Texture2D" uid="uid://dk6vrxkgl63to" path="res://assets/UI/Menú/Fondo menú.png" id="4_s5ody"]
-[ext_resource type="AudioStream" uid="uid://chofpwnio7sgr" path="res://assets/audio/The Soviet Threat (OST).ogg" id="6_bdrrg"]
-[ext_resource type="AudioStream" uid="uid://bns66kh2prub3" path="res://assets/audio/fedeaprobacion.ogg" id="7_bdrrg"]
+[ext_resource type="Script" uid="uid://cws5cdwrkuntp" path="res://Escenas/Ganar_y_perder/perder.gd" id="1_dcuf5"]
+[ext_resource type="Texture2D" uid="uid://bwxp3ik3b8kdk" path="res://assets/UI/Menú/grabber.png" id="2_4uh0v"]
+[ext_resource type="FontFile" uid="uid://1o768f1851hv" path="res://assets/UI/soviet_program (1)/SovietProgram.ttf" id="3_24pin"]
+[ext_resource type="Texture2D" uid="uid://dcqigy5xemots" path="res://assets/UI/Menú/The Soviet Threat PNG.png" id="4_i7dfp"]
+[ext_resource type="Texture2D" uid="uid://dk6vrxkgl63to" path="res://assets/UI/Menú/Fondo menú.png" id="5_k6204"]
+[ext_resource type="AudioStream" uid="uid://chofpwnio7sgr" path="res://assets/audio/The Soviet Threat (OST).ogg" id="6_dv2ce"]
+[ext_resource type="AudioStream" uid="uid://bns66kh2prub3" path="res://assets/audio/fedeaprobacion.ogg" id="7_6uiqm"]
 
 [sub_resource type="GDScript" id="GDScript_bdrrg"]
 resource_name = "MenuTitulo"
@@ -37,14 +37,14 @@ border_color = Color(1, 0, 0, 1)
 corner_detail = 1
 
 [sub_resource type="Theme" id="Theme_mh2jt"]
-default_font = ExtResource("2_s5ody")
+default_font = ExtResource("3_24pin")
 default_font_size = 48
 Button/colors/font_color = Color(0.87451, 0, 0, 1)
 Button/colors/font_focus_color = Color(0.498039, 0, 0, 1)
 Button/colors/font_hover_color = Color(0.498039, 0, 0, 1)
 Button/styles/focus = SubResource("StyleBoxEmpty_s5ody")
-HSlider/icons/grabber = ExtResource("2_7bx68")
-HSlider/icons/grabber_highlight = ExtResource("2_7bx68")
+HSlider/icons/grabber = ExtResource("2_4uh0v")
+HSlider/icons/grabber_highlight = ExtResource("2_4uh0v")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_7bx68")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_7bx68")
 HSlider/styles/slider = SubResource("StyleBoxFlat_s5ody")
@@ -180,8 +180,8 @@ func _on_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(0,value)
 "
 
-[node name="Juego" type="Node"]
-script = ExtResource("1_bd63v")
+[node name="Perder" type="Node"]
+script = ExtResource("1_dcuf5")
 
 [node name="MenuTitulo" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_bdrrg")
@@ -218,29 +218,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
 
-[node name="TextureRect" type="TextureRect" parent="MenuTitulo/Control/VBoxContainer"]
-custom_minimum_size = Vector2(0, 256)
-layout_mode = 2
-texture = ExtResource("4_bdrrg")
-expand_mode = 3
-stretch_mode = 6
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuTitulo/Control/VBoxContainer"]
 layout_mode = 2
 
+[node name="Label2" type="Label" parent="MenuTitulo/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "MISION FALLIDA
+
+
+
+"
+horizontal_alignment = 1
+
 [node name="JugarBoton" type="Button" parent="MenuTitulo/Control/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "JUGAr"
-flat = true
-
-[node name="SettingsBoton" type="Button" parent="MenuTitulo/Control/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "OPCIoNES"
-flat = true
-
-[node name="CreditosBoton" type="Button" parent="MenuTitulo/Control/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "credITOS"
+text = "ReINTeNTAR"
 flat = true
 
 [node name="ColorRect" type="ColorRect" parent="MenuTitulo/Control"]
@@ -269,12 +261,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_s5ody")
+texture = ExtResource("5_k6204")
 expand_mode = 3
 stretch_mode = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MenuTitulo"]
-stream = ExtResource("6_bdrrg")
+stream = ExtResource("6_dv2ce")
 autoplay = true
 
 [node name="ColorRect" type="ColorRect" parent="MenuTitulo"]
@@ -331,18 +323,18 @@ theme_override_constants/separation = 64
 [node name="TextureRect" type="TextureRect" parent="Creditos/Control/VBoxContainer"]
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
-texture = ExtResource("4_bdrrg")
+texture = ExtResource("4_i7dfp")
 expand_mode = 3
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="Creditos/Control/VBoxContainer"]
 layout_mode = 2
 text = "HECHO POR
-LOLA PILAR ACUñA
-LUCAS TIMOTEO ARANO
-ESTEFANY CORDOBA JIMENEZ
-THIAGO OJEDA SCARANO
-FEDERICO JULIAN PEREZ TRENCH"
+Lola Pilar Acuña
+Lucas Timoteo Arano
+Estefany Cordoba Jimenez
+Thiago Ojeda Scarano
+Federico Julian Perez Trench"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="Creditos/Control/VBoxContainer"]
@@ -367,7 +359,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_s5ody")
+texture = ExtResource("5_k6204")
 expand_mode = 3
 stretch_mode = 5
 metadata/_edit_lock_ = true
@@ -382,7 +374,7 @@ offset_bottom = 850.0
 mouse_filter = 2
 
 [node name="FedePlayer" type="AudioStreamPlayer" parent="Creditos"]
-stream = ExtResource("7_bdrrg")
+stream = ExtResource("7_6uiqm")
 
 [node name="Settings" type="CanvasLayer" parent="."]
 visible = false
@@ -458,7 +450,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_s5ody")
+texture = ExtResource("5_k6204")
 expand_mode = 3
 stretch_mode = 5
 metadata/_edit_lock_ = true
@@ -475,8 +467,6 @@ mouse_filter = 2
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="MenuTitulo/Control/VBoxContainer/VBoxContainer/JugarBoton" to="." method="_on_jugar_pressed"]
-[connection signal="pressed" from="MenuTitulo/Control/VBoxContainer/VBoxContainer/SettingsBoton" to="." method="_on_opciones_pressed"]
-[connection signal="pressed" from="MenuTitulo/Control/VBoxContainer/VBoxContainer/CreditosBoton" to="." method="_on_creditos_boton_pressed"]
 [connection signal="pressed" from="Creditos/Control/VBoxContainer/Button" to="." method="_on_volver_creditos_pressed"]
 [connection signal="value_changed" from="Settings/Control/VBoxContainer/HBoxContainer/HSlider" to="Settings/Control/VBoxContainer/HBoxContainer/HSlider" method="_on_value_changed"]
 [connection signal="pressed" from="Settings/Control/VBoxContainer/Button" to="." method="_on_volver_settings_pressed"]
