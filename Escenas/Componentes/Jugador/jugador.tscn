@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://dbni6o826cp8b"]
+[gd_scene load_steps=32 format=3 uid="uid://dbni6o826cp8b"]
 
 [ext_resource type="Script" uid="uid://g3k14gh5dgm7" path="res://Escenas/Componentes/Jugador/jugador.gd" id="1_lwbgw"]
 [ext_resource type="Script" uid="uid://rvrdp77wpetu" path="res://Escenas/Componentes/Jugador/hud/hud.gd" id="2_n06o3"]
 [ext_resource type="Texture2D" uid="uid://dl2a45xxql8ia" path="res://assets/UI/HUD/Crosshair.png" id="3_cop5c"]
 [ext_resource type="AudioStream" uid="uid://6ctq62otghun" path="res://assets/audio/Efectos de sonido/Paso corregido.mp3" id="4_04w7q"]
 [ext_resource type="Script" uid="uid://dvcswaltu2pey" path="res://Escenas/Componentes/Jugador/barra_vida.gd" id="4_0541f"]
+[ext_resource type="Texture2D" uid="uid://cixyekxxwvgvj" path="res://PosBom.png" id="4_cop5c"]
 [ext_resource type="Texture2D" uid="uid://c5ynae3kx8hnc" path="res://assets/UI/HUD/Barra de salud.png" id="4_g6jpv"]
 [ext_resource type="Texture2D" uid="uid://bn7trblkg8toi" path="res://assets/UI/HUD/Cantidad de vida.png" id="5_g6jpv"]
 [ext_resource type="Texture2D" uid="uid://ddosjs63vr35r" path="res://assets/UI/HUD/Cooldown hackeo.png" id="6_5howd"]
@@ -14,6 +15,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwbgw"]
 no_depth_test = true
+albedo_color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lwbgw"]
 material = SubResource("StandardMaterial3D_lwbgw")
@@ -243,7 +245,7 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f14ml"]
 
-[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("indicador_hack", "indicador_fade", "crosshair", "hack_audio", "recargar_audio", "disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "notas_label", "hacking_cooldown", "agacharse_animacion", "area_luz")]
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("indicador_hack", "indicador_fade", "crosshair", "hack_audio", "recargar_audio", "disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "notas_label", "hacking_cooldown", "agacharse_animacion", "area_luz", "foto", "bomba_label")]
 script = ExtResource("1_lwbgw")
 indicador_hack = NodePath("CanvasLayer/HUD/Crosshair/IndicadorHack")
 indicador_fade = NodePath("CanvasLayer/HUD/Crosshair/IndicadorHack/IndicadorFade")
@@ -261,6 +263,8 @@ notas_label = NodePath("CanvasLayer/NotasLabel")
 hacking_cooldown = NodePath("HackingCooldown")
 agacharse_animacion = NodePath("AgacharseAnimacion")
 area_luz = NodePath("Area3D")
+foto = NodePath("CanvasLayer/Foto")
+bomba_label = NodePath("CanvasLayer/BombaLabel")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_oq0nd")
@@ -305,6 +309,18 @@ offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "Presiona E para hackear"
+
+[node name="BombaLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 35.0
+offset_right = 94.0
+offset_bottom = 75.0
+grow_horizontal = 2
+text = "Presiona Q para poner la bomba"
 
 [node name="HUD" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("municion_label", "max_municion_label")]
 layout_mode = 3
@@ -399,6 +415,15 @@ offset_right = 0.679932
 offset_bottom = 0.159973
 autowrap_mode = 3
 clip_text = true
+
+[node name="Foto" type="TextureRect" parent="CanvasLayer"]
+visible = false
+offset_left = 70.0
+offset_top = 402.0
+offset_right = 554.0
+offset_bottom = 664.0
+texture = ExtResource("4_cop5c")
+expand_mode = 1
 
 [node name="AgacharseAnimacion" type="AnimationPlayer" parent="."]
 libraries = {
