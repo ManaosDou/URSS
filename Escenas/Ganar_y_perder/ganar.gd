@@ -1,6 +1,6 @@
 extends Node
 
-var nivel : PackedScene = preload("res://Escenas/juego_test/juego.tscn")
+var nivel : PackedScene = load("res://Escenas/juego_test/juego.tscn")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

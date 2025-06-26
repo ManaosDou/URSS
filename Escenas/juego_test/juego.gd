@@ -1,6 +1,6 @@
 extends Node
 
-var nivel : PackedScene = preload("res://Escenas/cutscene_0/cutscene_0.tscn")
+var nivel : PackedScene = load("res://Escenas/cutscene_0/cutscene_0.tscn")
 
 func _ready() -> void:
 	Globals.music_player = $MusicPlayer

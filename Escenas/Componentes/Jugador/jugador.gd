@@ -54,8 +54,8 @@ var foto_visible : bool = false
 var en_area_bomba : bool = false
 var tiene_bomba : bool = false
 
-var nivelGanar : PackedScene = preload("res://Escenas/Ganar_y_perder/Ganar.tscn")
-var nivelPerder : PackedScene = preload("res://Escenas/Ganar_y_perder/Perder.tscn")
+var nivelGanar : PackedScene = load("res://Escenas/Ganar_y_perder/Ganar.tscn")
+var nivelPerder : PackedScene = load("res://Escenas/Ganar_y_perder/Perder.tscn")
 
 @export var canvas_pausa : CanvasLayer
 
