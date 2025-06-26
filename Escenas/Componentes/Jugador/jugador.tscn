@@ -252,7 +252,7 @@ font_size = 64
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f14ml"]
 
-[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("indicador_hack", "indicador_fade", "crosshair", "hack_audio", "recargar_audio", "disparos_audio", "pasos_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "notas_label", "hacking_cooldown", "agacharse_animacion", "area_luz", "foto", "bomba_label")]
+[node name="Jugador" type="CharacterBody3D" node_paths=PackedStringArray("indicador_hack", "indicador_fade", "crosshair", "hack_audio", "recargar_audio", "disparos_audio", "pasos_audio", "bomba_audio", "pasos_audio_timer", "arma_flash", "arma_animacion", "hud", "fase_label", "notas_label", "hacking_cooldown", "agacharse_animacion", "area_luz", "foto", "bomba_label", "canvas_pausa")]
 script = ExtResource("1_lwbgw")
 indicador_hack = NodePath("CanvasLayer/HUD/Crosshair/IndicadorHack")
 indicador_fade = NodePath("CanvasLayer/HUD/Crosshair/IndicadorHack/IndicadorFade")
@@ -261,6 +261,7 @@ hack_audio = NodePath("HackAudio")
 recargar_audio = NodePath("RecargarAudio")
 disparos_audio = NodePath("DisparoAudio")
 pasos_audio = NodePath("PasosAudio")
+bomba_audio = NodePath("BombaAudio")
 pasos_audio_timer = NodePath("PasosAudio/Timer")
 arma_flash = NodePath("Camera3D/ArmaMesh/ArmaFlash")
 arma_animacion = NodePath("Camera3D/ArmaMesh/ArmaAnimacion")
@@ -272,6 +273,7 @@ agacharse_animacion = NodePath("AgacharseAnimacion")
 area_luz = NodePath("Area3D")
 foto = NodePath("CanvasLayer/Foto")
 bomba_label = NodePath("CanvasLayer/BombaLabel")
+canvas_pausa = NodePath("CanvasPausa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_oq0nd")
@@ -607,5 +609,7 @@ max_db = -10.0
 [node name="BombaAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("13_ysmvk")
 max_db = -10.0
+
+[node name="CanvasPausa" type="CanvasLayer" parent="."]
 
 [connection signal="timeout" from="PasosAudio/Timer" to="." method="_on_timer_timeout"]
